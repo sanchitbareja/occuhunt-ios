@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController <UIScrollViewDelegate>
+@interface MainViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property IBOutlet UIView *mapView;
 @property IBOutlet UIView *listView;
 
 @property IBOutlet UIScrollView *mapScrollView;
 @property IBOutlet UIImageView *mapImageView;
+
+@property UICollectionView *listCollectionView;
+
 
 - (IBAction)openRightDrawer:(id)sender;
 - (IBAction)segmentedValueChanged:(id)sender;

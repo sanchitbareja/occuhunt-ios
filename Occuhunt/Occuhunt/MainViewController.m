@@ -29,7 +29,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.mapView.hidden = NO;
+    self.listView.hidden = YES;
+    
+	// Map View
     self.mapScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 504)];
     self.mapImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dccexhibitionhall"]];
     
@@ -40,6 +43,19 @@
 	self.mapScrollView.maximumZoomScale = 4.0;
 	self.mapScrollView.minimumZoomScale = 1;
     LOG_EXPR(self.mapScrollView.contentSize);
+    
+    // Grid View
+    
+    UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
+    
+    self.listCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 320, 504) collectionViewLayout:layout];
+    [self.listView addSubview:self.listCollectionView];
+    self.listCollectionView.backgroundColor = [UIColor clearColor];
+    
+    [self.listCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    
+    [self.listCollectionView setDataSource:self];
+    [self.listCollectionView setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,17 +68,6 @@
     [self.sidePanelController showRightPanelAnimated:YES];
 }
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    NSLog(@"lol");
-    return self.mapImageView;
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"im scrolling");
-}
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    NSLog(@"im zooming");
-}
 
 - (IBAction)segmentedValueChanged:(id)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl*) sender;
@@ -78,6 +83,45 @@
             self.mapView.hidden = YES;
             break;
     }
+}
+
+#pragma mark - Scroll View
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    NSLog(@"lol");
+    return self.mapImageView;
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"im scrolling");
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    NSLog(@"im zooming");
+}
+
+#pragma mark - List View
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 8;
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"Cell";
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    cell.backgroundColor = [UIColor greenColor];
+    
+    return cell;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(10, 15, 0, 15);
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(140, 100);
 }
 
 @end
