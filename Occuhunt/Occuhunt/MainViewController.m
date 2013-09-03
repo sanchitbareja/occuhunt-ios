@@ -111,12 +111,19 @@
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
-    cell.backgroundColor = UIColorFromRGB(0x95a5a5);
+    cell.backgroundColor = UIColorFromRGB(0xecf0f1);
     
     UIImageView *mainImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 140, 70)];
     mainImage.image = [UIImage imageNamed:@"accenture-advert.jpg"];
     mainImage.contentMode = UIViewContentModeScaleAspectFill;
     [cell addSubview:mainImage];
+    
+    UILabel *companyNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 85, 140, 20)];
+    companyNameLabel.textAlignment = NSTextAlignmentCenter;
+    companyNameLabel.textColor = UIColorFromRGB(0x2c3e50);
+    companyNameLabel.font = [UIFont fontWithName:@"Open Sans" size:12];
+    companyNameLabel.text = @"Accenture";
+    [cell addSubview:companyNameLabel];
     
     return cell;
 }
