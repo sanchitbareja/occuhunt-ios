@@ -17,5 +17,6 @@
 @property IBOutlet UIImageView *mapImageView;
 
 - (IBAction)openRightDrawer:(id)sender;
+- (IBAction)segmentedValueChanged:(id)sender;
 
 @end

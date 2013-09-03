@@ -30,7 +30,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.mapScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 504)];
+    self.mapImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dccexhibitionhall"]];
+    
+    [self.mapView addSubview:self.mapScrollView];
+    [self.mapScrollView addSubview:self.mapImageView];
+    
     self.mapScrollView.contentSize = self.mapImageView.image.size;
+	self.mapScrollView.maximumZoomScale = 4.0;
+	self.mapScrollView.minimumZoomScale = 1;
+    LOG_EXPR(self.mapScrollView.contentSize);
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,6 +53,7 @@
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    NSLog(@"lol");
     return self.mapImageView;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -52,6 +62,22 @@
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     NSLog(@"im zooming");
+}
+
+- (IBAction)segmentedValueChanged:(id)sender {
+    UISegmentedControl *segmentedControl = (UISegmentedControl*) sender;
+    switch ([segmentedControl selectedSegmentIndex]) {
+        case 0:
+            // Map View
+            self.mapView.hidden = NO;
+            self.listView.hidden = YES;
+            break;
+        case 1:
+            // List View
+            self.listView.hidden = NO;
+            self.mapView.hidden = YES;
+            break;
+    }
 }
 
 @end
