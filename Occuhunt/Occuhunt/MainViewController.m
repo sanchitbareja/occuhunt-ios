@@ -111,17 +111,24 @@
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor greenColor];
+    cell.backgroundColor = UIColorFromRGB(0x95a5a5);
+    
+    UIImageView *mainImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 140, 70)];
+    mainImage.image = [UIImage imageNamed:@"accenture-advert.jpg"];
+    mainImage.contentMode = UIViewContentModeScaleAspectFill;
+    [cell addSubview:mainImage];
     
     return cell;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(10, 15, 0, 15);
+    return UIEdgeInsetsMake(40, 15, 40, 15);
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(140, 100);
+    return CGSizeMake(140, 110);
 }
-
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 40;
+}
 @end

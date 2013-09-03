@@ -19,6 +19,8 @@
 		8F9F531317D5859E00D783FD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531117D5859E00D783FD /* MainViewController.m */; };
 		8F9F531617D586A300D783FD /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531517D586A300D783FD /* VTPG_Common.m */; };
 		8F9F531717D586A300D783FD /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531517D586A300D783FD /* VTPG_Common.m */; };
+		8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F531817D59B0500D783FD /* accenture-advert.jpg */; };
+		8F9F531A17D59B0500D783FD /* accenture-advert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F531817D59B0500D783FD /* accenture-advert.jpg */; };
 		8FF9575F17D580D000046DDF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FF9575E17D580D000046DDF /* Foundation.framework */; };
 		8FF9576117D580D000046DDF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FF9576017D580D000046DDF /* CoreGraphics.framework */; };
 		8FF9576317D580D000046DDF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FF9576217D580D000046DDF /* UIKit.framework */; };
@@ -58,6 +60,7 @@
 		8F9F531117D5859E00D783FD /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		8F9F531417D586A300D783FD /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPG_Common.h; sourceTree = "<group>"; };
 		8F9F531517D586A300D783FD /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPG_Common.m; sourceTree = "<group>"; };
+		8F9F531817D59B0500D783FD /* accenture-advert.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "accenture-advert.jpg"; path = "Images/accenture-advert.jpg"; sourceTree = "<group>"; };
 		8FF9575B17D580D000046DDF /* Occuhunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Occuhunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF9575E17D580D000046DDF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8FF9576017D580D000046DDF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -165,6 +168,7 @@
 		8FF9576717D580D000046DDF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8F9F531817D59B0500D783FD /* accenture-advert.jpg */,
 				8FF9577517D580D000046DDF /* Images.xcassets */,
 				8FF9577217D580D000046DDF /* Occuhunt.xcdatamodeld */,
 				8F9F531417D586A300D783FD /* VTPG_Common.h */,
@@ -270,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */,
 				8FF9576B17D580D000046DDF /* InfoPlist.strings in Resources */,
 				8FF9577617D580D000046DDF /* Images.xcassets in Resources */,
 				8F9F530417D581B300D783FD /* Storyboard.storyboard in Resources */,
@@ -282,6 +287,7 @@
 			files = (
 				8FF9578817D580D000046DDF /* InfoPlist.strings in Resources */,
 				8F9F530517D581B300D783FD /* Storyboard.storyboard in Resources */,
+				8F9F531A17D59B0500D783FD /* accenture-advert.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
