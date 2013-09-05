@@ -10,6 +10,7 @@
 #import "VTPG_Common.h"
 #import "JASidePanelController.h"
 #import "UIViewController+JASidePanel.h"
+#import <AFNetworking/AFJSONRequestOperation.h>
 
 @interface MainViewController ()
 
@@ -56,6 +57,16 @@
     
     [self.listCollectionView setDataSource:self];
     [self.listCollectionView setDelegate:self];
+    
+    NSURL *url = [NSURL URLWithString:@"http://httpbin.org/ip"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"IP Address: %@", [JSON valueForKeyPath:@"origin"]);
+    } failure:nil];
+    
+    [operation start];
+
 }
 
 - (void)didReceiveMemoryWarning
