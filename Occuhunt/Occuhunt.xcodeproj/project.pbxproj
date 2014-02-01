@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30AEF072D9804157814BC3F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 759C5E8598224F01B77179E7 /* libPods.a */; };
+		54A91C21833248CDB88E78A6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 759C5E8598224F01B77179E7 /* libPods.a */; };
+		8F3CC176189A192F009C356D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3CC175189A192F009C356D /* CoreBluetooth.framework */; };
+		8F3CC178189A1936009C356D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3CC177189A1936009C356D /* CoreLocation.framework */; };
 		8F8434F617D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F717D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */; };
@@ -49,6 +51,9 @@
 		8F9F531717D586A300D783FD /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531517D586A300D783FD /* VTPG_Common.m */; };
 		8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F531817D59B0500D783FD /* accenture-advert.jpg */; };
 		8F9F531A17D59B0500D783FD /* accenture-advert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F531817D59B0500D783FD /* accenture-advert.jpg */; };
+		8FC1B5A7188DC82C00E09E67 /* CEEFairMap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */; };
+		8FC1B5AA188DD03A00E09E67 /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC1B5A9188DD03A00E09E67 /* DrawView.m */; };
+		8FC1B5AD188DD47E00E09E67 /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */; };
 		8FF9575F17D580D000046DDF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FF9575E17D580D000046DDF /* Foundation.framework */; };
 		8FF9576117D580D000046DDF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FF9576017D580D000046DDF /* CoreGraphics.framework */; };
 		8FF9576317D580D000046DDF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FF9576217D580D000046DDF /* UIKit.framework */; };
@@ -78,6 +83,8 @@
 
 /* Begin PBXFileReference section */
 		759C5E8598224F01B77179E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F3CC175189A192F009C356D /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		8F3CC177189A1936009C356D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		8F8434EE17D59D6700E52121 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -108,6 +115,11 @@
 		8F9F531417D586A300D783FD /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPG_Common.h; sourceTree = "<group>"; };
 		8F9F531517D586A300D783FD /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPG_Common.m; sourceTree = "<group>"; };
 		8F9F531817D59B0500D783FD /* accenture-advert.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "accenture-advert.jpg"; path = "Images/accenture-advert.jpg"; sourceTree = "<group>"; };
+		8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = CEEFairMap.jpg; path = Images/CEEFairMap.jpg; sourceTree = "<group>"; };
+		8FC1B5A8188DD03A00E09E67 /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
+		8FC1B5A9188DD03A00E09E67 /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
+		8FC1B5AB188DD47E00E09E67 /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
+		8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
 		8FF9575B17D580D000046DDF /* Occuhunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Occuhunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF9575E17D580D000046DDF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8FF9576017D580D000046DDF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -134,13 +146,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F3CC178189A1936009C356D /* CoreLocation.framework in Frameworks */,
+				8F3CC176189A192F009C356D /* CoreBluetooth.framework in Frameworks */,
 				8F87319817D8345D00579703 /* MobileCoreServices.framework in Frameworks */,
 				8F87319617D8345400579703 /* SystemConfiguration.framework in Frameworks */,
 				8FF9576117D580D000046DDF /* CoreGraphics.framework in Frameworks */,
 				8FF9576517D580D000046DDF /* CoreData.framework in Frameworks */,
 				8FF9576317D580D000046DDF /* UIKit.framework in Frameworks */,
 				8FF9575F17D580D000046DDF /* Foundation.framework in Frameworks */,
-				30AEF072D9804157814BC3F6 /* libPods.a in Frameworks */,
+				54A91C21833248CDB88E78A6 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +175,7 @@
 		8F84350A17D59D6C00E52121 /* OpenSans */ = {
 			isa = PBXGroup;
 			children = (
+				8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */,
 				8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */,
 				8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */,
 				8F8434EE17D59D6700E52121 /* OpenSans-ExtraBold.ttf */,
@@ -215,6 +230,8 @@
 		8FF9575D17D580D000046DDF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F3CC177189A1936009C356D /* CoreLocation.framework */,
+				8F3CC175189A192F009C356D /* CoreBluetooth.framework */,
 				8F87319717D8345D00579703 /* MobileCoreServices.framework */,
 				8F87319517D8345400579703 /* SystemConfiguration.framework */,
 				8FF9575E17D580D000046DDF /* Foundation.framework */,
@@ -235,8 +252,12 @@
 				8F9F530317D581B300D783FD /* Storyboard.storyboard */,
 				8F9F531017D5859E00D783FD /* MainViewController.h */,
 				8F9F531117D5859E00D783FD /* MainViewController.m */,
+				8FC1B5A8188DD03A00E09E67 /* DrawView.h */,
+				8FC1B5A9188DD03A00E09E67 /* DrawView.m */,
 				8F87319217D826F100579703 /* ServerIO.h */,
 				8F87319317D826F100579703 /* ServerIO.m */,
+				8FC1B5AB188DD47E00E09E67 /* PulsingHaloLayer.h */,
+				8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */,
 				8F9F530217D5816A00D783FD /* JASidePanel */,
 				8FF9576717D580D000046DDF /* Supporting Files */,
 			);
@@ -327,6 +348,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Sidwyn Koh";
 				TargetAttributes = {
+					8FF9575A17D580D000046DDF = {
+						DevelopmentTeam = FZZX7AJEE8;
+					};
 					8FF9577A17D580D000046DDF = {
 						TestTargetID = 8FF9575A17D580D000046DDF;
 					};
@@ -360,6 +384,7 @@
 				8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */,
 				8F84350617D59D6700E52121 /* OpenSans-Semibold.ttf in Resources */,
 				8F8434FA17D59D6700E52121 /* OpenSans-ExtraBold.ttf in Resources */,
+				8FC1B5A7188DC82C00E09E67 /* CEEFairMap.jpg in Resources */,
 				8FF9576B17D580D000046DDF /* InfoPlist.strings in Resources */,
 				8F84350217D59D6700E52121 /* OpenSans-LightItalic.ttf in Resources */,
 				8FF9577617D580D000046DDF /* Images.xcassets in Resources */,
@@ -434,9 +459,11 @@
 			files = (
 				8F9F530017D5816700D783FD /* UIViewController+JASidePanel.m in Sources */,
 				8F84351117D5A26000E52121 /* CategoryCell.m in Sources */,
+				8FC1B5AA188DD03A00E09E67 /* DrawView.m in Sources */,
 				8F9F531617D586A300D783FD /* VTPG_Common.m in Sources */,
 				8F9F530817D581FF00D783FD /* SidePanelViewController.m in Sources */,
 				8F87319417D826F100579703 /* ServerIO.m in Sources */,
+				8FC1B5AD188DD47E00E09E67 /* PulsingHaloLayer.m in Sources */,
 				8FF9577117D580D000046DDF /* AppDelegate.m in Sources */,
 				8F84350D17D59E0600E52121 /* SidePanelRightViewController.m in Sources */,
 				8FF9576D17D580D000046DDF /* main.m in Sources */,
@@ -565,10 +592,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Occuhunt/Occuhunt-Prefix.pch";
 				INFOPLIST_FILE = "Occuhunt/Occuhunt-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -579,10 +609,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Occuhunt/Occuhunt-Prefix.pch";
 				INFOPLIST_FILE = "Occuhunt/Occuhunt-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

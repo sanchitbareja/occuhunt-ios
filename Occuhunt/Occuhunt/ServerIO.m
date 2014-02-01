@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Sidwyn Koh. All rights reserved.
 //
 
+// Managing many NSURLRequests: http://stackoverflow.com/questions/332276/managing-multiple-asynchronous-nsurlconnection-connections
+
 #import "ServerIO.h"
 #import <AFOAuth2Client/AFOAuth2Client.h>
 #import <AFNetworking/AFJSONRequestOperation.h>
@@ -40,7 +42,6 @@
 }
 
 - (void)getAccessToken {
-    
     NSURL *url = [NSURL URLWithString:@"http://example.com/"];
     AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:url clientID:kClientID secret:kClientSecret];
     
