@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>Pods-IOSLinkedInAPI.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,21 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>003B4A098B2A4CC2A743A2BF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>05BC68F093C74CF2A0C51B33</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>09748EE4C5774B058FF9EC32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1B832DF316B74207BEE8D39B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -37,12 +57,47 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>309774159A3541199F1F7986</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>345B72E1520B47D594BBC75A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4CE7B05DAC334778B3D746F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>564614E6457242C28CC7ABD6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>564D10D64A0A405796F2E6A7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7C4A201C053741FCAD5FD387</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>91C1D727A8574AAEBE76755E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B030B56C678A4020830F47BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B274AAD515B444B3831242DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -53,6 +108,11 @@
 			<true/>
 		</dict>
 		<key>CFD21434CC6E4751BE676DC8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D00558E167424C8F853B3731</key>
 		<dict>
 			<key>primary</key>
 			<true/>

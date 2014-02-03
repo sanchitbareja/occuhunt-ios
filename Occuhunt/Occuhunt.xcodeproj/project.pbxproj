@@ -10,6 +10,12 @@
 		54A91C21833248CDB88E78A6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 759C5E8598224F01B77179E7 /* libPods.a */; };
 		8F3CC176189A192F009C356D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3CC175189A192F009C356D /* CoreBluetooth.framework */; };
 		8F3CC178189A1936009C356D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3CC177189A1936009C356D /* CoreLocation.framework */; };
+		8F547BF1189F25A80046D518 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F547BF0189F25A80046D518 /* MainTabBarViewController.m */; };
+		8F547BF4189F2CA50046D518 /* EventListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F547BF3189F2CA50046D518 /* EventListViewController.m */; };
+		8F547BF7189F2F5C0046D518 /* EventListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F547BF6189F2F5C0046D518 /* EventListCell.m */; };
+		8F547BF9189F31BB0046D518 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F547BF8189F31BB0046D518 /* EventListCell.xib */; };
+		8F547C00189F34610046D518 /* PortfolioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F547BFF189F34610046D518 /* PortfolioViewController.m */; };
+		8F547C02189F3BD10046D518 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F547C01189F3BD10046D518 /* 1.jpg */; };
 		8F8434F617D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F717D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */; };
@@ -45,8 +51,8 @@
 		8F9F530517D581B300D783FD /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F530317D581B300D783FD /* Storyboard.storyboard */; };
 		8F9F530817D581FF00D783FD /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F530717D581FF00D783FD /* SidePanelViewController.m */; };
 		8F9F530917D581FF00D783FD /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F530717D581FF00D783FD /* SidePanelViewController.m */; };
-		8F9F531217D5859E00D783FD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531117D5859E00D783FD /* MainViewController.m */; };
-		8F9F531317D5859E00D783FD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531117D5859E00D783FD /* MainViewController.m */; };
+		8F9F531217D5859E00D783FD /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531117D5859E00D783FD /* EventViewController.m */; };
+		8F9F531317D5859E00D783FD /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531117D5859E00D783FD /* EventViewController.m */; };
 		8F9F531617D586A300D783FD /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531517D586A300D783FD /* VTPG_Common.m */; };
 		8F9F531717D586A300D783FD /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531517D586A300D783FD /* VTPG_Common.m */; };
 		8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F531817D59B0500D783FD /* accenture-advert.jpg */; };
@@ -85,6 +91,16 @@
 		759C5E8598224F01B77179E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F3CC175189A192F009C356D /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8F3CC177189A1936009C356D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8F547BEF189F25A80046D518 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
+		8F547BF0189F25A80046D518 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
+		8F547BF2189F2CA50046D518 /* EventListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListViewController.h; sourceTree = "<group>"; };
+		8F547BF3189F2CA50046D518 /* EventListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListViewController.m; sourceTree = "<group>"; };
+		8F547BF5189F2F5C0046D518 /* EventListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListCell.h; sourceTree = "<group>"; };
+		8F547BF6189F2F5C0046D518 /* EventListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListCell.m; sourceTree = "<group>"; };
+		8F547BF8189F31BB0046D518 /* EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
+		8F547BFE189F34610046D518 /* PortfolioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortfolioViewController.h; sourceTree = "<group>"; };
+		8F547BFF189F34610046D518 /* PortfolioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortfolioViewController.m; sourceTree = "<group>"; };
+		8F547C01189F3BD10046D518 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 1.jpg; path = Images/1.jpg; sourceTree = "<group>"; };
 		8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		8F8434EE17D59D6700E52121 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -110,8 +126,8 @@
 		8F9F530317D581B300D783FD /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		8F9F530617D581FF00D783FD /* SidePanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidePanelViewController.h; sourceTree = "<group>"; };
 		8F9F530717D581FF00D783FD /* SidePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidePanelViewController.m; sourceTree = "<group>"; };
-		8F9F531017D5859E00D783FD /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		8F9F531117D5859E00D783FD /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		8F9F531017D5859E00D783FD /* EventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventViewController.h; sourceTree = "<group>"; };
+		8F9F531117D5859E00D783FD /* EventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewController.m; sourceTree = "<group>"; };
 		8F9F531417D586A300D783FD /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPG_Common.h; sourceTree = "<group>"; };
 		8F9F531517D586A300D783FD /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPG_Common.m; sourceTree = "<group>"; };
 		8F9F531817D59B0500D783FD /* accenture-advert.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "accenture-advert.jpg"; path = "Images/accenture-advert.jpg"; sourceTree = "<group>"; };
@@ -120,6 +136,8 @@
 		8FC1B5A9188DD03A00E09E67 /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
 		8FC1B5AB188DD47E00E09E67 /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
 		8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
+		8FDF4607189CDC580009A9B2 /* libPods-IOSLinkedInAPI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-IOSLinkedInAPI.a"; path = "Pods/build/Debug-iphoneos/libPods-IOSLinkedInAPI.a"; sourceTree = "<group>"; };
+		8FDF4609189CDC610009A9B2 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		8FF9575B17D580D000046DDF /* Occuhunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Occuhunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF9575E17D580D000046DDF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8FF9576017D580D000046DDF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -230,6 +248,8 @@
 		8FF9575D17D580D000046DDF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8FDF4609189CDC610009A9B2 /* libPods-AFNetworking.a */,
+				8FDF4607189CDC580009A9B2 /* libPods-IOSLinkedInAPI.a */,
 				8F3CC177189A1936009C356D /* CoreLocation.framework */,
 				8F3CC175189A192F009C356D /* CoreBluetooth.framework */,
 				8F87319717D8345D00579703 /* MobileCoreServices.framework */,
@@ -250,14 +270,19 @@
 				8FF9576F17D580D000046DDF /* AppDelegate.h */,
 				8FF9577017D580D000046DDF /* AppDelegate.m */,
 				8F9F530317D581B300D783FD /* Storyboard.storyboard */,
-				8F9F531017D5859E00D783FD /* MainViewController.h */,
-				8F9F531117D5859E00D783FD /* MainViewController.m */,
-				8FC1B5A8188DD03A00E09E67 /* DrawView.h */,
-				8FC1B5A9188DD03A00E09E67 /* DrawView.m */,
-				8F87319217D826F100579703 /* ServerIO.h */,
-				8F87319317D826F100579703 /* ServerIO.m */,
-				8FC1B5AB188DD47E00E09E67 /* PulsingHaloLayer.h */,
-				8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */,
+				8F547BEF189F25A80046D518 /* MainTabBarViewController.h */,
+				8F547BF0189F25A80046D518 /* MainTabBarViewController.m */,
+				8F547BFE189F34610046D518 /* PortfolioViewController.h */,
+				8F547BFF189F34610046D518 /* PortfolioViewController.m */,
+				8F547BF2189F2CA50046D518 /* EventListViewController.h */,
+				8F547BF3189F2CA50046D518 /* EventListViewController.m */,
+				8F547BF5189F2F5C0046D518 /* EventListCell.h */,
+				8F547BF6189F2F5C0046D518 /* EventListCell.m */,
+				8F547BF8189F31BB0046D518 /* EventListCell.xib */,
+				8F9F531017D5859E00D783FD /* EventViewController.h */,
+				8F9F531117D5859E00D783FD /* EventViewController.m */,
+				8F547C01189F3BD10046D518 /* 1.jpg */,
+				8FF9577517D580D000046DDF /* Images.xcassets */,
 				8F9F530217D5816A00D783FD /* JASidePanel */,
 				8FF9576717D580D000046DDF /* Supporting Files */,
 			);
@@ -267,9 +292,14 @@
 		8FF9576717D580D000046DDF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8FC1B5AB188DD47E00E09E67 /* PulsingHaloLayer.h */,
+				8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */,
+				8FC1B5A8188DD03A00E09E67 /* DrawView.h */,
+				8FC1B5A9188DD03A00E09E67 /* DrawView.m */,
+				8F87319217D826F100579703 /* ServerIO.h */,
+				8F87319317D826F100579703 /* ServerIO.m */,
 				8F84350A17D59D6C00E52121 /* OpenSans */,
 				8F9F531817D59B0500D783FD /* accenture-advert.jpg */,
-				8FF9577517D580D000046DDF /* Images.xcassets */,
 				8FF9577217D580D000046DDF /* Occuhunt.xcdatamodeld */,
 				8F9F531417D586A300D783FD /* VTPG_Common.h */,
 				8F9F531517D586A300D783FD /* VTPG_Common.m */,
@@ -379,9 +409,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F547BF9189F31BB0046D518 /* EventListCell.xib in Resources */,
 				8F8434FE17D59D6700E52121 /* OpenSans-Italic.ttf in Resources */,
 				8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */,
 				8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */,
+				8F547C02189F3BD10046D518 /* 1.jpg in Resources */,
 				8F84350617D59D6700E52121 /* OpenSans-Semibold.ttf in Resources */,
 				8F8434FA17D59D6700E52121 /* OpenSans-ExtraBold.ttf in Resources */,
 				8FC1B5A7188DC82C00E09E67 /* CEEFairMap.jpg in Resources */,
@@ -463,11 +495,15 @@
 				8F9F531617D586A300D783FD /* VTPG_Common.m in Sources */,
 				8F9F530817D581FF00D783FD /* SidePanelViewController.m in Sources */,
 				8F87319417D826F100579703 /* ServerIO.m in Sources */,
+				8F547C00189F34610046D518 /* PortfolioViewController.m in Sources */,
 				8FC1B5AD188DD47E00E09E67 /* PulsingHaloLayer.m in Sources */,
+				8F547BF4189F2CA50046D518 /* EventListViewController.m in Sources */,
+				8F547BF7189F2F5C0046D518 /* EventListCell.m in Sources */,
+				8F547BF1189F25A80046D518 /* MainTabBarViewController.m in Sources */,
 				8FF9577117D580D000046DDF /* AppDelegate.m in Sources */,
 				8F84350D17D59E0600E52121 /* SidePanelRightViewController.m in Sources */,
 				8FF9576D17D580D000046DDF /* main.m in Sources */,
-				8F9F531217D5859E00D783FD /* MainViewController.m in Sources */,
+				8F9F531217D5859E00D783FD /* EventViewController.m in Sources */,
 				8F9F52FE17D5816700D783FD /* JASidePanelController.m in Sources */,
 				8FF9577417D580D000046DDF /* Occuhunt.xcdatamodeld in Sources */,
 			);
@@ -481,7 +517,7 @@
 				8F84350E17D59E0600E52121 /* SidePanelRightViewController.m in Sources */,
 				8F9F52FF17D5816700D783FD /* JASidePanelController.m in Sources */,
 				8FF9578A17D580D000046DDF /* OccuhuntTests.m in Sources */,
-				8F9F531317D5859E00D783FD /* MainViewController.m in Sources */,
+				8F9F531317D5859E00D783FD /* EventViewController.m in Sources */,
 				8F9F530917D581FF00D783FD /* SidePanelViewController.m in Sources */,
 				8F9F531717D586A300D783FD /* VTPG_Common.m in Sources */,
 				8F84351217D5A26000E52121 /* CategoryCell.m in Sources */,
@@ -594,6 +630,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Occuhunt/Occuhunt-Prefix.pch";
 				INFOPLIST_FILE = "Occuhunt/Occuhunt-Info.plist";
@@ -611,6 +648,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Occuhunt/Occuhunt-Prefix.pch";
 				INFOPLIST_FILE = "Occuhunt/Occuhunt-Info.plist";

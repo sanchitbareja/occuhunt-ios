@@ -3,7 +3,7 @@ This application makes use of the following third party libraries:
 
 ## AFNetworking
 
-Copyright (c) 2011 Gowalla (http://gowalla.com/)
+Copyright (c) 2013 AFNetworking (http://afnetworking.com/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## AFOAuth2Client
+## IOSLinkedInAPI
 
-Copyright (c) 2011 Mattt Thompson (http://mattt.me/)
+Copyright (c) 2013 Ancientprogramming (http://www.ancientprogramming.com/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
