@@ -9,12 +9,20 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate>
+@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate> {
+    // Event Map Details
+    int numberOfRows;
+    int numberOfColumns;
+    int numberOfBlankRows;
+    int numberOfBlankColumns;
+    NSArray *companies;
+}
 
 @property IBOutlet UIView *mapView;
 @property IBOutlet UIView *listView;
 
 @property IBOutlet UIScrollView *mapScrollView;
+@property UICollectionView *collectionView;
 @property IBOutlet UIImageView *mapImageView;
 
 @property IBOutlet UISearchBar *mainSearchBar;

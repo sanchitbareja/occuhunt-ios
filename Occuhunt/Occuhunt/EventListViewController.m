@@ -83,6 +83,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
     UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"EventViewController"];
+    vc.title = @"Map";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

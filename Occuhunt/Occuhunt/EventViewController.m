@@ -8,11 +8,14 @@
 
 #import "EventViewController.h"
 #import "VTPG_Common.h"
-#import "JASidePanelController.h"
-#import "UIViewController+JASidePanel.h"
+//#import "JASidePanelController.h"
+//#import "UIViewController+JASidePanel.h"
 //#import <AFNetworking/AFJSONRequestOperation.h>
 #import "DrawView.h"
 #import "PulsingHaloLayer.h"
+#import "VTPG_Common.h"
+
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
 @interface EventViewController ()
 
@@ -49,45 +52,97 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"Map";
     self.mapView.hidden = NO;
     self.listView.hidden = YES;
+    self.mainSearchBar.hidden = YES;
     
 	// Map View
-    self.mapScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 504)];
+    CGRect toUseFrame = self.view.frame;
+    toUseFrame.origin.y += 65;
+    toUseFrame.size.height -= 65;
+    
+    self.mapScrollView = [[UIScrollView alloc] initWithFrame:toUseFrame];
+    
     self.mapScrollView.delegate = self;
-    self.mapImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CEEFairMap.jpg"]];
+    self.mapScrollView.backgroundColor = [UIColor clearColor];
     
-    [self.mapView addSubview:self.mapScrollView];
-    [self.mapScrollView addSubview:self.mapImageView];
+    UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
+    _collectionView=[[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+    [_collectionView setDataSource:self];
+    [_collectionView setDelegate:self];
     
-    self.mapScrollView.contentSize = self.mapImageView.image.size;
-	self.mapScrollView.maximumZoomScale = 2.0;
-	self.mapScrollView.minimumZoomScale = 0.2;
-    self.mapScrollView.zoomScale = 0.255;
-    
-    self.mainSearchBar.hidden = YES;
-    LOG_EXPR(self.mapScrollView.contentSize);
+    [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    [_collectionView setBackgroundColor:[UIColor clearColor]];
+    _collectionView.userInteractionEnabled = YES;
+    self.mapScrollView.contentSize = CGSizeMake(600, 800);
+    self.mapScrollView.minimumZoomScale = 0.3;
+    self.mapScrollView.maximumZoomScale = 5.0;
+    self.mapScrollView.tag = 123;
+    [self.view addSubview:self.mapScrollView];
+    [self.mapScrollView addSubview:_collectionView];
     
     // Grid View
     
-    UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
+    UICollectionViewFlowLayout *layout2=[[UICollectionViewFlowLayout alloc] init];
     
-    self.listCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 320, 504) collectionViewLayout:layout];
+    self.listCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 320, 504) collectionViewLayout:layout2];
     [self.listView addSubview:self.listCollectionView];
     self.listCollectionView.backgroundColor = [UIColor clearColor];
     
-    [self.listCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.listCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     
     [self.listCollectionView setDataSource:self];
     [self.listCollectionView setDelegate:self];
-    
-    NSURL *url = [NSURL URLWithString:@"http://httpbin.org/ip"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     PulsingHaloLayer *halo = [PulsingHaloLayer layer];
     halo.position = CGPointMake(380, 1060);
     [self.mapImageView.layer addSublayer:halo];
     
+    dispatch_async(kBgQueue, ^{
+        NSData* data = [NSData dataWithContentsOfURL:
+                        [NSURL URLWithString:@"http://occuhunt.com/static/faircoords/2.json"]];
+        if (data == nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+        [self performSelectorOnMainThread:@selector(parseData:)
+                               withObject:data waitUntilDone:YES];
+    });
+    
+}
+
+- (void)parseData:(NSData *)returnedData{
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:returnedData //1
+                          options:kNilOptions
+                          error:&error];
+    
+    NSLog(@"loans: %@", json); //3
+    
+    if (json) {
+        // Setup of Map
+        numberOfRows = [[json objectForKey:@"rows"] intValue];
+        numberOfColumns = [[json objectForKey:@"cols"] intValue];
+        companies = [json objectForKey:@"coys"];
+        
+        numberOfBlankRows = [[json objectForKey:@"blank_rows"] intValue];
+        numberOfBlankColumns = [[json objectForKey:@"blank_columns"] intValue];
+        
+        int numberOfNotBlankRows = numberOfRows-numberOfBlankRows;
+        int numberOfNotBlankColumns = numberOfColumns-numberOfBlankColumns;
+        self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, 50*numberOfNotBlankColumns+30*numberOfBlankColumns, 50*numberOfNotBlankRows+30*numberOfBlankRows);
+        LOG_EXPR(self.collectionView.frame);
+        self.mapScrollView.zoomScale = 1.5;
+        self.mapScrollView.contentOffset = CGPointMake(0, 0);
+        LOG_EXPR(numberOfRows);
+        LOG_EXPR(numberOfColumns);
+        LOG_EXPR(self.collectionView.frame);
+    }
+    
+    [self.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,10 +163,9 @@
     }
 }
 
-- (IBAction)openRightDrawer:(id)sender {
-    [self.sidePanelController showRightPanelAnimated:YES];
-}
-
+//- (IBAction)openRightDrawer:(id)sender {
+//    [self.sidePanelController showRightPanelAnimated:YES];
+//}
 
 - (IBAction)segmentedValueChanged:(id)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl*) sender;
@@ -156,61 +210,100 @@
     [self.mapImageView addSubview:drawableView];
 }
 
-#pragma mark - Scroll View
+# pragma mark - Scroll View Delegate
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    NSLog(@"Scrolled");
+}
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+//    NSLog(@"Zoomed");
+    NSLog(@"current zoom is %f", scrollView.zoomScale);
+}
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    NSLog(@"lol");
-    return self.mapImageView;
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"im scrolling");
-}
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    NSLog(@"im zooming");
-    NSLog(@"Zoom scale, %f", scrollView.zoomScale);
+    NSLog(@"my id is %i", scrollView.tag);
+    if (scrollView.tag != 123) {
+        return nil;
+    }
+    return self.collectionView;
 }
 
-#pragma mark - List View
+#pragma mark - Collection View
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 8;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return numberOfColumns*numberOfRows;
 }
 
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"Cell";
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
-    cell.backgroundColor = UIColorFromRGB(0xecf0f1);
-    
-    UIImageView *mainImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 140, 70)];
-    mainImage.image = [UIImage imageNamed:@"accenture-advert.jpg"];
-    mainImage.contentMode = UIViewContentModeScaleAspectFill;
-    [cell addSubview:mainImage];
-    
-    UILabel *companyNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 85, 140, 20)];
-    companyNameLabel.textAlignment = NSTextAlignmentCenter;
-    companyNameLabel.textColor = UIColorFromRGB(0x2c3e50);
-    companyNameLabel.font = [UIFont fontWithName:@"Open Sans" size:12];
-    companyNameLabel.text = @"Accenture";
-    [cell addSubview:companyNameLabel];
-    
+    UILabel *companyName;
+    if ([cell.contentView viewWithTag:100]) {
+        companyName = (UILabel *) [cell.contentView viewWithTag:100];
+    }
+    else {
+        companyName = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 46, 46)];
+        companyName.tag = 100;
+        companyName.textAlignment = NSTextAlignmentCenter;
+        companyName.backgroundColor = [UIColor clearColor];
+        companyName.font = [UIFont fontWithName:@"Open Sans" size:8];
+        companyName.textColor = [UIColor whiteColor];
+        companyName.lineBreakMode = NSLineBreakByWordWrapping;
+        companyName.numberOfLines = 0;
+    }
+    int theNumber = (indexPath.row)*(indexPath.section);
+    NSLog(@"the row is %i", indexPath.row);
+    NSLog(@"the section is %i", indexPath.section);
+    NSLog(@"the number is %i", theNumber);
+    NSLog(@"companies count is %i", companies.count);
+    if (indexPath.row < companies.count) {
+        companyName.text = [[companies objectAtIndex:(indexPath.row)] objectForKey:@"coy_name"];
+        
+    }
+    else {
+        companyName.text = @"";
+    }
+    NSLog(@"company name %@", companyName.text);
+    if ([companyName.text isEqualToString:@""]) {
+        companyName.text = @"";
+        cell.backgroundColor = [UIColor clearColor];
+        [cell.contentView addSubview:companyName];
+    }
+    else {
+        cell.backgroundColor = [UIColor colorWithRed:122/255.0 green:167/255.0 blue:174/255.0 alpha:1.0];
+        [cell.contentView addSubview:companyName];
+    }
+    if ([[[companies objectAtIndex:(indexPath.row)] objectForKey:@"blank_column"] intValue] == 1){
+        cell.backgroundColor = [UIColor clearColor];
+    }
     return cell;
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(40, 15, 40, 15);
-}
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(140, 110);
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 40;
+    if ([[[companies objectAtIndex:(indexPath.row)] objectForKey:@"blank_column"] intValue] == 1){
+        return CGSizeMake(30, 50);
+    }
+    else if ([[[companies objectAtIndex:(indexPath.row)] objectForKey:@"blank_row"] intValue] == 1){
+        return CGSizeMake(50, 30);
+    }
+    else {
+        return CGSizeMake(50, 50);
+    }
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"I tapped");
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+
+}
 # pragma mark - UISearchBar Methods
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {

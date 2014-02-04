@@ -10,6 +10,7 @@
 #import "LIALinkedInHttpClient.h"
 #import "LIALinkedInApplication.h"
 #import "LIALinkedInAuthorizationViewController.h"
+#import "SettingsViewController.h"
 
 @interface PortfolioViewController ()
 
@@ -35,6 +36,7 @@
     UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
     face.bounds = CGRectMake( 0, 0, faceImage.size.width, faceImage.size.height );
     [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(openSettings:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithCustomView:face];
     self.navigationItem.leftBarButtonItem = bbi;
     
@@ -64,7 +66,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (IBAction)openSettings:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    SettingsViewController *vc = (SettingsViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+    vc.delegate = self;
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nc animated:YES completion:nil];
+}
 
 - (IBAction)connectWithLinkedIn:(id)sender {
     NSLog(@"Did tap connect with linkedin");

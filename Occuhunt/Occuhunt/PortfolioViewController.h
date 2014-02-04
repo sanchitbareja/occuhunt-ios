@@ -28,6 +28,7 @@
 
 - (IBAction)initRegion:(id)sender;
 - (IBAction)transmitBeacon:(UIButton *)sender;
+- (IBAction)openSettings:(id)sender;
 - (IBAction)connectWithLinkedIn:(id)sender;
 
 @end

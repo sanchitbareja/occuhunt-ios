@@ -16,6 +16,7 @@
 		8F547BF9189F31BB0046D518 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F547BF8189F31BB0046D518 /* EventListCell.xib */; };
 		8F547C00189F34610046D518 /* PortfolioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F547BFF189F34610046D518 /* PortfolioViewController.m */; };
 		8F547C02189F3BD10046D518 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F547C01189F3BD10046D518 /* 1.jpg */; };
+		8F547C10189F535B0046D518 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F547C0E189F535B0046D518 /* SettingsViewController.m */; };
 		8F8434F617D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F717D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */; };
@@ -101,6 +102,8 @@
 		8F547BFE189F34610046D518 /* PortfolioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortfolioViewController.h; sourceTree = "<group>"; };
 		8F547BFF189F34610046D518 /* PortfolioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortfolioViewController.m; sourceTree = "<group>"; };
 		8F547C01189F3BD10046D518 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 1.jpg; path = Images/1.jpg; sourceTree = "<group>"; };
+		8F547C0D189F535B0046D518 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		8F547C0E189F535B0046D518 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		8F8434EE17D59D6700E52121 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -190,6 +193,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F547C03189F52E30046D518 /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				8F547BFE189F34610046D518 /* PortfolioViewController.h */,
+				8F547BFF189F34610046D518 /* PortfolioViewController.m */,
+			);
+			name = Portfolio;
+			sourceTree = "<group>";
+		};
+		8F547C04189F52EA0046D518 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				8F547BF2189F2CA50046D518 /* EventListViewController.h */,
+				8F547BF3189F2CA50046D518 /* EventListViewController.m */,
+				8F547BF5189F2F5C0046D518 /* EventListCell.h */,
+				8F547BF6189F2F5C0046D518 /* EventListCell.m */,
+				8F547BF8189F31BB0046D518 /* EventListCell.xib */,
+				8F9F531017D5859E00D783FD /* EventViewController.h */,
+				8F9F531117D5859E00D783FD /* EventViewController.m */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
 		8F84350A17D59D6C00E52121 /* OpenSans */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,15 +298,10 @@
 				8F9F530317D581B300D783FD /* Storyboard.storyboard */,
 				8F547BEF189F25A80046D518 /* MainTabBarViewController.h */,
 				8F547BF0189F25A80046D518 /* MainTabBarViewController.m */,
-				8F547BFE189F34610046D518 /* PortfolioViewController.h */,
-				8F547BFF189F34610046D518 /* PortfolioViewController.m */,
-				8F547BF2189F2CA50046D518 /* EventListViewController.h */,
-				8F547BF3189F2CA50046D518 /* EventListViewController.m */,
-				8F547BF5189F2F5C0046D518 /* EventListCell.h */,
-				8F547BF6189F2F5C0046D518 /* EventListCell.m */,
-				8F547BF8189F31BB0046D518 /* EventListCell.xib */,
-				8F9F531017D5859E00D783FD /* EventViewController.h */,
-				8F9F531117D5859E00D783FD /* EventViewController.m */,
+				8F547C0D189F535B0046D518 /* SettingsViewController.h */,
+				8F547C0E189F535B0046D518 /* SettingsViewController.m */,
+				8F547C03189F52E30046D518 /* Portfolio */,
+				8F547C04189F52EA0046D518 /* Events */,
 				8F547C01189F3BD10046D518 /* 1.jpg */,
 				8FF9577517D580D000046DDF /* Images.xcassets */,
 				8F9F530217D5816A00D783FD /* JASidePanel */,
@@ -492,6 +513,7 @@
 				8F9F530017D5816700D783FD /* UIViewController+JASidePanel.m in Sources */,
 				8F84351117D5A26000E52121 /* CategoryCell.m in Sources */,
 				8FC1B5AA188DD03A00E09E67 /* DrawView.m in Sources */,
+				8F547C10189F535B0046D518 /* SettingsViewController.m in Sources */,
 				8F9F531617D586A300D783FD /* VTPG_Common.m in Sources */,
 				8F9F530817D581FF00D783FD /* SidePanelViewController.m in Sources */,
 				8F87319417D826F100579703 /* ServerIO.m in Sources */,
