@@ -1,3 +1,5 @@
 platform :ios, '6.0'
-pod 'AFNetworking', '~> 2.0'
 pod 'IOSLinkedInAPI'
+pod 'SSKeychain'
+pod 'AFNetworking'
+pod 'SDWebImage'

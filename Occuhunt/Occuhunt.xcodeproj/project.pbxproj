@@ -54,10 +54,9 @@
 		8F9F530917D581FF00D783FD /* SidePanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F530717D581FF00D783FD /* SidePanelViewController.m */; };
 		8F9F531217D5859E00D783FD /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531117D5859E00D783FD /* EventViewController.m */; };
 		8F9F531317D5859E00D783FD /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531117D5859E00D783FD /* EventViewController.m */; };
-		8F9F531617D586A300D783FD /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531517D586A300D783FD /* VTPG_Common.m */; };
-		8F9F531717D586A300D783FD /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F531517D586A300D783FD /* VTPG_Common.m */; };
 		8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F531817D59B0500D783FD /* accenture-advert.jpg */; };
 		8F9F531A17D59B0500D783FD /* accenture-advert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F531817D59B0500D783FD /* accenture-advert.jpg */; };
+		8FABE22D18A2B73300A36A6A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FABE22C18A2B73300A36A6A /* Security.framework */; };
 		8FC1B5A7188DC82C00E09E67 /* CEEFairMap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */; };
 		8FC1B5AA188DD03A00E09E67 /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC1B5A9188DD03A00E09E67 /* DrawView.m */; };
 		8FC1B5AD188DD47E00E09E67 /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */; };
@@ -131,9 +130,8 @@
 		8F9F530717D581FF00D783FD /* SidePanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidePanelViewController.m; sourceTree = "<group>"; };
 		8F9F531017D5859E00D783FD /* EventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventViewController.h; sourceTree = "<group>"; };
 		8F9F531117D5859E00D783FD /* EventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewController.m; sourceTree = "<group>"; };
-		8F9F531417D586A300D783FD /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPG_Common.h; sourceTree = "<group>"; };
-		8F9F531517D586A300D783FD /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPG_Common.m; sourceTree = "<group>"; };
 		8F9F531817D59B0500D783FD /* accenture-advert.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "accenture-advert.jpg"; path = "Images/accenture-advert.jpg"; sourceTree = "<group>"; };
+		8FABE22C18A2B73300A36A6A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = CEEFairMap.jpg; path = Images/CEEFairMap.jpg; sourceTree = "<group>"; };
 		8FC1B5A8188DD03A00E09E67 /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
 		8FC1B5A9188DD03A00E09E67 /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
@@ -167,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FABE22D18A2B73300A36A6A /* Security.framework in Frameworks */,
 				8F3CC178189A1936009C356D /* CoreLocation.framework in Frameworks */,
 				8F3CC176189A192F009C356D /* CoreBluetooth.framework in Frameworks */,
 				8F87319817D8345D00579703 /* MobileCoreServices.framework in Frameworks */,
@@ -274,6 +273,7 @@
 		8FF9575D17D580D000046DDF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8FABE22C18A2B73300A36A6A /* Security.framework */,
 				8FDF4609189CDC610009A9B2 /* libPods-AFNetworking.a */,
 				8FDF4607189CDC580009A9B2 /* libPods-IOSLinkedInAPI.a */,
 				8F3CC177189A1936009C356D /* CoreLocation.framework */,
@@ -295,6 +295,8 @@
 			children = (
 				8FF9576F17D580D000046DDF /* AppDelegate.h */,
 				8FF9577017D580D000046DDF /* AppDelegate.m */,
+				8F87319217D826F100579703 /* ServerIO.h */,
+				8F87319317D826F100579703 /* ServerIO.m */,
 				8F9F530317D581B300D783FD /* Storyboard.storyboard */,
 				8F547BEF189F25A80046D518 /* MainTabBarViewController.h */,
 				8F547BF0189F25A80046D518 /* MainTabBarViewController.m */,
@@ -317,13 +319,9 @@
 				8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */,
 				8FC1B5A8188DD03A00E09E67 /* DrawView.h */,
 				8FC1B5A9188DD03A00E09E67 /* DrawView.m */,
-				8F87319217D826F100579703 /* ServerIO.h */,
-				8F87319317D826F100579703 /* ServerIO.m */,
 				8F84350A17D59D6C00E52121 /* OpenSans */,
 				8F9F531817D59B0500D783FD /* accenture-advert.jpg */,
 				8FF9577217D580D000046DDF /* Occuhunt.xcdatamodeld */,
-				8F9F531417D586A300D783FD /* VTPG_Common.h */,
-				8F9F531517D586A300D783FD /* VTPG_Common.m */,
 				8FF9576817D580D000046DDF /* Occuhunt-Info.plist */,
 				8FF9576917D580D000046DDF /* InfoPlist.strings */,
 				8FF9576C17D580D000046DDF /* main.m */,
@@ -514,7 +512,6 @@
 				8F84351117D5A26000E52121 /* CategoryCell.m in Sources */,
 				8FC1B5AA188DD03A00E09E67 /* DrawView.m in Sources */,
 				8F547C10189F535B0046D518 /* SettingsViewController.m in Sources */,
-				8F9F531617D586A300D783FD /* VTPG_Common.m in Sources */,
 				8F9F530817D581FF00D783FD /* SidePanelViewController.m in Sources */,
 				8F87319417D826F100579703 /* ServerIO.m in Sources */,
 				8F547C00189F34610046D518 /* PortfolioViewController.m in Sources */,
@@ -541,7 +538,6 @@
 				8FF9578A17D580D000046DDF /* OccuhuntTests.m in Sources */,
 				8F9F531317D5859E00D783FD /* EventViewController.m in Sources */,
 				8F9F530917D581FF00D783FD /* SidePanelViewController.m in Sources */,
-				8F9F531717D586A300D783FD /* VTPG_Common.m in Sources */,
 				8F84351217D5A26000E52121 /* CategoryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

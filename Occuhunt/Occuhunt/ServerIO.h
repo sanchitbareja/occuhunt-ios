@@ -18,6 +18,9 @@
 - (void)getCompanies;
 - (void)getCategories;
 - (void)getMaps;
+- (void)getUser:(NSString *)userID;
+
+- (void)makeJSONCall:(NSString *)string;
 
 @property (nonatomic, assign) id <ServerIODelegate> delegate;
 
@@ -28,6 +31,6 @@
 
 @protocol ServerIODelegate
 @required
-- (void)returnData:(NSDictionary *)data;
-- (void)returnFailure:(NSDictionary *)details;
+- (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response;
+- (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error;
 @end

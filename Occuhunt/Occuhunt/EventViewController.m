@@ -7,13 +7,11 @@
 //
 
 #import "EventViewController.h"
-#import "VTPG_Common.h"
 //#import "JASidePanelController.h"
 //#import "UIViewController+JASidePanel.h"
 //#import <AFNetworking/AFJSONRequestOperation.h>
 #import "DrawView.h"
 #import "PulsingHaloLayer.h"
-#import "VTPG_Common.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -134,12 +132,8 @@
         int numberOfNotBlankRows = numberOfRows-numberOfBlankRows;
         int numberOfNotBlankColumns = numberOfColumns-numberOfBlankColumns;
         self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, 50*numberOfNotBlankColumns+30*numberOfBlankColumns, 50*numberOfNotBlankRows+30*numberOfBlankRows);
-        LOG_EXPR(self.collectionView.frame);
         self.mapScrollView.zoomScale = 1.5;
         self.mapScrollView.contentOffset = CGPointMake(0, 0);
-        LOG_EXPR(numberOfRows);
-        LOG_EXPR(numberOfColumns);
-        LOG_EXPR(self.collectionView.frame);
     }
     
     [self.collectionView reloadData];

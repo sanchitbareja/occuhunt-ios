@@ -6,118 +6,53 @@
 	<dict>
 		<key>Pods-AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>Pods-AFOAuth2Client.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-IOSLinkedInAPI.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SSKeychain.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>003B4A098B2A4CC2A743A2BF</key>
+		<key>02AC26A8D8FD4B07B0B0F1B8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>05BC68F093C74CF2A0C51B33</key>
+		<key>30772E5E25A0435F85A960F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>09748EE4C5774B058FF9EC32</key>
+		<key>B1204A2741FB4E00B9506C9E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1B832DF316B74207BEE8D39B</key>
+		<key>DBF967EB47BE43D5ADFDB7CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1BC1A2CC56E04326884347AD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>227FDDE8F7304ECCBBCCEC62</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>309774159A3541199F1F7986</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>345B72E1520B47D594BBC75A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4CE7B05DAC334778B3D746F8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>564614E6457242C28CC7ABD6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>564D10D64A0A405796F2E6A7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7C4A201C053741FCAD5FD387</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>91C1D727A8574AAEBE76755E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B030B56C678A4020830F47BD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B274AAD515B444B3831242DE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BD4107EA2202480EB6618FAC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CFD21434CC6E4751BE676DC8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D00558E167424C8F853B3731</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D49BF0DAA51846CA81F8648B</key>
+		<key>F45678C888AD4829B555118B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

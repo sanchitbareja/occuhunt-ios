@@ -11,6 +11,8 @@
 #import "LIALinkedInApplication.h"
 #import "LIALinkedInAuthorizationViewController.h"
 #import "SettingsViewController.h"
+#import <SSKeychain/SSKeychain.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PortfolioViewController ()
 
@@ -50,7 +52,6 @@
     _logInButton.layer.cornerRadius = 8;
     _logInButton.layer.masksToBounds = YES;
     
-    
     // iBeacon Tech
     self.locationManagerReceiver = [[CLLocationManager alloc] init];
     self.locationManagerReceiver.delegate = self;
@@ -58,6 +59,12 @@
     
     LIALinkedInHttpClient *_client;
     _client = [self client];
+    
+    self.portfolioScrollView.minimumZoomScale = 1.0;
+    self.portfolioScrollView.maximumZoomScale = 3.0;
+    
+    thisServer = [[ServerIO alloc] init];
+    thisServer.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,6 +80,32 @@
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nc animated:YES completion:nil];
 }
+
+- (void)setUpProfile {
+    NSString *myID = [SSKeychain passwordForService:@"OH" account:@"self"];
+    self.loginView.hidden = YES;
+    [thisServer getUser:myID];
+}
+
+#pragma mark - ServerIO Methods
+
+- (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
+    if ([[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"]) {
+        NSLog(@"yeah got resume");
+        [self.portfolioImageView setImage:[UIImage imageNamed:@"1.jpg"]];
+//        NSString *resumeLink = [response objectForKey:@"resume"];
+        NSString *resumeLink = @"http://phaseoneimageprofessor.files.wordpress.com/2013/07/iqpw29_main_image_.jpg";
+        [self.portfolioImageView setImageWithURL:[NSURL URLWithString:resumeLink] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+            NSLog(@"image description %@", [image description]);
+        }];
+    }
+}
+
+- (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
+    
+}
+
+#pragma mark - LinkedIn Methods
 
 - (IBAction)connectWithLinkedIn:(id)sender {
     NSLog(@"Did tap connect with linkedin");
@@ -94,6 +127,12 @@
 - (void)requestMeWithToken:(NSString *)accessToken {
     [self.client GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(id,first-name,last-name,industry)?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
         NSLog(@"current user %@", result);
+        [SSKeychain setPassword:[result objectForKey:@"id"] forService:@"OH" account:@"self"];
+        NSMutableDictionary *toSaveInfoDictionary = [result mutableCopy];
+        [toSaveInfoDictionary setValue:nil forKey:@"id"]; // Delete ID
+        result = nil;
+        [[NSUserDefaults standardUserDefaults] setObject:toSaveInfoDictionary forKey:@"userInfo"]; // Save the rest in userInfo dict
+        [self setUpProfile];
     }        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed to fetch current user %@", error);
     }];
@@ -112,8 +151,22 @@
     return [LIALinkedInHttpClient clientForApplication:application presentingViewController:nil];
 }
 
+#pragma mark - UIScrollView Delegate Methods
 
-// Receiver
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"Scrolled");
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    NSLog(@"Zoomed");
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.portfolioImageView;
+}
+
+#pragma mark - Bluetooth-specific Methods
 
 - (IBAction)initRegion:(id)sender {
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"23542266-18D1-4FE4-B4A1-23F8195B9D39"];

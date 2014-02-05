@@ -19,13 +19,21 @@ PODS:
     - AFNetworking/NSURLConnection
   - IOSLinkedInAPI (2.0.0):
     - AFNetworking (>= 2.0.0)
+  - SDWebImage (3.5.2):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.5.2)
+  - SSKeychain (1.2.1)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.0)
+  - AFNetworking
   - IOSLinkedInAPI
+  - SDWebImage
+  - SSKeychain
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
   IOSLinkedInAPI: 1c1b1bc3fcf21607225d2b9cd704bffab0abfbe1
+  SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
+  SSKeychain: d18926838c2e7cd342e2a49e9f869858e49f035a
 
-COCOAPODS: 0.24.0
+COCOAPODS: 0.29.0

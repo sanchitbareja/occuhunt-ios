@@ -9,8 +9,6 @@
 // Managing many NSURLRequests: http://stackoverflow.com/questions/332276/managing-multiple-asynchronous-nsurlconnection-connections
 
 #import "ServerIO.h"
-//#import <AFOAuth2Client/AFOAuth2Client.h>
-//#import <AFNetworking/AFJSONRequestOperation.h>
 
 #define kClientID @""
 #define kClientSecret @""
@@ -19,26 +17,29 @@
 
 @synthesize delegate;
 
-- (void)makeJSONCall:(NSURLRequest *)request{
+- (void)makeJSONCall:(NSString *)string{
     if (!self.delegate) {
         NSLog(@"No delegate. Please check.");
     }
-//    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-//        if (self.delegate) {
-//            [self.delegate returnData:@{request:@"request", response:@"response", JSON:@"json"}];
-//        }
-//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-//        if (self.delegate) {
-//            [self.delegate returnFailure:@{request:@"request", error:@"error", JSON:@"json"}];
-//        }
-//    }];
-//    [operation start];
+    NSLog(@"Making call to %@", string);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:string parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        if (self.delegate) {
+            [self.delegate returnData:operation response:responseObject];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        if (self.delegate) {
+            [self.delegate returnFailure:operation error:error];
+        }
+    }];
+
 }
 
 - (void)serverSanityCheck {
-    NSURL *url = [NSURL URLWithString:@"http://occuhunt.com/"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self makeJSONCall:request];
+    NSString *url = @"http://occuhunt.com/";
+    [self makeJSONCall:url];
 }
 
 - (void)getAccessToken {
@@ -59,28 +60,31 @@
     
 }
 
+
+- (void)getUser:(NSString *)userID{
+    NSMutableString *url = [NSMutableString stringWithString:@"http://occuhunt.com/api/v1/users"];
+    [url appendFormat:@"/?linkedin_uid=%@", userID];
+    [self makeJSONCall:url];
+}
+
 - (void)getFairs {
-    NSURL *url = [NSURL URLWithString:@"http://occuhunt.com/api/v1/fairs"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self makeJSONCall:request];
+    NSString *url = @"http://occuhunt.com/api/v1/fairs";
+    [self makeJSONCall:url];
 }
 
 - (void)getCompanies {
-    NSURL *url = [NSURL URLWithString:@"http://occuhunt.com/api/v1/companies"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self makeJSONCall:request];
+    NSString *url = @"http://occuhunt.com/api/v1/companies";
+    [self makeJSONCall:url];
 }
 
 - (void)getCategories {
-    NSURL *url = [NSURL URLWithString:@"http://occuhunt.com/api/v1/categories"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self makeJSONCall:request];
+    NSString *url = @"http://occuhunt.com/api/v1/categories";
+    [self makeJSONCall:url];
 }
 
 - (void)getMaps {
-    NSURL *url = [NSURL URLWithString:@"http://occuhunt.com/api/v1/maps"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self makeJSONCall:request];
+    NSString *url = @"http://occuhunt.com/api/v1/maps";
+    [self makeJSONCall:url];
 }
 
 @end

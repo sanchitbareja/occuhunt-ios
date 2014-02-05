@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "ServerIO.h"
 
-@interface PortfolioViewController : UIViewController <CBPeripheralManagerDelegate, CLLocationManagerDelegate>
+@interface PortfolioViewController : UIViewController <CBPeripheralManagerDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, ServerIODelegate> {
+    ServerIO *thisServer;
+}
 
 @property (nonatomic, strong) IBOutlet UIButton *shareResume;
+@property (nonatomic, strong) IBOutlet UIView *loginView;
 @property (nonatomic, strong) IBOutlet UIButton *logInButton;
+@property (nonatomic, strong) IBOutlet UIScrollView *portfolioScrollView;
+@property (nonatomic, strong) IBOutlet UIImageView *portfolioImageView;
 
 
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion;
