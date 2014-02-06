@@ -42,9 +42,11 @@
    
     mapButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"852-map"] style:UIBarButtonItemStylePlain target:self action:@selector(showMap:)];
     listButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"729-top-list"] style:UIBarButtonItemStylePlain target:self action:@selector(showList:)];
-    locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Door"] style:UIBarButtonItemStylePlain target:self action:@selector(locateUser:)];
     checkInButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"722-location-pin"] style:UIBarButtonItemStylePlain target:self action:@selector(checkIn:)];
     
+    if (self.listOfRooms.count <= 1) {
+        roomsButton.enabled = NO;
+    }
 //    [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton]];
 
     //    UIView *titleView = [self createNavigationTitleViewWithTitle:@"Startup Fair" andSubtitle:@"Recreational Sports Facility"];
@@ -69,24 +71,9 @@
     if (self.mapID.length == 0) {
         return;
     }
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://occuhunt.com/static/faircoords/%@.json", self.mapID]]];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if (error || data == (id)[NSNull null] || [data length] == 0) {
-                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                                   [alert show];
-                               }
-                               else {
-                                   [self performSelectorOnMainThread:@selector(parseData:)
-                                                          withObject:data waitUntilDone:YES];
-                               }
-                           }];
-     
     
-    self.mapView.hidden = NO;
-    self.listView.hidden = YES;
-    self.mainSearchBar.hidden = YES;
+    [self mapNewRoom];
+    
     self.filteredCompanyList = [NSMutableArray arrayWithCapacity:50];
     [self.searchDisplayController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
     thisServer = [[ServerIO alloc] init];
@@ -124,6 +111,36 @@
     self.companyTableView.dataSource = self;
     [self.companyTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
     [self.listView addSubview:self.companyTableView];
+}
+
+- (void)mapNewRoom {
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://occuhunt.com/static/faircoords/%@.json", self.mapID]]];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (error || data == (id)[NSNull null] || [data length] == 0) {
+                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                   [alert show];
+                               }
+                               else {
+                                   [self performSelectorOnMainThread:@selector(parseData:)
+                                                          withObject:data waitUntilDone:YES];
+                               }
+                           }];
+    
+    
+    self.mapView.hidden = NO;
+    self.listView.hidden = YES;
+    self.mainSearchBar.hidden = YES;
+    
+    // Empty all arrays
+    [filteredCompanies removeAllObjects];
+    companies = [[NSArray alloc] init];
+    [self.filteredCompanyList removeAllObjects];
+    
+    // Reload all tables
+    [self.listCollectionView reloadData];
+    [self.companyTableView reloadData];
 }
 
 - (void)parseData:(NSData *)returnedData{
@@ -245,6 +262,19 @@
     
 }
 
+#pragma mark - UIAlertViewDelegate Methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    // fair id_ room_id
+    if (buttonIndex > self.listOfRooms.count) {
+        return;
+    }
+    int roomID = [[[self.listOfRooms objectAtIndex:buttonIndex-1] objectForKey:@"id"] intValue];
+    self.mapID = [NSString stringWithFormat:@"%@_%i", self.fairID, roomID];
+    NSLog(@"self.map id is %@", self.mapID);
+    [self mapNewRoom];
+}
+
 #pragma mark - Navigation Bar / Toolbar Methods
 
 - (IBAction)segmentedValueChanged:(id)sender {
@@ -271,8 +301,14 @@
     self.listView.hidden = NO;
 }
 
-- (IBAction)locateUser:(id)sender {
-    
+- (IBAction)showRooms:(id)sender {
+    if (self.listOfRooms.count > 0) {
+        UIAlertView *roomListAlert = [[UIAlertView alloc] initWithTitle:@"Pick a room" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        for (NSDictionary *eachRoom in self.listOfRooms) {
+            [roomListAlert addButtonWithTitle:[eachRoom objectForKey:@"name"]];
+        }
+        [roomListAlert show];
+    }
 }
 
 - (IBAction)checkIn:(id)sender {

@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "ServerIO.h"
 
-@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, ServerIODelegate> {
+@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, ServerIODelegate, UIAlertViewDelegate> {
     // Event Map Details
     int numberOfRows;
     int numberOfColumns;
@@ -22,12 +22,14 @@
     UIBarButtonItem *listButton;
     UIBarButtonItem *locateButton;
     UIBarButtonItem *checkInButton;
+    IBOutlet UIBarButtonItem *roomsButton;
     NSMutableArray *filteredCompanies; // no blank guys
     
     ServerIO *thisServer;
 }
 @property (nonatomic, strong) NSString *fairID;
 @property (nonatomic, strong) NSString *mapID;
+@property (nonatomic, strong) NSArray *listOfRooms;
 
 @property IBOutlet UIView *mapView;
 @property IBOutlet UIView *listView;
@@ -46,5 +48,6 @@
 
 - (IBAction)segmentedValueChanged:(id)sender;
 - (IBAction)checkIn:(id)sender;
+- (IBAction)showRooms:(id)sender;
 
 @end

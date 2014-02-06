@@ -119,6 +119,7 @@
     int roomID = [[[[currentEvent objectForKey:@"rooms"] objectAtIndex:0] objectForKey:@"id"] intValue];
     vc.fairID = [NSString stringWithFormat:@"%i", eventID];
     vc.mapID = [NSString stringWithFormat:@"%i_%i", eventID, roomID];
+    vc.listOfRooms = [[currentEvent objectForKey:@"rooms"] copy];
     
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];

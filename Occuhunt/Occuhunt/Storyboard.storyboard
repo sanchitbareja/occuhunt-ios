@@ -358,7 +358,11 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Rooms" id="dGo-22-gIT"/>
+                                    <barButtonItem title="Rooms" id="dGo-22-gIT">
+                                        <connections>
+                                            <action selector="showRooms:" destination="fca-4G-y9d" id="3fv-Az-e3v"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="166" style="plain" systemItem="fixedSpace" id="QMM-WF-R8f"/>
                                     <barButtonItem title="Check In" id="YVv-ut-dgE">
                                         <connections>
@@ -404,6 +408,7 @@
                         <outlet property="mainSearchBar" destination="3nt-bI-5Y5" id="ldy-sH-enB"/>
                         <outlet property="mapListSegmentedControl" destination="Qx3-hr-vn7" id="REi-rt-CaR"/>
                         <outlet property="mapView" destination="l2G-NI-gVY" id="Jmh-ma-bwS"/>
+                        <outlet property="roomsButton" destination="dGo-22-gIT" id="VcX-Af-8YX"/>
                         <outlet property="searchDisplayController" destination="bnu-T9-plN" id="Tsv-bM-uRt"/>
                         <outlet property="view" destination="Avj-S9-Z01" id="84B-2c-suh"/>
                     </connections>
