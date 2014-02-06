@@ -267,6 +267,11 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // fair id_ room_id
+    NSLog(@"button index %i", buttonIndex);
+    if (buttonIndex == -1 || buttonIndex == 0) {
+        [alertView dismissWithClickedButtonIndex:-1 animated:YES];
+        return;
+    }
     if (buttonIndex > self.listOfRooms.count) {
         return;
     }
@@ -304,10 +309,11 @@
 
 - (IBAction)showRooms:(id)sender {
     if (self.listOfRooms.count > 0) {
-        UIAlertView *roomListAlert = [[UIAlertView alloc] initWithTitle:@"Pick a room" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        UIAlertView *roomListAlert = [[UIAlertView alloc] initWithTitle:@"Event Venues" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         for (NSDictionary *eachRoom in self.listOfRooms) {
             [roomListAlert addButtonWithTitle:[eachRoom objectForKey:@"name"]];
         }
+        roomListAlert.tag == 100;
         [roomListAlert show];
     }
 }
