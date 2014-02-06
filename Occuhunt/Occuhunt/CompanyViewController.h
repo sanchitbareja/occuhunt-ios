@@ -19,5 +19,6 @@
 @property (nonatomic, strong) IBOutlet UIImageView *companyBannerImageView;
 
 - (IBAction)closeView:(id)sender;
+- (IBAction)dropResume:(id)sender;
 
 @end

@@ -145,9 +145,11 @@
 
 - (void)checkInWithUserID:(NSString *)userID andEventID:(NSString *)eventID {
     NSString *url = @"http://occuhunt.com/api/v1/hunts/";
-    NSLog(@"your user id is %@", userID);
-    NSLog(@"your event id is %@", eventID);
     [self makeJSONPost:url andArgs:@{@"user_id": userID, @"event_id": eventID}];
 }
 
+- (void)shareResumeWithRecruitersWithUserID:(NSString *)userID andCompanyID:(NSString *)companyID andStatus:(NSString *)status {
+    NSString *url = @"http://occuhunt.com/api/v1/applications/";
+    [self makeJSONPost:url andArgs:@{@"user_id": userID, @"company_id": companyID, @"status": status}];
+}
 @end

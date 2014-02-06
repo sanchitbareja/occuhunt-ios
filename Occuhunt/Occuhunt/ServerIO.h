@@ -22,6 +22,7 @@
 - (void)getUser:(NSString *)userID;
 - (void)getHunts:(NSString *)userID;
 - (void)checkInWithUserID:(NSString *)userID andEventID:(NSString *)eventID;
+- (void)shareResumeWithRecruitersWithUserID:(NSString *)userID andCompanyID:(NSString *)companyID andStatus:(NSString *)status;
 
 @property (nonatomic, assign) id <ServerIODelegate> delegate;
 

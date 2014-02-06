@@ -9,6 +9,7 @@
 #import "CompanyViewController.h"
 #import <MZFormSheetController/MZFormSheetController.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SSKeychain/SSKeychain.h>
 
 @interface CompanyViewController ()
 
@@ -31,6 +32,20 @@
     }];
 }
 
+- (IBAction)dropResume:(id)sender {
+    if([[SSKeychain passwordForService:@"OH" account:@"self"] length] == 0) {
+        UIAlertView *notLoggedIn = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You are not logged in." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [notLoggedIn show];
+    }
+    else {
+        NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
+        NSLog(@"your user id is %@", userID);
+        
+        [thisServer shareResumeWithRecruitersWithUserID:userID andCompanyID:self.companyID andStatus:@"\"applied\""];
+     }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,26 +66,36 @@
 #pragma mark - Server IO Methods
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineHeightMultiple = 20.0f;
-    paragraphStyle.minimumLineHeight = 20.0f;
-    paragraphStyle.maximumLineHeight = 20.0f;
-    
-    NSDictionary *theCompany = [[[response objectForKey:@"response"] objectForKey:@"companies"] objectAtIndex:0];
-    
-    NSString *string = [theCompany objectForKey:@"company_description"];
-    UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:16.0];
-    UIColor *color = UIColorFromRGB(0x005f69);
-    NSDictionary *attribute = @{
-                                NSParagraphStyleAttributeName : paragraphStyle,
-                                NSFontAttributeName : font,
-                                NSForegroundColorAttributeName : color
-                                };
-    companyDetailTextView.attributedText = [[NSAttributedString alloc] initWithString:string attributes:attribute];
-    
-    self.companyNameLabel.text = [theCompany objectForKey:@"name"];
-    [self.companyBannerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [theCompany objectForKey:@"banner_image"]]]];
-    NSLog(@"Finished setting up!");
+    if ([response objectForKey:@"meta"]) {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineHeightMultiple = 20.0f;
+        paragraphStyle.minimumLineHeight = 20.0f;
+        paragraphStyle.maximumLineHeight = 20.0f;
+        
+        NSDictionary *theCompany = [[[response objectForKey:@"response"] objectForKey:@"companies"] objectAtIndex:0];
+        
+        NSString *string = [theCompany objectForKey:@"company_description"];
+        UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:16.0];
+        UIColor *color = UIColorFromRGB(0x005f69);
+        NSDictionary *attribute = @{
+                                    NSParagraphStyleAttributeName : paragraphStyle,
+                                    NSFontAttributeName : font,
+                                    NSForegroundColorAttributeName : color
+                                    };
+        companyDetailTextView.attributedText = [[NSAttributedString alloc] initWithString:string attributes:attribute];
+        
+        self.companyNameLabel.text = [theCompany objectForKey:@"name"];
+        [self.companyBannerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [theCompany objectForKey:@"banner_image"]]]];
+        NSLog(@"Finished setting up!");
+    }
+    else {
+        if ([operation.response statusCode] == 200 || [operation.response statusCode] == 201) {
+            NSLog(@"Success!");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Resume dropped!" message:[NSString stringWithFormat:@"Expect to hear back from %@ soon!", self.companyNameLabel.text] delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
+            [alert show];
+
+        }
+    }
 }
 
 - (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
