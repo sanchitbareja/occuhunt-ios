@@ -37,13 +37,33 @@
 
 }
 
+- (void)makeJSONPost:(NSString *)string andArgs:(NSDictionary *)args {
+    if (!self.delegate) {
+        NSLog(@"No delegate. Please check.");
+    }
+    NSLog(@"Making call to %@", string);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager POST:string parameters:args success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        if (self.delegate) {
+            [self.delegate returnData:operation response:responseObject];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        if (self.delegate) {
+            [self.delegate returnFailure:operation error:error];
+        }
+    }];
+}
+
 - (void)serverSanityCheck {
     NSString *url = @"http://occuhunt.com/";
     [self makeJSONCall:url];
 }
 
 - (void)getAccessToken {
-    NSURL *url = [NSURL URLWithString:@"http://example.com/"];
+//    NSURL *url = [NSURL URLWithString:@"http://example.com/"];
 //    AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:url clientID:kClientID secret:kClientSecret];
 //    
 //    [oauthClient authenticateUsingOAuthWithPath:@"/oauth/token"
@@ -77,6 +97,11 @@
     [self makeJSONCall:url];
 }
 
+- (void)getCompany:(NSString *)companyID {
+    NSString *url = [NSString stringWithFormat:@"http://occuhunt.com/api/v1/companies/?id=%@", companyID];
+    [self makeJSONCall:url];
+}
+
 - (void)getCategories {
     NSString *url = @"http://occuhunt.com/api/v1/categories";
     [self makeJSONCall:url];
@@ -85,6 +110,13 @@
 - (void)getMaps {
     NSString *url = @"http://occuhunt.com/api/v1/maps";
     [self makeJSONCall:url];
+}
+
+- (void)checkInWithUserID:(NSString *)userID andEventID:(NSString *)eventID {
+    NSString *url = @"http://occuhunt.com/api/v1/hunts/";
+    NSLog(@"your user id is %@", userID);
+    NSLog(@"your event id is %@", eventID);
+    [self makeJSONPost:url andArgs:@{@"user_id": userID, @"event_id": eventID}];
 }
 
 @end

@@ -140,6 +140,7 @@
     else if (indexPath.section == 1) {
         if ([[SSKeychain passwordForService:@"OH" account:@"self"] length] > 0) {
             [SSKeychain setPassword:@"" forService:@"OH" account:@"self"];
+            [SSKeychain setPassword:@"" forService:@"OH" account:@"user_id"];
             [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"userInfo"];
             [self.tableView reloadData];
         }

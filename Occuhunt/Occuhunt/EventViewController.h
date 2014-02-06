@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "ServerIO.h"
 
-@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, ServerIODelegate> {
     // Event Map Details
     int numberOfRows;
     int numberOfColumns;
     int numberOfBlankRows;
     int numberOfBlankColumns;
+    
     NSArray *companies;
     UIBarButtonItem *mapButton;
     UIBarButtonItem *listButton;
@@ -22,7 +24,9 @@
     UIBarButtonItem *checkInButton;
     NSMutableArray *filteredCompanies; // no blank guys
     
+    ServerIO *thisServer;
 }
+@property (nonatomic, strong) NSString *fairID;
 @property (nonatomic, strong) NSString *mapID;
 
 @property IBOutlet UIView *mapView;
@@ -32,13 +36,14 @@
 @property UICollectionView *collectionView;
 @property IBOutlet UIImageView *mapImageView;
 
+@property IBOutlet UISegmentedControl *mapListSegmentedControl;
 @property IBOutlet UISearchBar *mainSearchBar;
 @property IBOutlet UIButton *drawLineButton;
 
 @property UICollectionView *listCollectionView;
 @property UITableView *companyTableView;
+@property (strong,nonatomic) NSMutableArray *filteredCompanyList;
 
-- (IBAction)openRightDrawer:(id)sender;
 - (IBAction)segmentedValueChanged:(id)sender;
 - (IBAction)checkIn:(id)sender;
 

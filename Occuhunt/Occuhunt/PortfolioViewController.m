@@ -148,6 +148,8 @@
         self.loginView.hidden = YES;
         self.resumeView.hidden = NO;
         NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];
+        NSString *userID = [NSString stringWithFormat:@"%i", (int)[[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"id"]];
+        [SSKeychain setPassword:userID forService:@"OH" account:@"user_id"];
         self.portfolioImageView.contentMode = UIViewContentModeTopLeft;
         NSLog(@"resume link %@", resumeLink);
         __block CGSize tempsize;

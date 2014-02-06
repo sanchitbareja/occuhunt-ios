@@ -14,6 +14,8 @@
 #import "PulsingHaloLayer.h"
 #import <MZFormSheetController/MZFormSheetController.h>
 #import "AppDelegate.h"
+#import "CompanyViewController.h"
+#import <SSKeychain/SSKeychain.h>
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -63,21 +65,33 @@
 {
     [super viewDidLoad];
     NSLog(@"my map is %@", self.mapID);
-    dispatch_async(kBgQueue, ^{
-        NSData* data = [NSData dataWithContentsOfURL:
-                        [NSURL URLWithString:@"http://occuhunt.com/static/faircoords/5_2.json"]];
-        if (data == nil) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }
-        [self performSelectorOnMainThread:@selector(parseData:)
-                               withObject:data waitUntilDone:YES];
-    });
+    
+    if (self.mapID.length == 0) {
+        return;
+    }
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://occuhunt.com/static/faircoords/%@.json", self.mapID]]];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (error || data == (id)[NSNull null] || [data length] == 0) {
+                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                   [alert show];
+                               }
+                               else {
+                                   [self performSelectorOnMainThread:@selector(parseData:)
+                                                          withObject:data waitUntilDone:YES];
+                               }
+                           }];
+     
     
     self.mapView.hidden = NO;
     self.listView.hidden = YES;
     self.mainSearchBar.hidden = YES;
-    
+    self.filteredCompanyList = [NSMutableArray arrayWithCapacity:50];
+    [self.searchDisplayController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
+    thisServer = [[ServerIO alloc] init];
+    thisServer.delegate = self;
+
 	// Map View
     CGRect toUseFrame = self.view.frame;
     toUseFrame.origin.y += 109;
@@ -135,6 +149,10 @@
         self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, 50*numberOfNotBlankColumns+30*numberOfBlankColumns, 50*numberOfNotBlankRows+30*numberOfBlankRows);
         self.mapScrollView.zoomScale = 1.5;
         self.mapScrollView.contentOffset = CGPointMake(0, 0);
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     }
     
     [self.collectionView reloadData];
@@ -211,18 +229,39 @@
     [self.mapImageView addSubview:drawableView];
 }
 
-#pragma mark - Bar Button Items Methods
+#pragma mark - Server IO Methods
+
+- (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
+    
+}
+- (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
+    
+}
+
+#pragma mark - Navigation Bar / Toolbar Methods
+
+- (IBAction)segmentedValueChanged:(id)sender {
+    switch (self.mapListSegmentedControl.selectedSegmentIndex) {
+        case 0:
+            [self showMap:nil];
+            break;
+        case 1:
+            [self showList:nil];
+            break;
+            
+        default:
+            break;
+    }
+}
 
 - (IBAction)showMap:(id)sender {
     self.mapView.hidden = NO;
     self.listView.hidden = YES;
-    [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton, listButton]];
 }
 
 - (IBAction)showList:(id)sender {
     self.mapView.hidden = YES;
     self.listView.hidden = NO;
-    [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton, mapButton]];
 }
 
 - (IBAction)locateUser:(id)sender {
@@ -230,7 +269,14 @@
 }
 
 - (IBAction)checkIn:(id)sender {
-    
+    if([[SSKeychain passwordForService:@"OH" account:@"self"] length] == 0) {
+        UIAlertView *notLoggedIn = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You are not logged in." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [notLoggedIn show];
+    }
+    else {
+        NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
+        [thisServer checkInWithUserID:userID andEventID:self.fairID];
+    }
 }
 
 # pragma mark - UINavigationBar Title and Subtitle 
@@ -322,11 +368,11 @@
         companyName.lineBreakMode = NSLineBreakByWordWrapping;
         companyName.numberOfLines = 0;
     }
-    int theNumber = (indexPath.row)*(indexPath.section);
-    NSLog(@"the row is %i", indexPath.row);
-    NSLog(@"the section is %i", indexPath.section);
-    NSLog(@"the number is %i", theNumber);
-    NSLog(@"companies count is %i", companies.count);
+//    int theNumber = (indexPath.row)*(indexPath.section);
+//    NSLog(@"the row is %i", indexPath.row);
+//    NSLog(@"the section is %i", indexPath.section);
+//    NSLog(@"the number is %i", theNumber);
+//    NSLog(@"companies count is %i", companies.count);
     if (indexPath.row < companies.count) {
         companyName.text = [[companies objectAtIndex:(indexPath.row)] objectForKey:@"coy_name"];
         
@@ -334,7 +380,7 @@
     else {
         companyName.text = @"";
     }
-    NSLog(@"company name %@", companyName.text);
+//    NSLog(@"company name %@", companyName.text);
     if ([companyName.text isEqualToString:@""]) {
         companyName.text = @"";
         cell.backgroundColor = [UIColor clearColor];
@@ -371,7 +417,11 @@
         }
     }
     NSLog(@"I tapped");
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompanyViewController"];
+    CompanyViewController *vc = (CompanyViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"CompanyViewController"];
+    if ([[companies objectAtIndex:indexPath.row] objectForKey:@"coy_id"]) {
+        NSString *companyID = [NSString stringWithFormat:@"%@", [[companies objectAtIndex:indexPath.row] objectForKey:@"coy_id"]];
+        vc.companyID = companyID;
+    }
     MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 410) viewController:vc];
     [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
     [[MZFormSheetBackgroundWindow appearance] setBlurRadius:10.0];
@@ -395,6 +445,32 @@
     [searchBar resignFirstResponder];
 }
 
+-(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    // Update the filtered array based on the search text and scope.
+    // Remove all objects from the filtered search array
+    [self.filteredCompanyList removeAllObjects];
+    // Filter the array using NSPredicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coy_id contains[c] %@",searchText];
+    filteredCompanies = [NSMutableArray arrayWithArray:[filteredCompanies filteredArrayUsingPredicate:predicate]];
+}
+
+#pragma mark - UISearchDisplayController Delegate Methods
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    // Tells the table data source to reload when text changes
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+    // Tells the table data source to reload when scope bar selection changes
+    [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
 
 #pragma mark - Table view data source
 
@@ -406,8 +482,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return filteredCompanies.count;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.filteredCompanyList count];
+    } else {
+        return [filteredCompanies count];
+    }
 }
 
 
@@ -415,14 +494,23 @@
 {
     static NSString *CellIdentifier = @"CellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = [[filteredCompanies objectAtIndex:(indexPath.row)] objectForKey:@"coy_name"];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        cell.textLabel.text = [[filteredCompanies objectAtIndex:(indexPath.row)] objectForKey:@"coy_name"];
+    }
+    else {
+        cell.textLabel.text = [[filteredCompanies objectAtIndex:(indexPath.row)] objectForKey:@"coy_name"];
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.companyTableView deselectRowAtIndexPath:indexPath animated:YES];
     NSLog(@"I tapped in list");
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompanyViewController"];
+    CompanyViewController *vc = (CompanyViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"CompanyViewController"];
+    if ([[filteredCompanies objectAtIndex:indexPath.row] objectForKey:@"coy_id"]) {
+        NSString *companyID = [NSString stringWithFormat:@"%@", [[filteredCompanies objectAtIndex:indexPath.row] objectForKey:@"coy_id"]];
+        vc.companyID = companyID;
+    }
     MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 410) viewController:vc];
     [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
     [[MZFormSheetBackgroundWindow appearance] setBlurRadius:10.0];

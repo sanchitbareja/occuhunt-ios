@@ -16,11 +16,11 @@
 - (void)getAccessToken;
 - (void)getFairs;
 - (void)getCompanies;
+- (void)getCompany:(NSString *)companyID;
 - (void)getCategories;
 - (void)getMaps;
 - (void)getUser:(NSString *)userID;
-
-- (void)makeJSONCall:(NSString *)string;
+- (void)checkInWithUserID:(NSString *)userID andEventID:(NSString *)eventID;
 
 @property (nonatomic, assign) id <ServerIODelegate> delegate;
 

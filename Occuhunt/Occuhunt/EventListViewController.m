@@ -117,6 +117,7 @@
     NSDictionary *currentEvent = [self.listOfEvents objectAtIndex:indexPath.row];
     int eventID = [[currentEvent objectForKey:@"id"] intValue];
     int roomID = [[[[currentEvent objectForKey:@"rooms"] objectAtIndex:0] objectForKey:@"id"] intValue];
+    vc.fairID = [NSString stringWithFormat:@"%i", eventID];
     vc.mapID = [NSString stringWithFormat:@"%i_%i", eventID, roomID];
     
     self.hidesBottomBarWhenPushed = YES;
