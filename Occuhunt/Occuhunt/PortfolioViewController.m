@@ -42,10 +42,24 @@
 //    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithCustomView:face];
 //    self.navigationItem.leftBarButtonItem = bbi;
     
-    _shareResume.layer.borderWidth = 1;
-    _shareResume.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
-    _shareResume.layer.cornerRadius = 8;
-    _shareResume.layer.masksToBounds = YES;
+//    _shareResume.layer.borderWidth = 1;
+//    _shareResume.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
+//    _shareResume.layer.cornerRadius = 8;
+//    _shareResume.layer.masksToBounds = YES;
+    
+    self.shareResume = [[BButton alloc] initWithFrame:CGRectMake(40, 10, 240, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
+    [self.shareResume setTitle:@"Drop Resume" forState:UIControlStateNormal];
+    [self.resumeView addSubview:self.shareResume];
+    
+    self.checkInStatus = [[UILabel alloc] initWithFrame:CGRectMake(11, 54, 295, 28)];
+    self.checkInStatus.backgroundColor = [UIColor clearColor];
+    self.checkInStatus.textAlignment = NSTextAlignmentCenter;
+    self.checkInStatus.text = @"You are checked in at UCB Startup Fair";
+    self.checkInStatus.font = [UIFont fontWithName:@"Helvetica Neue" size:11];
+    self.checkInStatus.textColor = [UIColor blackColor];
+    [self.resumeView addSubview:self.checkInStatus];
+    
+    
     
     _logInButton.layer.borderWidth = 1;
     _logInButton.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
@@ -81,6 +95,31 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    
+    
+    void (^animationLabel) (void) = ^{
+        self.checkInStatus.alpha = 1;
+    };
+    void (^completionLabel) (BOOL) = ^(BOOL f) {
+        self.checkInStatus.alpha = 0;
+    };
+    
+    NSUInteger opts =  UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat;
+    [UIView animateWithDuration:1.0f delay:0 options:opts
+                     animations:animationLabel completion:completionLabel];
+    
+    void (^animationLabel2) (void) = ^{
+        self.checkInStatus.alpha = 0;
+    };
+    void (^completionLabel2) (BOOL) = ^(BOOL f) {
+        self.checkInStatus.alpha = 1;
+    };
+    NSUInteger opts2 =  UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat;
+    [UIView animateWithDuration:1.0f delay:1.0f options:opts2
+                     animations:animationLabel2 completion:completionLabel2];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,8 +144,7 @@
 #pragma mark - ServerIO Methods
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
-    if ([[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"]) {
-        NSLog(@"yeah got resume");
+    if ([[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"]) {;
         self.loginView.hidden = YES;
         self.resumeView.hidden = NO;
         NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];

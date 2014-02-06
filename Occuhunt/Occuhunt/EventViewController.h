@@ -23,6 +23,7 @@
     NSMutableArray *filteredCompanies; // no blank guys
     
 }
+@property (nonatomic, strong) NSString *mapID;
 
 @property IBOutlet UIView *mapView;
 @property IBOutlet UIView *listView;

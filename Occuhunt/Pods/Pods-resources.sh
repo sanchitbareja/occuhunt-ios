@@ -41,6 +41,7 @@ install_resource()
       ;;
   esac
 }
+install_resource "BButton/BButton/resources/FontAwesome.ttf"
 install_resource "Mixpanel/Mixpanel/MPArrowLeft.png"
 install_resource "Mixpanel/Mixpanel/MPArrowLeft@2x.png"
 install_resource "Mixpanel/Mixpanel/MPArrowRight.png"

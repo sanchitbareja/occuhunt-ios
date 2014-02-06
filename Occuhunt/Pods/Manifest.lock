@@ -18,6 +18,7 @@ PODS:
   - AFNetworking/UIKit (2.1.0):
     - AFNetworking/NSURLConnection
   - AsyncImageView (1.5.1)
+  - BButton (3.2.3)
   - IOSLinkedInAPI (2.0.0):
     - AFNetworking (>= 2.0.0)
   - Mixpanel (2.3.1)
@@ -32,6 +33,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - AsyncImageView
+  - BButton
   - IOSLinkedInAPI
   - Mixpanel
   - MZFormSheetController
@@ -41,6 +43,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
   AsyncImageView: 686febb2b2a923353ede67c529d257498059852d
+  BButton: b405745cd7ccc9444c696b8690fb79541623766a
   IOSLinkedInAPI: 1c1b1bc3fcf21607225d2b9cd704bffab0abfbe1
   Mixpanel: 8d189c58bcaac429de9cb4f18a54621df99b7e38
   MZAppearance: 8b02683f0019f725557ae9839ed6cab153fff669

@@ -10,6 +10,7 @@
 #import "EventViewController.h"
 #import "EventListCell.h"
 #import "PortfolioViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface EventListViewController ()
 
@@ -90,16 +91,18 @@
     static NSString *CellIdentifier = @"EventListCell";
     EventListCell *cell = (EventListCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
-    
-    cell.eventImage.image = [UIImage imageNamed:@"Favicon4.png"];
-    
     NSDictionary *currentEvent = [self.listOfEvents objectAtIndex:indexPath.row];
     
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *tempDate = [dateFormatter dateFromString:[currentEvent objectForKey:@"date_start"]];
-    [dateFormatter setDateFormat:@"MMMM d yyyy, "];
-    cell.eventTime.text = [dateFormatter stringFromDate:tempDate];
+    [cell.eventImage setImageWithURL:[NSURL URLWithString:[currentEvent objectForKey:@"logo"]] placeholderImage:[UIImage imageNamed:@"Favicon4.png"]];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+    NSDate *startDate = [dateFormatter dateFromString:[currentEvent objectForKey:@"time_start"]];
+    NSDate *endDate = [dateFormatter dateFromString:[currentEvent objectForKey:@"time_end"]];
+    [dateFormatter setDateFormat:@"MMMM d yyyy', 'HHa"];
+    NSMutableString *dateString = [NSMutableString stringWithString:[dateFormatter stringFromDate:startDate]];
+    [dateFormatter setDateFormat:@"' - 'ha"];
+    [dateString appendString:[dateFormatter stringFromDate:endDate]];
+    cell.eventTime.text = dateString;
 //    cell.eventVenue.text = [currentEvent objectForKey:@"];
     cell.eventTitle.text = [currentEvent objectForKey:@"name"];
     
@@ -109,7 +112,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-    UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"EventViewController"];
+    EventViewController *vc = (EventViewController *) [storyboard instantiateViewControllerWithIdentifier:@"EventViewController"];
+    
+    NSDictionary *currentEvent = [self.listOfEvents objectAtIndex:indexPath.row];
+    int eventID = [[currentEvent objectForKey:@"id"] intValue];
+    int roomID = [[[[currentEvent objectForKey:@"rooms"] objectAtIndex:0] objectForKey:@"id"] intValue];
+    vc.mapID = [NSString stringWithFormat:@"%i_%i", eventID, roomID];
+    
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     self.hidesBottomBarWhenPushed = NO;

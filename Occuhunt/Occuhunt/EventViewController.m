@@ -62,10 +62,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    NSLog(@"my map is %@", self.mapID);
     dispatch_async(kBgQueue, ^{
         NSData* data = [NSData dataWithContentsOfURL:
-                        [NSURL URLWithString:@"http://occuhunt.com/static/faircoords/2.json"]];
+                        [NSURL URLWithString:@"http://occuhunt.com/static/faircoords/5_2.json"]];
         if (data == nil) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];

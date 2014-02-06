@@ -11,6 +11,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "ServerIO.h"
 #import "MyImageView.h"
+#import <BButton/BButton.h>
 
 @interface PortfolioViewController : UIViewController <CBPeripheralManagerDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, ServerIODelegate> {
     ServerIO *thisServer;
@@ -19,7 +20,9 @@
     float myWidth;
 }
 
-@property (nonatomic, strong) IBOutlet UIButton *shareResume;
+@property (nonatomic, strong) IBOutlet BButton *shareResume;
+@property (nonatomic, strong) UILabel *checkInStatus;
+
 @property (nonatomic, strong) IBOutlet UIView *loginView;
 @property (nonatomic, strong) IBOutlet UIView *resumeView;
 @property (nonatomic, strong) IBOutlet UIButton *logInButton;

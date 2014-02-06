@@ -138,18 +138,6 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="454"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGj-pt-Snq">
-                                        <rect key="frame" x="40" y="10" width="240" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                        <state key="normal" title="Share Resume"/>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You are now checked in at UCB Startup Fair" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGe-Nc-s7N">
-                                        <rect key="frame" x="11" y="52" width="295" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sko-Al-ZwK">
                                         <rect key="frame" x="0.0" y="73" width="320" height="381"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -205,7 +193,6 @@
                         <outlet property="portfolioImageView" destination="vql-P7-Q1P" id="Pc7-aZ-aBw"/>
                         <outlet property="portfolioScrollView" destination="Sko-Al-ZwK" id="pA6-Zb-nWE"/>
                         <outlet property="resumeView" destination="kEM-tp-8II" id="Pq5-4t-bWy"/>
-                        <outlet property="shareResume" destination="fGj-pt-Snq" id="wfj-kJ-OpX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEC-kq-SNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -363,7 +350,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Rooms" id="dGo-22-gIT"/>
-                                    <barButtonItem width="162" style="plain" systemItem="fixedSpace" id="QMM-WF-R8f"/>
+                                    <barButtonItem width="166" style="plain" systemItem="fixedSpace" id="QMM-WF-R8f"/>
                                     <barButtonItem title="Check In" id="YVv-ut-dgE"/>
                                 </items>
                             </toolbar>
