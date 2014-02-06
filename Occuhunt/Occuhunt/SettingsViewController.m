@@ -122,7 +122,7 @@
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
         controller.mailComposeDelegate = self;
         [controller setSubject:@"Occuhunt iOS App – Feedback"];
-        NSArray *toRecipients = [NSArray arrayWithObjects:@"founders@occuhunt.com", nil];
+        NSArray *toRecipients = [NSArray arrayWithObjects:@"occuhunt@gmail.com", nil];
         [controller setToRecipients:toRecipients];
         [controller setMessageBody:@"" isHTML:NO];
         [self presentViewController:controller animated:YES completion:nil];
@@ -131,6 +131,11 @@
         [SSKeychain setPassword:nil forService:@"OH" account:@"self"];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"userInfo"];
     }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

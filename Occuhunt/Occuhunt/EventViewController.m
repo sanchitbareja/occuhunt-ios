@@ -37,6 +37,16 @@
     [super loadView];
     // If you create your views manually, you MUST override this method and use it to create your views.
     // If you use Interface Builder to create your views, then you must NOT override this method.
+   
+    mapButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"852-map"] style:UIBarButtonItemStylePlain target:self action:@selector(showMap:)];
+    listButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"729-top-list"] style:UIBarButtonItemStylePlain target:self action:@selector(showList:)];
+    locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"789-map-location"] style:UIBarButtonItemStylePlain target:self action:@selector(locateUser:)];
+    checkInButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"722-location-pin"] style:UIBarButtonItemStylePlain target:self action:@selector(checkIn:)];
+    
+    [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton, listButton]];
+
+    //    UIView *titleView = [self createNavigationTitleViewWithTitle:@"Startup Fair" andSubtitle:@"Recreational Sports Facility"];
+//    self.navigationItem.titleView = titleView;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -53,7 +63,6 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Map";
     self.mapView.hidden = NO;
     self.listView.hidden = YES;
     self.mainSearchBar.hidden = NO;
@@ -63,7 +72,7 @@
     toUseFrame.origin.y += 109;
     toUseFrame.size.height -= 109;
     
-    self.mapScrollView = [[UIScrollView alloc] initWithFrame:toUseFrame];
+    self.mapScrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     
     self.mapScrollView.delegate = self;
     self.mapScrollView.backgroundColor = [UIColor clearColor];
@@ -80,7 +89,7 @@
     self.mapScrollView.minimumZoomScale = 0.6;
     self.mapScrollView.maximumZoomScale = 5.0;
     self.mapScrollView.tag = 123;
-    [self.view addSubview:self.mapScrollView];
+    [self.mapView addSubview:self.mapScrollView];
     [self.mapScrollView addSubview:_collectionView];
     
     
@@ -122,7 +131,7 @@
                           options:kNilOptions
                           error:&error];
     
-    NSLog(@"loans: %@", json); //3
+    NSLog(@"json: %@", json); //3
     
     if (json) {
         // Setup of Map
@@ -165,9 +174,8 @@
 //    [self.sidePanelController showRightPanelAnimated:YES];
 //}
 
-- (IBAction)segmentedValueChanged:(id)sender {
-    UISegmentedControl *segmentedControl = (UISegmentedControl*) sender;
-    switch ([segmentedControl selectedSegmentIndex]) {
+- (void)changeMapOrListView:(int)input {
+    switch (input) {
         case 0:
             // Map View
             self.mapView.hidden = NO;
@@ -208,8 +216,70 @@
     [self.mapImageView addSubview:drawableView];
 }
 
+#pragma mark - Bar Button Items Methods
+
+- (IBAction)showMap:(id)sender {
+    self.mapView.hidden = NO;
+    self.listView.hidden = YES;
+    [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton, listButton]];
+}
+
+- (IBAction)showList:(id)sender {
+    self.mapView.hidden = YES;
+    self.listView.hidden = NO;
+    [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton, mapButton]];
+}
+
+- (IBAction)locateUser:(id)sender {
+    
+}
+
 - (IBAction)checkIn:(id)sender {
     
+}
+
+# pragma mark - UINavigationBar Title and Subtitle 
+
+- (UIView *)createNavigationTitleViewWithTitle:(NSString *)title andSubtitle:(NSString *)subtitle {
+    
+    if (subtitle == nil) {
+        subtitle = @"";
+    }
+    
+    const NSInteger leftOffset = 15;
+    
+    // Replace titleView.
+    UIView *headerTitleSubtitleView                = [[UILabel alloc] initWithFrame:CGRectMake(leftOffset, 0, 200, 44)];
+    headerTitleSubtitleView.backgroundColor        = [UIColor clearColor];
+    headerTitleSubtitleView.autoresizesSubviews    = YES;
+    
+    CGRect frame = [subtitle isEqualToString:@""] ? CGRectMake(leftOffset, 0, 160, 44) : CGRectMake(leftOffset, 2, 160, 24);
+    UILabel *titleView    = [[UILabel alloc] initWithFrame:frame];
+    titleView.backgroundColor            = [UIColor clearColor];
+    titleView.font                        = [UIFont boldSystemFontOfSize:19];
+    titleView.textAlignment                = NSTextAlignmentCenter;
+    titleView.textColor                    = [UIColor blackColor];
+    titleView.text                        = title;
+    titleView.adjustsFontSizeToFitWidth    = YES;
+    titleView.minimumScaleFactor        = 0;
+    titleView.lineBreakMode                = NSLineBreakByTruncatingMiddle;
+    [headerTitleSubtitleView addSubview:titleView];
+    
+    // If subtitle is not empty...
+    if (![subtitle isEqualToString:@""]) {
+        UILabel *subtitleView = [[UILabel alloc] initWithFrame:CGRectMake(leftOffset, 24, 160, 44-24)];
+        subtitleView.backgroundColor            = [UIColor clearColor];
+        subtitleView.font                        = [UIFont systemFontOfSize:13];
+        subtitleView.textAlignment                = NSTextAlignmentCenter;
+        subtitleView.textColor                    = [UIColor blackColor];
+        subtitleView.text                        = subtitle;
+        subtitleView.adjustsFontSizeToFitWidth    = YES;
+        subtitleView.minimumScaleFactor            = 4;
+        subtitleView.lineBreakMode                = NSLineBreakByTruncatingMiddle;
+        [headerTitleSubtitleView addSubview:subtitleView];
+    }
+    
+    return headerTitleSubtitleView;
 }
 
 # pragma mark - Scroll View Delegate

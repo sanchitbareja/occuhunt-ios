@@ -34,13 +34,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    UIImage *faceImage = [UIImage imageNamed:@"OHSmall"];
-    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
-    face.bounds = CGRectMake( 0, 0, faceImage.size.width, faceImage.size.height );
-    [face setImage:faceImage forState:UIControlStateNormal];
-    [face addTarget:self action:@selector(openSettings:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithCustomView:face];
-    self.navigationItem.leftBarButtonItem = bbi;
+//    UIImage *faceImage = [UIImage imageNamed:@"OHSmall"];
+//    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+//    face.bounds = CGRectMake( 0, 0, faceImage.size.width, faceImage.size.height );
+//    [face setImage:faceImage forState:UIControlStateNormal];
+//    [face addTarget:self action:@selector(openSettings:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithCustomView:face];
+//    self.navigationItem.leftBarButtonItem = bbi;
     
     _shareResume.layer.borderWidth = 1;
     _shareResume.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;

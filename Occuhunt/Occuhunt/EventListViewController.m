@@ -42,8 +42,12 @@
     thisServer = [[ServerIO alloc] init];
     thisServer.delegate = self;
     
-    [thisServer getFairs];
     dateFormatter = [[NSDateFormatter alloc] init];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [thisServer getFairs];
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,7 +110,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
     UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"EventViewController"];
-    vc.title = @"Event";
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     self.hidesBottomBarWhenPushed = NO;

@@ -16,6 +16,10 @@
     int numberOfBlankRows;
     int numberOfBlankColumns;
     NSArray *companies;
+    UIBarButtonItem *mapButton;
+    UIBarButtonItem *listButton;
+    UIBarButtonItem *locateButton;
+    UIBarButtonItem *checkInButton;
 }
 
 @property IBOutlet UIView *mapView;

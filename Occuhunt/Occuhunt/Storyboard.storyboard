@@ -186,7 +186,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Portfolio" id="x62-da-BZI"/>
+                    <navigationItem key="navigationItem" title="Portfolio" id="x62-da-BZI">
+                        <barButtonItem key="leftBarButtonItem" image="740-gear" id="623-Ic-p4Z">
+                            <connections>
+                                <action selector="openSettings:" destination="F7l-DL-L7g" id="wW7-nL-e9F"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="logInButton" destination="fPD-73-xEo" id="AZu-20-eG1"/>
                         <outlet property="loginView" destination="sSE-sD-6fa" id="FQd-5J-twl"/>
@@ -395,6 +401,7 @@
     <resources>
         <image name="703-download" width="21" height="28"/>
         <image name="722-location-pin" width="19" height="28"/>
+        <image name="740-gear" width="28" height="28"/>
         <image name="close" width="50" height="50"/>
         <image name="ucbsf" width="125" height="125"/>
         <image name="yelpbanner.jpg" width="1000" height="487"/>
