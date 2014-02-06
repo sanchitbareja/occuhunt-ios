@@ -164,8 +164,9 @@
         int numberOfNotBlankRows = numberOfRows-numberOfBlankRows;
         int numberOfNotBlankColumns = numberOfColumns-numberOfBlankColumns;
         self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, 50*numberOfNotBlankColumns+30*numberOfBlankColumns, 50*numberOfNotBlankRows+30*numberOfBlankRows);
-        self.mapScrollView.zoomScale = 1.5;
+        self.mapScrollView.zoomScale = 1.0;
         self.mapScrollView.contentOffset = CGPointMake(0, 0);
+        self.mapScrollView.frame = self.view.frame;
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -250,7 +251,7 @@
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
     if ([operation.response statusCode] == 200 || [operation.response statusCode] == 201) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're all set!" message:@"Head over to Portfolio and start dropping your resume!" delegate:nil cancelButtonTitle:@"Awesome" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're all set!" message:@"Head over to Portfolio and start dropping your resume." delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
         [alert show];
     }
     else {

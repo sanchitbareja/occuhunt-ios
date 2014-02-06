@@ -103,7 +103,7 @@
     [dateFormatter setDateFormat:@"' - 'ha"];
     [dateString appendString:[dateFormatter stringFromDate:endDate]];
     cell.eventTime.text = dateString;
-//    cell.eventVenue.text = [currentEvent objectForKey:@"];
+    cell.eventVenue.text = [[[currentEvent objectForKey:@"rooms"] objectAtIndex:0] objectForKey:@"name"];
     cell.eventTitle.text = [currentEvent objectForKey:@"name"];
     
     
