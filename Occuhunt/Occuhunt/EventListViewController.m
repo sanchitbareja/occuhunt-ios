@@ -38,12 +38,29 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"EventListCell"
                                                bundle:[NSBundle mainBundle]]
          forCellReuseIdentifier:@"EventListCell"];
+    
+    thisServer = [[ServerIO alloc] init];
+    thisServer.delegate = self;
+    
+    [thisServer getFairs];
+    dateFormatter = [[NSDateFormatter alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Server IO Delegate
+
+- (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
+    self.listOfEvents = [response objectForKey:@"objects"];
+    [self.tableView reloadData];
+}
+
+- (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
+    
 }
 
 #pragma mark - Table view data source
@@ -57,7 +74,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 7;
+    return self.listOfEvents.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -71,11 +88,17 @@
     
     // Configure the cell...
     
-    cell.eventImage.image = [UIImage imageNamed:@"ucbsf"];
-    cell.eventTime.text = @"February 26, 12 - 4pm";
-    cell.eventVenue.text = @"International House";
-    cell.eventTitle.text = @"UC Berkeley Startup Fair";
-    NSLog(@"printing cell");
+    cell.eventImage.image = [UIImage imageNamed:@"Favicon4.png"];
+    
+    NSDictionary *currentEvent = [self.listOfEvents objectAtIndex:indexPath.row];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *tempDate = [dateFormatter dateFromString:[currentEvent objectForKey:@"date_start"]];
+    [dateFormatter setDateFormat:@"MMMM d yyyy, "];
+    cell.eventTime.text = [dateFormatter stringFromDate:tempDate];
+//    cell.eventVenue.text = [currentEvent objectForKey:@"];
+    cell.eventTitle.text = [currentEvent objectForKey:@"name"];
+    
     
     return cell;
 }
@@ -83,8 +106,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
     UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"EventViewController"];
-    vc.title = @"Map";
+    vc.title = @"Event";
+    self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 /*

@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import <SSKeychain/SSKeychain.h>
 
 @interface SettingsViewController ()
 
@@ -60,13 +61,19 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    if (section == 0) {
+        return 1;
+    }
+    else if (section == 1) {
+        return 1;
+    }
+    return 0;
 }
 
 
@@ -80,22 +87,42 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    
-    switch (indexPath.row) {
-        case 0:
-            cell.textLabel.text = @"Log Out";
-            break;
-        default:
-            break;
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:
+                cell.textLabel.text = @"Send Feedback";
+                break;
+            default:
+                break;
+        }
+    }
+    else if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+                cell.textLabel.text = @"Log Out";
+                break;
+            default:
+                break;
+        }
     }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-    UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"EventViewController"];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 0) {
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+        controller.mailComposeDelegate = self;
+        [controller setSubject:@"Occuhunt iOS App – Feedback"];
+        NSArray *toRecipients = [NSArray arrayWithObjects:@"founders@occuhunt.com", nil];
+        [controller setToRecipients:toRecipients];
+        [controller setMessageBody:@"" isHTML:NO];
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+    else if (indexPath.section == 1) {
+        [SSKeychain setPassword:nil forService:@"OH" account:@"self"];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"userInfo"];
+    }
 }
 
 /*

@@ -55,7 +55,7 @@
     self.title = @"Map";
     self.mapView.hidden = NO;
     self.listView.hidden = YES;
-    self.mainSearchBar.hidden = YES;
+    self.mainSearchBar.hidden = NO;
     
 	// Map View
     CGRect toUseFrame = self.view.frame;
@@ -205,6 +205,10 @@
         CGContextFillPath(context);
     };
     [self.mapImageView addSubview:drawableView];
+}
+
+- (IBAction)checkIn:(id)sender {
+    
 }
 
 # pragma mark - Scroll View Delegate

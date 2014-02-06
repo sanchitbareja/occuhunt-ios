@@ -33,5 +33,6 @@
 
 - (IBAction)openRightDrawer:(id)sender;
 - (IBAction)segmentedValueChanged:(id)sender;
+- (IBAction)checkIn:(id)sender;
 
 @end

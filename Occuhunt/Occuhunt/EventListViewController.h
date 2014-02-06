@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServerIO.h"
 
-@interface EventListViewController : UITableViewController
+@interface EventListViewController : UITableViewController <ServerIODelegate>{
+    ServerIO *thisServer;
+    NSDateFormatter *dateFormatter;
+}
+
+@property (nonatomic, strong) NSArray *listOfEvents;
 
 @end
