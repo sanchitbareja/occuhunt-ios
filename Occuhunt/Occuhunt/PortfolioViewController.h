@@ -18,6 +18,7 @@
     
     float myHeight;
     float myWidth;
+    
 }
 
 @property (nonatomic, strong) IBOutlet BButton *shareResume;
@@ -39,6 +40,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManagerReceiver;
 @property IBOutlet UILabel *distanceLabel;
 
+@property (nonatomic, strong) NSArray *listOfCompaniesAtUpcomingEvent;
 
 - (IBAction)initRegion:(id)sender;
 - (IBAction)transmitBeacon:(UIButton *)sender;

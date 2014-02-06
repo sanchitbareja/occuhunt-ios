@@ -13,6 +13,7 @@
 #import "SettingsViewController.h"
 #import <SSKeychain/SSKeychain.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "DropResumeViewController.h"
 
 @interface PortfolioViewController ()
 
@@ -49,6 +50,7 @@
     
     self.shareResume = [[BButton alloc] initWithFrame:CGRectMake(40, 10, 240, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
     [self.shareResume setTitle:@"Drop Resume" forState:UIControlStateNormal];
+    [self.shareResume addTarget:self action:@selector(dropResume:) forControlEvents:UIControlEventTouchUpInside];
     [self.resumeView addSubview:self.shareResume];
     
     self.checkInStatus = [[UILabel alloc] initWithFrame:CGRectMake(11, 54, 295, 28)];
@@ -134,6 +136,15 @@
     [self presentViewController:nc animated:YES completion:nil];
 }
 
+- (IBAction)dropResume:(id)sender {
+    
+    DropResumeViewController *drvc = [[DropResumeViewController alloc] init];
+    drvc.delegate = self;
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:drvc];
+    drvc.listOfCompanies = self.listOfCompaniesAtUpcomingEvent;
+    [self presentViewController:navc animated:YES completion:nil];
+}
+
 - (void)setUpProfile {
     NSString *myID = [SSKeychain passwordForService:@"OH" account:@"self"];
     [thisServer getUser:myID];
@@ -171,6 +182,31 @@
         NSLog(@"fairname is %@", fairName);
         if (fairName.length > 0) {
             self.checkInStatus.text = [NSString stringWithFormat:@"You are checked in at %@", fairName];
+            // Download fair details
+#warning to change before submission
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://occuhunt.com/static/faircoords/8.json"]]];
+            [NSURLConnection sendAsynchronousRequest:request
+                                               queue:[NSOperationQueue mainQueue]
+                                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                       if (error || data == (id)[NSNull null] || [data length] == 0) {
+                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the list of companies. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                           [alert show];
+                                       }
+                                       else {
+                                           NSError* error;
+                                           NSDictionary* json = [NSJSONSerialization
+                                                                 JSONObjectWithData:data //1
+                                                                 options:kNilOptions
+                                                                 error:&error];
+                                           
+                                           NSLog(@"json: %@", json); //3
+                                           
+                                           NSArray *companies = [json objectForKey:@"coys"];
+                                           
+                                           self.listOfCompaniesAtUpcomingEvent = companies;
+                                       }
+                                   }];
+
        }
     }
 }

@@ -18,13 +18,12 @@
 		8F547C02189F3BD10046D518 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F547C01189F3BD10046D518 /* 1.jpg */; };
 		8F547C10189F535B0046D518 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F547C0E189F535B0046D518 /* SettingsViewController.m */; };
 		8F664C4A18A3043A00684A0F /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F664C4918A3043A00684A0F /* MyImageView.m */; };
-		8F664C4C18A308CE00684A0F /* sidres.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C4B18A308CE00684A0F /* sidres.jpeg */; };
 		8F664C4E18A30F0400684A0F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F664C4D18A30F0400684A0F /* MessageUI.framework */; };
 		8F664C5018A3120400684A0F /* Favicon4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C4F18A3120400684A0F /* Favicon4.png */; };
 		8F664C5318A315BD00684A0F /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F664C5218A315BD00684A0F /* CompanyViewController.m */; };
-		8F664C5D18A31C3C00684A0F /* yelpbanner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C5C18A31C3C00684A0F /* yelpbanner.jpg */; };
 		8F664C6018A33C4100684A0F /* Door.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C5E18A33C4100684A0F /* Door.png */; };
 		8F664C6118A33C4100684A0F /* Door@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C5F18A33C4100684A0F /* Door@2x.png */; };
+		8F664C6418A409EC00684A0F /* DropResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F664C6318A409EC00684A0F /* DropResumeViewController.m */; };
 		8F8434F617D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F717D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */; };
@@ -113,14 +112,14 @@
 		8F547C0E189F535B0046D518 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		8F664C4818A3043A00684A0F /* MyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyImageView.h; sourceTree = "<group>"; };
 		8F664C4918A3043A00684A0F /* MyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyImageView.m; sourceTree = "<group>"; };
-		8F664C4B18A308CE00684A0F /* sidres.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sidres.jpeg; path = ../../../../../Desktop/sidres.jpeg; sourceTree = "<group>"; };
 		8F664C4D18A30F0400684A0F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8F664C4F18A3120400684A0F /* Favicon4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Favicon4.png; sourceTree = "<group>"; };
 		8F664C5118A315BD00684A0F /* CompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyViewController.h; sourceTree = "<group>"; };
 		8F664C5218A315BD00684A0F /* CompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyViewController.m; sourceTree = "<group>"; };
-		8F664C5C18A31C3C00684A0F /* yelpbanner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yelpbanner.jpg; sourceTree = "<group>"; };
 		8F664C5E18A33C4100684A0F /* Door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Door.png; path = Images/Door.png; sourceTree = "<group>"; };
 		8F664C5F18A33C4100684A0F /* Door@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Door@2x.png"; path = "Images/Door@2x.png"; sourceTree = "<group>"; };
+		8F664C6218A409EC00684A0F /* DropResumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropResumeViewController.h; sourceTree = "<group>"; };
+		8F664C6318A409EC00684A0F /* DropResumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropResumeViewController.m; sourceTree = "<group>"; };
 		8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		8F8434EE17D59D6700E52121 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -218,6 +217,8 @@
 				8F547BFF189F34610046D518 /* PortfolioViewController.m */,
 				8F664C4818A3043A00684A0F /* MyImageView.h */,
 				8F664C4918A3043A00684A0F /* MyImageView.m */,
+				8F664C6218A409EC00684A0F /* DropResumeViewController.h */,
+				8F664C6318A409EC00684A0F /* DropResumeViewController.m */,
 			);
 			name = Portfolio;
 			sourceTree = "<group>";
@@ -237,8 +238,6 @@
 				8F664C5218A315BD00684A0F /* CompanyViewController.m */,
 				8F664C5E18A33C4100684A0F /* Door.png */,
 				8F664C5F18A33C4100684A0F /* Door@2x.png */,
-				8F664C5C18A31C3C00684A0F /* yelpbanner.jpg */,
-				8F664C4B18A308CE00684A0F /* sidres.jpeg */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -463,7 +462,6 @@
 				8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */,
 				8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */,
 				8F547C02189F3BD10046D518 /* 1.jpg in Resources */,
-				8F664C4C18A308CE00684A0F /* sidres.jpeg in Resources */,
 				8F84350617D59D6700E52121 /* OpenSans-Semibold.ttf in Resources */,
 				8F664C6118A33C4100684A0F /* Door@2x.png in Resources */,
 				8F8434FA17D59D6700E52121 /* OpenSans-ExtraBold.ttf in Resources */,
@@ -472,7 +470,6 @@
 				8FF9576B17D580D000046DDF /* InfoPlist.strings in Resources */,
 				8F84350217D59D6700E52121 /* OpenSans-LightItalic.ttf in Resources */,
 				8FF9577617D580D000046DDF /* Images.xcassets in Resources */,
-				8F664C5D18A31C3C00684A0F /* yelpbanner.jpg in Resources */,
 				8F8434F617D59D6700E52121 /* OpenSans-Bold.ttf in Resources */,
 				8F9F530417D581B300D783FD /* Storyboard.storyboard in Resources */,
 				8F84350817D59D6700E52121 /* OpenSans-SemiboldItalic.ttf in Resources */,
@@ -560,6 +557,7 @@
 				8FF9576D17D580D000046DDF /* main.m in Sources */,
 				8F9F531217D5859E00D783FD /* EventViewController.m in Sources */,
 				8F9F52FE17D5816700D783FD /* JASidePanelController.m in Sources */,
+				8F664C6418A409EC00684A0F /* DropResumeViewController.m in Sources */,
 				8FF9577417D580D000046DDF /* Occuhunt.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
