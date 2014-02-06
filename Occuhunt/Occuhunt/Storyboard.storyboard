@@ -145,13 +145,14 @@
                                         <state key="normal" title="Share Resume"/>
                                     </button>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sko-Al-ZwK">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="454"/>
+                                        <rect key="frame" x="0.0" y="73" width="320" height="381"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T13-7f-ny7">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="454"/>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vql-P7-Q1P" customClass="UIImageView">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="381"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <connections>
                                             <outlet property="delegate" destination="F7l-DL-L7g" id="hyM-tt-iaY"/>
@@ -189,6 +190,9 @@
                     <connections>
                         <outlet property="logInButton" destination="fPD-73-xEo" id="AZu-20-eG1"/>
                         <outlet property="loginView" destination="sSE-sD-6fa" id="FQd-5J-twl"/>
+                        <outlet property="portfolioImageView" destination="vql-P7-Q1P" id="Pc7-aZ-aBw"/>
+                        <outlet property="portfolioScrollView" destination="Sko-Al-ZwK" id="pA6-Zb-nWE"/>
+                        <outlet property="resumeView" destination="kEM-tp-8II" id="Pq5-4t-bWy"/>
                         <outlet property="shareResume" destination="fGj-pt-Snq" id="wfj-kJ-OpX"/>
                     </connections>
                 </viewController>
@@ -223,6 +227,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3g-Qg-sc3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="825" y="-40"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="CeX-eN-L4B">
+            <objects>
+                <viewController storyboardIdentifier="CompanyController" id="XqI-sV-ruo" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mOa-iI-G1v"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tfb-t0-Mrs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mOX-zc-Xkf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Company X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwD-nk-TgK">
+                                <rect key="frame" x="115" y="241" width="90" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.81849187413746283" green="0.87613318115673522" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hpn-F8-m9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1109" y="785"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="aIX-PN-rDK">

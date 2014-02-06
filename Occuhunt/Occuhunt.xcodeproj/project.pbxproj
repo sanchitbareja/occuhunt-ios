@@ -17,6 +17,8 @@
 		8F547C00189F34610046D518 /* PortfolioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F547BFF189F34610046D518 /* PortfolioViewController.m */; };
 		8F547C02189F3BD10046D518 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F547C01189F3BD10046D518 /* 1.jpg */; };
 		8F547C10189F535B0046D518 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F547C0E189F535B0046D518 /* SettingsViewController.m */; };
+		8F664C4A18A3043A00684A0F /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F664C4918A3043A00684A0F /* MyImageView.m */; };
+		8F664C4C18A308CE00684A0F /* sidres.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C4B18A308CE00684A0F /* sidres.jpeg */; };
 		8F8434F617D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F717D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */; };
@@ -103,6 +105,9 @@
 		8F547C01189F3BD10046D518 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 1.jpg; path = Images/1.jpg; sourceTree = "<group>"; };
 		8F547C0D189F535B0046D518 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		8F547C0E189F535B0046D518 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		8F664C4818A3043A00684A0F /* MyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyImageView.h; sourceTree = "<group>"; };
+		8F664C4918A3043A00684A0F /* MyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyImageView.m; sourceTree = "<group>"; };
+		8F664C4B18A308CE00684A0F /* sidres.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sidres.jpeg; path = ../../../../../Desktop/sidres.jpeg; sourceTree = "<group>"; };
 		8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		8F8434EE17D59D6700E52121 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -197,6 +202,8 @@
 			children = (
 				8F547BFE189F34610046D518 /* PortfolioViewController.h */,
 				8F547BFF189F34610046D518 /* PortfolioViewController.m */,
+				8F664C4818A3043A00684A0F /* MyImageView.h */,
+				8F664C4918A3043A00684A0F /* MyImageView.m */,
 			);
 			name = Portfolio;
 			sourceTree = "<group>";
@@ -211,6 +218,7 @@
 				8F547BF8189F31BB0046D518 /* EventListCell.xib */,
 				8F9F531017D5859E00D783FD /* EventViewController.h */,
 				8F9F531117D5859E00D783FD /* EventViewController.m */,
+				8F664C4B18A308CE00684A0F /* sidres.jpeg */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -433,6 +441,7 @@
 				8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */,
 				8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */,
 				8F547C02189F3BD10046D518 /* 1.jpg in Resources */,
+				8F664C4C18A308CE00684A0F /* sidres.jpeg in Resources */,
 				8F84350617D59D6700E52121 /* OpenSans-Semibold.ttf in Resources */,
 				8F8434FA17D59D6700E52121 /* OpenSans-ExtraBold.ttf in Resources */,
 				8FC1B5A7188DC82C00E09E67 /* CEEFairMap.jpg in Resources */,
@@ -518,6 +527,7 @@
 				8FC1B5AD188DD47E00E09E67 /* PulsingHaloLayer.m in Sources */,
 				8F547BF4189F2CA50046D518 /* EventListViewController.m in Sources */,
 				8F547BF7189F2F5C0046D518 /* EventListCell.m in Sources */,
+				8F664C4A18A3043A00684A0F /* MyImageView.m in Sources */,
 				8F547BF1189F25A80046D518 /* MainTabBarViewController.m in Sources */,
 				8FF9577117D580D000046DDF /* AppDelegate.m in Sources */,
 				8F84350D17D59E0600E52121 /* SidePanelRightViewController.m in Sources */,

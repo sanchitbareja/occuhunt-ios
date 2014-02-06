@@ -12,6 +12,7 @@
 //#import <AFNetworking/AFJSONRequestOperation.h>
 #import "DrawView.h"
 #import "PulsingHaloLayer.h"
+#import <MZFormSheetController/MZFormSheetController.h>
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -39,12 +40,12 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+//    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 - (void)viewDidLoad
@@ -75,11 +76,13 @@
     [_collectionView setBackgroundColor:[UIColor clearColor]];
     _collectionView.userInteractionEnabled = YES;
     self.mapScrollView.contentSize = CGSizeMake(600, 800);
-    self.mapScrollView.minimumZoomScale = 0.3;
+    self.mapScrollView.minimumZoomScale = 0.6;
     self.mapScrollView.maximumZoomScale = 5.0;
     self.mapScrollView.tag = 123;
     [self.view addSubview:self.mapScrollView];
     [self.mapScrollView addSubview:_collectionView];
+    
+    
     
     // Grid View
     
@@ -292,6 +295,21 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"I tapped");
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompanyController"];
+    
+    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithViewController:vc];
+    [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
+    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:35.0];
+    [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
+    mzv.transitionStyle = MZFormSheetTransitionStyleFade;
+    mzv.formSheetWindow.transparentTouchEnabled = YES;
+    [mzv presentAnimated:YES completionHandler:^(UIViewController *presentedFSViewController) {
+        
+    }];
+//    // present form sheet with view controller
+//    [self mz_presentFormSheetController:mzv animated:YES completionHandler:^(MZFormSheetController *formSheetController) {
+//        //do sth
+//    }];
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {

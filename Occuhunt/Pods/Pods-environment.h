@@ -48,11 +48,29 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 1
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 0
 
+// AsyncImageView
+#define COCOAPODS_POD_AVAILABLE_AsyncImageView
+#define COCOAPODS_VERSION_MAJOR_AsyncImageView 1
+#define COCOAPODS_VERSION_MINOR_AsyncImageView 5
+#define COCOAPODS_VERSION_PATCH_AsyncImageView 1
+
 // IOSLinkedInAPI
 #define COCOAPODS_POD_AVAILABLE_IOSLinkedInAPI
 #define COCOAPODS_VERSION_MAJOR_IOSLinkedInAPI 2
 #define COCOAPODS_VERSION_MINOR_IOSLinkedInAPI 0
 #define COCOAPODS_VERSION_PATCH_IOSLinkedInAPI 0
+
+// MZAppearance
+#define COCOAPODS_POD_AVAILABLE_MZAppearance
+#define COCOAPODS_VERSION_MAJOR_MZAppearance 1
+#define COCOAPODS_VERSION_MINOR_MZAppearance 1
+#define COCOAPODS_VERSION_PATCH_MZAppearance 1
+
+// MZFormSheetController
+#define COCOAPODS_POD_AVAILABLE_MZFormSheetController
+#define COCOAPODS_VERSION_MAJOR_MZFormSheetController 2
+#define COCOAPODS_VERSION_MINOR_MZFormSheetController 3
+#define COCOAPODS_VERSION_PATCH_MZFormSheetController 1
 
 // SDWebImage
 #define COCOAPODS_POD_AVAILABLE_SDWebImage

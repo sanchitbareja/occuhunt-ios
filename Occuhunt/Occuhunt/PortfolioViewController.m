@@ -60,8 +60,11 @@
     LIALinkedInHttpClient *_client;
     _client = [self client];
     
-    self.portfolioScrollView.minimumZoomScale = 1.0;
-    self.portfolioScrollView.maximumZoomScale = 3.0;
+    self.portfolioScrollView.minimumZoomScale = 0.2;
+    self.portfolioScrollView.maximumZoomScale = 2.0;
+    self.portfolioScrollView.delegate = self;
+//    self.portfolioScrollView.clipsToBounds = YES;
+//    self.portfolioScrollView.contentSize = self.portfolioImageView.frame.size;
     
     thisServer = [[ServerIO alloc] init];
     thisServer.delegate = self;
@@ -92,11 +95,20 @@
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
     if ([[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"]) {
         NSLog(@"yeah got resume");
-        [self.portfolioImageView setImage:[UIImage imageNamed:@"1.jpg"]];
-//        NSString *resumeLink = [response objectForKey:@"resume"];
-        NSString *resumeLink = @"http://phaseoneimageprofessor.files.wordpress.com/2013/07/iqpw29_main_image_.jpg";
+        NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];
+        self.portfolioImageView.contentMode = UIViewContentModeTopLeft;
+        NSLog(@"resume link %@", resumeLink);
+        __block CGSize tempsize;
+        __weak PortfolioViewController *weakSelf = self;
         [self.portfolioImageView setImageWithURL:[NSURL URLWithString:resumeLink] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
             NSLog(@"image description %@", [image description]);
+//            CGRect screenRect = [[UIScreen mainScreen] bounds];
+//            CGFloat screenWidth = screenRect.size.width;
+//            float proportion = image.size.width/screenWidth;
+//            float newHeight = image.size.height/proportion;
+//            weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, newHeight);
+            weakSelf.portfolioScrollView.contentSize = image.size;
+//            weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
         }];
     }
 }
@@ -155,15 +167,21 @@
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"Scrolled");
+//    NSLog(@"Scrolled");
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    NSLog(@"Zoomed");
+    //    NSLog(@"Zoomed");
+    NSLog(@"my frame is %f %f", self.portfolioScrollView.frame.size.height, self.portfolioScrollView.frame.size.width);
+    NSLog(@"my size is %f %f", self.portfolioScrollView.contentSize.height, self.portfolioScrollView.contentSize.width);
+    NSLog(@"my zoomscale is %f", self.portfolioScrollView.zoomScale);
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.portfolioImageView;
+    if (scrollView == self.portfolioScrollView) {
+        return self.portfolioImageView;
+    }
+    return nil;
 }
 
 #pragma mark - Bluetooth-specific Methods

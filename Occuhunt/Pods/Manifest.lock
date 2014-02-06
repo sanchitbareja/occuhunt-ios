@@ -17,8 +17,12 @@ PODS:
   - AFNetworking/Serialization (2.1.0)
   - AFNetworking/UIKit (2.1.0):
     - AFNetworking/NSURLConnection
+  - AsyncImageView (1.5.1)
   - IOSLinkedInAPI (2.0.0):
     - AFNetworking (>= 2.0.0)
+  - MZAppearance (1.1.1)
+  - MZFormSheetController (2.3.1):
+    - MZAppearance (~> 1.1.1)
   - SDWebImage (3.5.2):
     - SDWebImage/Core
   - SDWebImage/Core (3.5.2)
@@ -26,13 +30,18 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - AsyncImageView
   - IOSLinkedInAPI
+  - MZFormSheetController
   - SDWebImage
   - SSKeychain
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
+  AsyncImageView: 686febb2b2a923353ede67c529d257498059852d
   IOSLinkedInAPI: 1c1b1bc3fcf21607225d2b9cd704bffab0abfbe1
+  MZAppearance: 8b02683f0019f725557ae9839ed6cab153fff669
+  MZFormSheetController: 3e0cfaead6d3354e1bde9cb028a333352169b25d
   SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
   SSKeychain: d18926838c2e7cd342e2a49e9f869858e49f035a
 

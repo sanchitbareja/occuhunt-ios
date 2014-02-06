@@ -9,7 +9,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-AsyncImageView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-IOSLinkedInAPI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MZAppearance.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MZFormSheetController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>02AC26A8D8FD4B07B0B0F1B8</key>
+		<key>0A6DFE57A14A486AA0AD6A2C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>30772E5E25A0435F85A960F7</key>
+		<key>2C84DC20372E4D5493F50770</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B1204A2741FB4E00B9506C9E</key>
+		<key>31321DA6AAFB4310AAA9C10C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DBF967EB47BE43D5ADFDB7CF</key>
+		<key>37B47ACCA42B434CBF4CD2BE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F45678C888AD4829B555118B</key>
+		<key>67CDC3F2493247C282D5AE80</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D20A6542C7BC418D9D221555</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E38149F480A244098BF7AB51</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EFC5509F9D1D440A923DBFCB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
