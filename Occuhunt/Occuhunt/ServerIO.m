@@ -41,20 +41,46 @@
     if (!self.delegate) {
         NSLog(@"No delegate. Please check.");
     }
+    if ([[args allKeys] count] == 0) {
+        NSLog(@"Empty dictionary");
+        return;
+    }
     NSLog(@"Making call to %@", string);
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager POST:string parameters:args success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+    
+    NSMutableString *constructString = [NSMutableString stringWithString:@"{"];
+    for (NSString *key in args) {
+        NSString *object = [args objectForKey:key];
+        [constructString appendFormat:@"\"%@\":%@,", key, object];
+    }
+    constructString = [NSMutableString stringWithString:[constructString substringToIndex:constructString.length-1]];
+    [constructString appendString:@"}"];
+    NSLog(@"construct string = %@", constructString);
+//    NSString *constructString = [NSString stringWithFormat:@"{\"user_id\":5,\"event_id\":3}"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:string]
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:10];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue: @"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:[constructString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    op.responseSerializer = [AFJSONResponseSerializer serializer];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"JSON responseObject: %@ ",responseObject);
         if (self.delegate) {
             [self.delegate returnData:operation response:responseObject];
         }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        NSLog(@"Error: %@", [error localizedDescription]);
         if (self.delegate) {
             [self.delegate returnFailure:operation error:error];
         }
+        
     }];
+    [op start];
+    return;
 }
 
 - (void)serverSanityCheck {

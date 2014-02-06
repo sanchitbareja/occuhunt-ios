@@ -232,7 +232,14 @@
 #pragma mark - Server IO Methods
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
-    
+    if ([operation.response statusCode] == 200 || [operation.response statusCode] == 201) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're all set!" message:@"Head over to Portfolio and start dropping your resume!" delegate:nil cancelButtonTitle:@"Awesome" otherButtonTitles: nil];
+        [alert show];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You can't check in right now. However, you can also check in online at Occuhunt.com." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 - (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
     
@@ -275,6 +282,7 @@
     }
     else {
         NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
+        NSLog(@"your user id is %@", userID);
         [thisServer checkInWithUserID:userID andEventID:self.fairID];
     }
 }

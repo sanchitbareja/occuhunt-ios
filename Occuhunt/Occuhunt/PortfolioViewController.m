@@ -83,20 +83,21 @@
     thisServer = [[ServerIO alloc] init];
     thisServer.delegate = self;
     
-    if ([[SSKeychain passwordForService:@"OH" account:@"self"] length] > 0) {
-        NSLog(@"yeah in portfolio and %@", [SSKeychain passwordForService:@"OH" account:@"self"]);
-        [thisServer getUser:[SSKeychain passwordForService:@"OH" account:@"self"]];
-        self.resumeView.hidden = NO;
-    }
-    else {
-        self.loginView.hidden = NO;
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
+    if ([[SSKeychain passwordForService:@"OH" account:@"self"] length] > 0) {
+        NSLog(@"yeah in portfolio and %@", [SSKeychain passwordForService:@"OH" account:@"self"]);
+        [thisServer getUser:[SSKeychain passwordForService:@"OH" account:@"self"]];
+        self.resumeView.hidden = NO;
+        self.loginView.hidden = YES;
+    }
+    else {
+        self.loginView.hidden = NO;
+        self.resumeView.hidden = YES;
+    }
     
     void (^animationLabel) (void) = ^{
         self.checkInStatus.alpha = 1;
@@ -148,7 +149,8 @@
         self.loginView.hidden = YES;
         self.resumeView.hidden = NO;
         NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];
-        NSString *userID = [NSString stringWithFormat:@"%i", (int)[[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"id"]];
+        int userIDInt = [[[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"id"] intValue];
+        NSString *userID = [NSString stringWithFormat:@"%i", userIDInt];
         [SSKeychain setPassword:userID forService:@"OH" account:@"user_id"];
         self.portfolioImageView.contentMode = UIViewContentModeTopLeft;
         NSLog(@"resume link %@", resumeLink);
