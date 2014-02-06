@@ -20,6 +20,7 @@
 - (void)getCategories;
 - (void)getMaps;
 - (void)getUser:(NSString *)userID;
+- (void)getHunts:(NSString *)userID;
 - (void)checkInWithUserID:(NSString *)userID andEventID:(NSString *)eventID;
 
 @property (nonatomic, assign) id <ServerIODelegate> delegate;

@@ -54,12 +54,9 @@
     self.checkInStatus = [[UILabel alloc] initWithFrame:CGRectMake(11, 54, 295, 28)];
     self.checkInStatus.backgroundColor = [UIColor clearColor];
     self.checkInStatus.textAlignment = NSTextAlignmentCenter;
-    self.checkInStatus.text = @"You are checked in at UCB Startup Fair";
     self.checkInStatus.font = [UIFont fontWithName:@"Helvetica Neue" size:11];
     self.checkInStatus.textColor = [UIColor blackColor];
     [self.resumeView addSubview:self.checkInStatus];
-    
-    
     
     _logInButton.layer.borderWidth = 1;
     _logInButton.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
@@ -120,7 +117,7 @@
     [UIView animateWithDuration:1.0f delay:1.0f options:opts2
                      animations:animationLabel2 completion:completionLabel2];
     
-    
+    [thisServer getHunts:[SSKeychain passwordForService:@"OH" account:@"user_id"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -166,6 +163,15 @@
             weakSelf.portfolioScrollView.contentSize = image.size;
 //            weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
         }];
+    }
+    else if ([[response objectForKey:@"response"] objectForKey:@"hunts"]) {
+        // Hunting!
+        NSDictionary *fair = [[[[response objectForKey:@"response"] objectForKey:@"hunts"] objectAtIndex:0] objectForKey:@"fair"];
+        NSString *fairName = [fair objectForKey:@"name"];
+        NSLog(@"fairname is %@", fairName);
+        if (fairName.length > 0) {
+            self.checkInStatus.text = [NSString stringWithFormat:@"You are checked in at %@", fairName];
+       }
     }
 }
 

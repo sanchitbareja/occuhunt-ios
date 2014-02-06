@@ -138,6 +138,11 @@
     [self makeJSONCall:url];
 }
 
+- (void)getHunts:(NSString *)userID{
+    NSString *url = [NSString stringWithFormat:@"http://occuhunt.com/api/v1/hunts/?user_id=%@", userID];
+    [self makeJSONCall:url];
+}
+
 - (void)checkInWithUserID:(NSString *)userID andEventID:(NSString *)eventID {
     NSString *url = @"http://occuhunt.com/api/v1/hunts/";
     NSLog(@"your user id is %@", userID);
