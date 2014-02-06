@@ -40,7 +40,7 @@
    
     mapButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"852-map"] style:UIBarButtonItemStylePlain target:self action:@selector(showMap:)];
     listButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"729-top-list"] style:UIBarButtonItemStylePlain target:self action:@selector(showList:)];
-    locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"789-map-location"] style:UIBarButtonItemStylePlain target:self action:@selector(locateUser:)];
+    locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Door"] style:UIBarButtonItemStylePlain target:self action:@selector(locateUser:)];
     checkInButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"722-location-pin"] style:UIBarButtonItemStylePlain target:self action:@selector(checkIn:)];
     
     [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton, listButton]];
@@ -62,6 +62,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    dispatch_async(kBgQueue, ^{
+        NSData* data = [NSData dataWithContentsOfURL:
+                        [NSURL URLWithString:@"http://occuhunt.com/static/faircoords/2.json"]];
+        if (data == nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+        [self performSelectorOnMainThread:@selector(parseData:)
+                               withObject:data waitUntilDone:YES];
+    });
     
     self.mapView.hidden = NO;
     self.listView.hidden = YES;
@@ -92,36 +103,13 @@
     [self.mapView addSubview:self.mapScrollView];
     [self.mapScrollView addSubview:_collectionView];
     
-    
-    
-    // Grid View
-    
-    UICollectionViewFlowLayout *layout2=[[UICollectionViewFlowLayout alloc] init];
-    
-    self.listCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 320, 504) collectionViewLayout:layout2];
-    [self.listView addSubview:self.listCollectionView];
-    self.listCollectionView.backgroundColor = [UIColor clearColor];
-    
-    [self.listCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
-    
-    [self.listCollectionView setDataSource:self];
-    [self.listCollectionView setDelegate:self];
-    
-    PulsingHaloLayer *halo = [PulsingHaloLayer layer];
-    halo.position = CGPointMake(380, 1060);
-    [self.mapImageView.layer addSublayer:halo];
-    
-    dispatch_async(kBgQueue, ^{
-        NSData* data = [NSData dataWithContentsOfURL:
-                        [NSURL URLWithString:@"http://occuhunt.com/static/faircoords/2.json"]];
-        if (data == nil) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }
-        [self performSelectorOnMainThread:@selector(parseData:)
-                               withObject:data waitUntilDone:YES];
-    });
-    
+    // List View
+    filteredCompanies = [[NSMutableArray alloc] init];
+    self.companyTableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    self.companyTableView.delegate = self;
+    self.companyTableView.dataSource = self;
+    [self.companyTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
+    [self.listView addSubview:self.companyTableView];
 }
 
 - (void)parseData:(NSData *)returnedData{
@@ -150,6 +138,13 @@
     }
     
     [self.collectionView reloadData];
+    [filteredCompanies removeAllObjects];
+    for (NSDictionary *eachCoy in companies) {
+        if ([[eachCoy objectForKey:@"coy_name"] length] > 0) {
+            [filteredCompanies addObject:eachCoy];
+        }
+    }
+    [self.companyTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -386,10 +381,6 @@
     [mzv presentAnimated:YES completionHandler:^(UIViewController *presentedFSViewController) {
         
     }];
-    // present form sheet with view controller
-//    [self mz_presentFormSheetController:mzv animated:YES completionHandler:^(MZFormSheetController *formSheetController) {
-//        //do sth
-//    }];
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -403,5 +394,97 @@
     [self drawLine:nil];
     [searchBar resignFirstResponder];
 }
+
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return filteredCompanies.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"CellIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.textLabel.text = [[filteredCompanies objectAtIndex:(indexPath.row)] objectForKey:@"coy_name"];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.companyTableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSLog(@"I tapped in list");
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompanyViewController"];
+    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 410) viewController:vc];
+    [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
+    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:10.0];
+    [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
+    mzv.transitionStyle = MZFormSheetTransitionStyleFade;
+    mzv.shouldDismissOnBackgroundViewTap = YES;
+    [mzv presentAnimated:YES completionHandler:^(UIViewController *presentedFSViewController) {
+        
+    }];
+
+}
+
+/*
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
+
+/*
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ }
+ else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
+
+/*
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
+
+/*
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a story board-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ 
+ */
+
 
 @end

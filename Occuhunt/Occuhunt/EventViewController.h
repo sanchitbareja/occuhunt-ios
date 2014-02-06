@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate> {
+@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate> {
     // Event Map Details
     int numberOfRows;
     int numberOfColumns;
@@ -20,6 +20,8 @@
     UIBarButtonItem *listButton;
     UIBarButtonItem *locateButton;
     UIBarButtonItem *checkInButton;
+    NSMutableArray *filteredCompanies; // no blank guys
+    
 }
 
 @property IBOutlet UIView *mapView;
@@ -33,7 +35,7 @@
 @property IBOutlet UIButton *drawLineButton;
 
 @property UICollectionView *listCollectionView;
-
+@property UITableView *companyTableView;
 
 - (IBAction)openRightDrawer:(id)sender;
 - (IBAction)segmentedValueChanged:(id)sender;

@@ -23,6 +23,8 @@
 		8F664C5018A3120400684A0F /* Favicon4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C4F18A3120400684A0F /* Favicon4.png */; };
 		8F664C5318A315BD00684A0F /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F664C5218A315BD00684A0F /* CompanyViewController.m */; };
 		8F664C5D18A31C3C00684A0F /* yelpbanner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C5C18A31C3C00684A0F /* yelpbanner.jpg */; };
+		8F664C6018A33C4100684A0F /* Door.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C5E18A33C4100684A0F /* Door.png */; };
+		8F664C6118A33C4100684A0F /* Door@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F664C5F18A33C4100684A0F /* Door@2x.png */; };
 		8F8434F617D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F717D59D6700E52121 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */; };
 		8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */; };
@@ -117,6 +119,8 @@
 		8F664C5118A315BD00684A0F /* CompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyViewController.h; sourceTree = "<group>"; };
 		8F664C5218A315BD00684A0F /* CompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyViewController.m; sourceTree = "<group>"; };
 		8F664C5C18A31C3C00684A0F /* yelpbanner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yelpbanner.jpg; sourceTree = "<group>"; };
+		8F664C5E18A33C4100684A0F /* Door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Door.png; path = Images/Door.png; sourceTree = "<group>"; };
+		8F664C5F18A33C4100684A0F /* Door@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Door@2x.png"; path = "Images/Door@2x.png"; sourceTree = "<group>"; };
 		8F8434EC17D59D6700E52121 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		8F8434ED17D59D6700E52121 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		8F8434EE17D59D6700E52121 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -231,6 +235,8 @@
 				8F9F531117D5859E00D783FD /* EventViewController.m */,
 				8F664C5118A315BD00684A0F /* CompanyViewController.h */,
 				8F664C5218A315BD00684A0F /* CompanyViewController.m */,
+				8F664C5E18A33C4100684A0F /* Door.png */,
+				8F664C5F18A33C4100684A0F /* Door@2x.png */,
 				8F664C5C18A31C3C00684A0F /* yelpbanner.jpg */,
 				8F664C4B18A308CE00684A0F /* sidres.jpeg */,
 			);
@@ -459,7 +465,9 @@
 				8F547C02189F3BD10046D518 /* 1.jpg in Resources */,
 				8F664C4C18A308CE00684A0F /* sidres.jpeg in Resources */,
 				8F84350617D59D6700E52121 /* OpenSans-Semibold.ttf in Resources */,
+				8F664C6118A33C4100684A0F /* Door@2x.png in Resources */,
 				8F8434FA17D59D6700E52121 /* OpenSans-ExtraBold.ttf in Resources */,
+				8F664C6018A33C4100684A0F /* Door.png in Resources */,
 				8FC1B5A7188DC82C00E09E67 /* CEEFairMap.jpg in Resources */,
 				8FF9576B17D580D000046DDF /* InfoPlist.strings in Resources */,
 				8F84350217D59D6700E52121 /* OpenSans-LightItalic.ttf in Resources */,
