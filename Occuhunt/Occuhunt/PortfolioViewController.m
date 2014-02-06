@@ -68,6 +68,15 @@
     
     thisServer = [[ServerIO alloc] init];
     thisServer.delegate = self;
+    
+    if ([[SSKeychain passwordForService:@"OH" account:@"self"] length] > 0) {
+        NSLog(@"yeah in portfolio and %@", [SSKeychain passwordForService:@"OH" account:@"self"]);
+        [thisServer getUser:[SSKeychain passwordForService:@"OH" account:@"self"]];
+        self.resumeView.hidden = NO;
+    }
+    else {
+        self.loginView.hidden = NO;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -90,7 +99,6 @@
 
 - (void)setUpProfile {
     NSString *myID = [SSKeychain passwordForService:@"OH" account:@"self"];
-    self.loginView.hidden = YES;
     [thisServer getUser:myID];
 }
 
@@ -99,6 +107,8 @@
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
     if ([[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"]) {
         NSLog(@"yeah got resume");
+        self.loginView.hidden = YES;
+        self.resumeView.hidden = NO;
         NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];
         self.portfolioImageView.contentMode = UIViewContentModeTopLeft;
         NSLog(@"resume link %@", resumeLink);

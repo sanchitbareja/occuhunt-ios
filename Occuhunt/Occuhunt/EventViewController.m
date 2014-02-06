@@ -43,7 +43,7 @@
     locateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Door"] style:UIBarButtonItemStylePlain target:self action:@selector(locateUser:)];
     checkInButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"722-location-pin"] style:UIBarButtonItemStylePlain target:self action:@selector(checkIn:)];
     
-    [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton, listButton]];
+//    [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton]];
 
     //    UIView *titleView = [self createNavigationTitleViewWithTitle:@"Startup Fair" andSubtitle:@"Recreational Sports Facility"];
 //    self.navigationItem.titleView = titleView;
@@ -76,7 +76,7 @@
     
     self.mapView.hidden = NO;
     self.listView.hidden = YES;
-    self.mainSearchBar.hidden = NO;
+    self.mainSearchBar.hidden = YES;
     
 	// Map View
     CGRect toUseFrame = self.view.frame;

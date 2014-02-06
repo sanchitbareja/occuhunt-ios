@@ -6,3 +6,4 @@ pod 'SDWebImage'
 pod 'MZFormSheetController'
 pod 'AsyncImageView'
 pod 'Mixpanel'
+pod ‘BButton’
