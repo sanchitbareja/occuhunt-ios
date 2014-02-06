@@ -78,7 +78,15 @@
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"Account";
+    switch (section) {
+        case 0:
+            return @"General";
+            break;
+            
+        default:
+            return @"Account";
+            break;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

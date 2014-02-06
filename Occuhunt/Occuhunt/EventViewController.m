@@ -13,6 +13,7 @@
 #import "DrawView.h"
 #import "PulsingHaloLayer.h"
 #import <MZFormSheetController/MZFormSheetController.h>
+#import "AppDelegate.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -59,8 +60,8 @@
     
 	// Map View
     CGRect toUseFrame = self.view.frame;
-    toUseFrame.origin.y += 65;
-    toUseFrame.size.height -= 65;
+    toUseFrame.origin.y += 109;
+    toUseFrame.size.height -= 109;
     
     self.mapScrollView = [[UIScrollView alloc] initWithFrame:toUseFrame];
     
@@ -298,19 +299,24 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([[[self.collectionView cellForItemAtIndexPath:indexPath] contentView] viewWithTag:100]){
+        UILabel *theLabel = (UILabel *)[[[self.collectionView cellForItemAtIndexPath:indexPath] contentView] viewWithTag:100];
+        if (theLabel.text.length < 1) {
+            return;
+        }
+    }
     NSLog(@"I tapped");
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompanyController"];
-    
-    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithViewController:vc];
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompanyViewController"];
+    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 410) viewController:vc];
     [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
-    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:35.0];
+    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:10.0];
     [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
     mzv.transitionStyle = MZFormSheetTransitionStyleFade;
-    mzv.formSheetWindow.transparentTouchEnabled = YES;
+    mzv.shouldDismissOnBackgroundViewTap = YES;
     [mzv presentAnimated:YES completionHandler:^(UIViewController *presentedFSViewController) {
         
     }];
-//    // present form sheet with view controller
+    // present form sheet with view controller
 //    [self mz_presentFormSheetController:mzv animated:YES completionHandler:^(MZFormSheetController *formSheetController) {
 //        //do sth
 //    }];
