@@ -7,15 +7,14 @@
 //
 
 #import "EventViewController.h"
-//#import "JASidePanelController.h"
-//#import "UIViewController+JASidePanel.h"
-//#import <AFNetworking/AFJSONRequestOperation.h>
 #import "DrawView.h"
 #import "PulsingHaloLayer.h"
 #import <MZFormSheetController/MZFormSheetController.h>
 #import "AppDelegate.h"
 #import "CompanyViewController.h"
 #import <SSKeychain/SSKeychain.h>
+#import <QuartzCore/QuartzCore.h>
+#import "SharpLabel.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -80,11 +79,8 @@
     thisServer.delegate = self;
 
 	// Map View
-    CGRect toUseFrame = self.view.frame;
-    toUseFrame.origin.y += 109;
-    toUseFrame.size.height -= 109;
     
-    self.mapScrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+    self.mapScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
     
     self.mapScrollView.delegate = self;
     self.mapScrollView.backgroundColor = [UIColor clearColor];
@@ -164,9 +160,8 @@
         int numberOfNotBlankRows = numberOfRows-numberOfBlankRows;
         int numberOfNotBlankColumns = numberOfColumns-numberOfBlankColumns;
         self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, 50*numberOfNotBlankColumns+30*numberOfBlankColumns, 50*numberOfNotBlankRows+30*numberOfBlankRows);
-        self.mapScrollView.zoomScale = 1.0;
+        self.mapScrollView.zoomScale = 1.5;
         self.mapScrollView.contentOffset = CGPointMake(0, 0);
-        self.mapScrollView.frame = self.mapView.frame;
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -260,7 +255,7 @@
     }
 }
 - (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
-    
+
 }
 
 #pragma mark - UIAlertViewDelegate Methods
@@ -309,7 +304,7 @@
 
 - (IBAction)showRooms:(id)sender {
     if (self.listOfRooms.count > 0) {
-        UIAlertView *roomListAlert = [[UIAlertView alloc] initWithTitle:@"Event Venues" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        UIAlertView *roomListAlert = [[UIAlertView alloc] initWithTitle:@"Venues" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         for (NSDictionary *eachRoom in self.listOfRooms) {
             [roomListAlert addButtonWithTitle:[eachRoom objectForKey:@"name"]];
         }
@@ -400,24 +395,51 @@
     return numberOfColumns*numberOfRows;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = (UICollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    if ([cell viewWithTag:100]) {
+        UILabel *companyName = (UILabel *)[cell viewWithTag:100];
+        if ([companyName.text isEqualToString:@""]) {
+            return;
+        }
+    }
+    cell.backgroundColor = UIColorFromRGB(0xa4c8cb); // highlight selection
+}
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = (UICollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    if ([cell viewWithTag:100]) {
+        UILabel *companyName = (UILabel *)[cell viewWithTag:100];
+        if ([companyName.text isEqualToString:@""]) {
+            return;
+        }
+    }
+    cell.backgroundColor = UIColorFromRGB(0xeef7f7); // highlight selection
+}
+
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     
-    UILabel *companyName;
+    SharpLabel *companyName;
     if ([cell.contentView viewWithTag:100]) {
-        companyName = (UILabel *) [cell.contentView viewWithTag:100];
+        companyName = (SharpLabel *) [cell.contentView viewWithTag:100];
     }
     else {
-        companyName = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 46, 46)];
+        companyName = [[SharpLabel alloc] initWithFrame:CGRectMake(2, 2, 46, 46)];
         companyName.tag = 100;
         companyName.textAlignment = NSTextAlignmentCenter;
         companyName.backgroundColor = [UIColor clearColor];
-        companyName.font = [UIFont fontWithName:@"Open Sans" size:8];
+        companyName.font = [UIFont fontWithName:@"Proxima Nova" size:8];
         companyName.textColor = [UIColor blackColor];
         companyName.lineBreakMode = NSLineBreakByWordWrapping;
         companyName.numberOfLines = 0;
+        
+        CATiledLayer *tiledLayer = (CATiledLayer*)companyName.layer;
+        tiledLayer.levelsOfDetail = 10;
+        tiledLayer.levelsOfDetailBias = 10;
     }
 //    int theNumber = (indexPath.row)*(indexPath.section);
 //    NSLog(@"the row is %i", indexPath.row);
@@ -440,6 +462,7 @@
     else {
         cell.backgroundColor = UIColorFromRGB(0xeef7f7);
         cell.layer.borderColor = [UIColorFromRGB(0xadadad) CGColor];
+        cell.layer.borderWidth = 0.5f;
         [cell.contentView addSubview:companyName];
     }
     if ([[[companies objectAtIndex:(indexPath.row)] objectForKey:@"blank_column"] intValue] == 1){
@@ -469,6 +492,10 @@
         }
     }
     NSLog(@"I tapped");
+    
+    // Highlight
+    
+    
     CompanyViewController *vc = (CompanyViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"CompanyViewController"];
     if ([[companies objectAtIndex:indexPath.row] objectForKey:@"coy_id"]) {
         NSString *companyID = [NSString stringWithFormat:@"%@", [[companies objectAtIndex:indexPath.row] objectForKey:@"coy_id"]];

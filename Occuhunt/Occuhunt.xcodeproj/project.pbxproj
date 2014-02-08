@@ -74,6 +74,7 @@
 		8FBEA1E118A5D1270069A8DB /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D718A5D1270069A8DB /* ProximaNova-Regular.otf */; };
 		8FBEA1E218A5D1270069A8DB /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D818A5D1270069A8DB /* ProximaNova-Semibold.otf */; };
 		8FBEA1E318A5D1270069A8DB /* ProximaNova-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D918A5D1270069A8DB /* ProximaNova-SemiboldItalic.otf */; };
+		8FBEA1E718A5D4A60069A8DB /* SharpLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FBEA1E618A5D4A60069A8DB /* SharpLabel.m */; };
 		8FC1B5A7188DC82C00E09E67 /* CEEFairMap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */; };
 		8FC1B5AA188DD03A00E09E67 /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC1B5A9188DD03A00E09E67 /* DrawView.m */; };
 		8FC1B5AD188DD47E00E09E67 /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */; };
@@ -169,6 +170,8 @@
 		8FBEA1D718A5D1270069A8DB /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		8FBEA1D818A5D1270069A8DB /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		8FBEA1D918A5D1270069A8DB /* ProximaNova-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		8FBEA1E518A5D4A60069A8DB /* SharpLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharpLabel.h; sourceTree = "<group>"; };
+		8FBEA1E618A5D4A60069A8DB /* SharpLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharpLabel.m; sourceTree = "<group>"; };
 		8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = CEEFairMap.jpg; path = Images/CEEFairMap.jpg; sourceTree = "<group>"; };
 		8FC1B5A8188DD03A00E09E67 /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
 		8FC1B5A9188DD03A00E09E67 /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
@@ -254,6 +257,8 @@
 				8F547BF8189F31BB0046D518 /* EventListCell.xib */,
 				8F9F531017D5859E00D783FD /* EventViewController.h */,
 				8F9F531117D5859E00D783FD /* EventViewController.m */,
+				8FBEA1E518A5D4A60069A8DB /* SharpLabel.h */,
+				8FBEA1E618A5D4A60069A8DB /* SharpLabel.m */,
 				8F664C5118A315BD00684A0F /* CompanyViewController.h */,
 				8F664C5218A315BD00684A0F /* CompanyViewController.m */,
 				8F664C5E18A33C4100684A0F /* Door.png */,
@@ -607,6 +612,7 @@
 				8F9F52FE17D5816700D783FD /* JASidePanelController.m in Sources */,
 				8F664C6418A409EC00684A0F /* DropResumeViewController.m in Sources */,
 				8FF9577417D580D000046DDF /* Occuhunt.xcdatamodeld in Sources */,
+				8FBEA1E718A5D4A60069A8DB /* SharpLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

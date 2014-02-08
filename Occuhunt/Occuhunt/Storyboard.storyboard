@@ -383,9 +383,9 @@
                                 <action selector="segmentedValueChanged:" destination="fca-4G-y9d" eventType="valueChanged" id="kKc-CO-2jJ"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" image="708-search" id="6Md-Jb-fxI">
+                        <barButtonItem key="rightBarButtonItem" title="Venues" id="6Md-Jb-fxI">
                             <connections>
-                                <action selector="openSearchBar:" destination="fca-4G-y9d" id="ec4-nz-UG5"/>
+                                <action selector="showRooms:" destination="fca-4G-y9d" id="CF2-qq-adA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -414,7 +414,6 @@
     </scenes>
     <resources>
         <image name="703-download" width="21" height="28"/>
-        <image name="708-search" width="28" height="28"/>
         <image name="740-gear" width="28" height="28"/>
         <image name="close" width="50" height="50"/>
         <image name="ucbsf" width="125" height="125"/>
