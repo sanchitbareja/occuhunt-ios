@@ -33,7 +33,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.title = @"Pick Companies";
+//    self.title = @"Pick Companies";
     UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Drop" style:UIBarButtonItemStylePlain target:self action:@selector(checkIn:)];
     self.navigationItem.rightBarButtonItem = rightbbi;
     

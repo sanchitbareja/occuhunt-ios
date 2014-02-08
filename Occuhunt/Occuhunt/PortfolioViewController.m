@@ -50,16 +50,17 @@
 //    _shareResume.layer.masksToBounds = YES;
     
     self.shareResume = [[BButton alloc] initWithFrame:CGRectMake(40, 10, 240, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
+    self.shareResume.color = UIColorFromRGB(0x348891);
     [self.shareResume setTitle:@"Drop Resume" forState:UIControlStateNormal];
     [self.shareResume addTarget:self action:@selector(dropResume:) forControlEvents:UIControlEventTouchUpInside];
     [self.resumeView addSubview:self.shareResume];
     
-    self.checkInStatus = [[UILabel alloc] initWithFrame:CGRectMake(11, 54, 295, 28)];
+    self.checkInStatus = [[UILabel alloc] initWithFrame:CGRectMake(11, 33, 295, 28)];
     self.checkInStatus.backgroundColor = [UIColor clearColor];
     self.checkInStatus.textAlignment = NSTextAlignmentCenter;
     self.checkInStatus.font = [UIFont fontWithName:@"Helvetica Neue" size:11];
-    self.checkInStatus.textColor = [UIColor blackColor];
-    [self.resumeView addSubview:self.checkInStatus];
+    self.checkInStatus.textColor = [UIColor whiteColor];
+//    [self.resumeView addSubview:self.checkInStatus];
     
     _logInButton.layer.borderWidth = 1;
     _logInButton.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
@@ -92,11 +93,10 @@
     self.portfolioScrollView.userInteractionEnabled = YES;
     self.portfolioImageView.userInteractionEnabled = YES;
     
-    
     self.portfolioScrollView.translatesAutoresizingMaskIntoConstraints = NO;
     self.portfolioImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    
+    // Scroll View + Auto Layout Fix
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_portfolioScrollView,_portfolioImageView);
     [self.resumeImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_portfolioScrollView]|" options:0 metrics: 0 views:viewsDictionary]];
     [self.resumeImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_portfolioScrollView]|" options:0 metrics: 0 views:viewsDictionary]];
@@ -105,11 +105,6 @@
     
     thisServer = [[ServerIO alloc] init];
     thisServer.delegate = self;
-    
-    NSLog(@"START");
-    NSLog(@"my frame is %f %f", self.portfolioScrollView.frame.size.height, self.portfolioScrollView.frame.size.width);
-    NSLog(@"my size is %f %f", self.portfolioScrollView.contentSize.height, self.portfolioScrollView.contentSize.width);
-    NSLog(@"my zoomscale is %f", self.portfolioScrollView.zoomScale);
     
 }
 
@@ -173,6 +168,7 @@
     drvc.delegate = self;
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:drvc];
     drvc.listOfCompanies = self.listOfCompaniesAtUpcomingEvent;
+    drvc.title = self.fairName;
     [self presentViewController:navc animated:YES completion:nil];
 }
 
@@ -205,11 +201,11 @@
             
             weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, newHeight);
             weakSelf.portfolioScrollView.contentSize = image.size;
-//            weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
-            NSLog(@"Just refresh");
-            NSLog(@"my frame is %f %f", weakSelf.portfolioScrollView.frame.size.height, weakSelf.portfolioScrollView.frame.size.width);
-            NSLog(@"my size is %f %f", weakSelf.portfolioScrollView.contentSize.height, weakSelf.portfolioScrollView.contentSize.width);
-            NSLog(@"my zoomscale is %f", weakSelf.portfolioScrollView.zoomScale);
+            weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
+            
+            
+//            weakSelf.portfolioImageView.contentMode = UIViewContentModeScaleAspectFit;
+//            weakSelf.portfolioScrollView.contentOffset = CGPointMake(0, -500);
         } usingProgressView:nil];
     }
     else if ([[response objectForKey:@"response"] objectForKey:@"hunts"]) {
@@ -219,6 +215,7 @@
         NSLog(@"fairname is %@", fairName);
         if (fairName.length > 0) {
             self.checkInStatus.text = [NSString stringWithFormat:@"You are checked in at %@", fairName];
+            self.fairName = fairName;
             self.shareResume.enabled = YES;
             // Download fair details
 #warning to change before submission
