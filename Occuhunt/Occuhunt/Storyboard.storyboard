@@ -89,8 +89,8 @@
             <objects>
                 <viewController id="KC9-tj-LQA" customClass="SidePanelViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jcS-E1-57T"/>
-                        <viewControllerLayoutGuide type="bottom" id="fnr-9l-Ujd"/>
+                        <viewControllerLayoutGuide type="top" id="gad-7H-6nk"/>
+                        <viewControllerLayoutGuide type="bottom" id="pRK-iL-5sa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CZN-NG-j6M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -127,8 +127,8 @@
             <objects>
                 <viewController id="F7l-DL-L7g" customClass="PortfolioViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eWZ-Kh-Zxy"/>
-                        <viewControllerLayoutGuide type="bottom" id="J3s-62-ifU"/>
+                        <viewControllerLayoutGuide type="top" id="tlR-Hv-6qM"/>
+                        <viewControllerLayoutGuide type="bottom" id="SDE-bq-CMP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="y9z-QE-Kby">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -138,20 +138,11 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="454"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sko-Al-ZwK">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fqs-hg-J9R">
                                         <rect key="frame" x="0.0" y="73" width="320" height="381"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vql-P7-Q1P" customClass="UIImageView">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="381"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </view>
-                                        </subviews>
-                                        <connections>
-                                            <outlet property="delegate" destination="F7l-DL-L7g" id="hyM-tt-iaY"/>
-                                        </connections>
-                                    </scrollView>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -190,8 +181,7 @@
                     <connections>
                         <outlet property="logInButton" destination="fPD-73-xEo" id="AZu-20-eG1"/>
                         <outlet property="loginView" destination="sSE-sD-6fa" id="FQd-5J-twl"/>
-                        <outlet property="portfolioImageView" destination="vql-P7-Q1P" id="Pc7-aZ-aBw"/>
-                        <outlet property="portfolioScrollView" destination="Sko-Al-ZwK" id="pA6-Zb-nWE"/>
+                        <outlet property="resumeImageView" destination="fqs-hg-J9R" id="aLz-OY-tE7"/>
                         <outlet property="resumeView" destination="kEM-tp-8II" id="Pq5-4t-bWy"/>
                     </connections>
                 </viewController>
@@ -232,8 +222,8 @@
             <objects>
                 <viewController storyboardIdentifier="CompanyViewController" id="XqI-sV-ruo" customClass="CompanyViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mOa-iI-G1v"/>
-                        <viewControllerLayoutGuide type="bottom" id="Tfb-t0-Mrs"/>
+                        <viewControllerLayoutGuide type="top" id="lXs-Gb-Mb5"/>
+                        <viewControllerLayoutGuide type="bottom" id="btF-aK-Tus"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mOX-zc-Xkf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -342,8 +332,8 @@
             <objects>
                 <viewController storyboardIdentifier="EventViewController" id="fca-4G-y9d" customClass="EventViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="z0j-CY-3Np"/>
-                        <viewControllerLayoutGuide type="bottom" id="UQU-g4-GN2"/>
+                        <viewControllerLayoutGuide type="top" id="Lv0-FL-q9K"/>
+                        <viewControllerLayoutGuide type="bottom" id="0p8-gp-TcG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Avj-S9-Z01">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>

@@ -74,14 +74,42 @@
     LIALinkedInHttpClient *_client;
     _client = [self client];
     
+    [self.resumeView addSubview:self.resumeImageView];
+    
+    self.portfolioScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 381)];
+    self.portfolioImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 381)];
+    [self.resumeImageView addSubview:self.portfolioScrollView];
+    
+    self.portfolioScrollView.clipsToBounds = YES;
+    
+    [self.portfolioScrollView addSubview:self.portfolioImageView];
+    
     self.portfolioScrollView.minimumZoomScale = 0.2;
     self.portfolioScrollView.maximumZoomScale = 2.0;
     self.portfolioScrollView.delegate = self;
-//    self.portfolioScrollView.clipsToBounds = YES;
-//    self.portfolioScrollView.contentSize = self.portfolioImageView.frame.size;
+    
+    self.portfolioScrollView.contentSize = self.portfolioScrollView.frame.size;
+    self.portfolioScrollView.userInteractionEnabled = YES;
+    self.portfolioImageView.userInteractionEnabled = YES;
+    
+    
+    self.portfolioScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.portfolioImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_portfolioScrollView,_portfolioImageView);
+    [self.resumeImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_portfolioScrollView]|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.resumeImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_portfolioScrollView]|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.portfolioScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_portfolioImageView]|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.portfolioScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_portfolioImageView]|" options:0 metrics: 0 views:viewsDictionary]];
     
     thisServer = [[ServerIO alloc] init];
     thisServer.delegate = self;
+    
+    NSLog(@"START");
+    NSLog(@"my frame is %f %f", self.portfolioScrollView.frame.size.height, self.portfolioScrollView.frame.size.width);
+    NSLog(@"my size is %f %f", self.portfolioScrollView.contentSize.height, self.portfolioScrollView.contentSize.width);
+    NSLog(@"my zoomscale is %f", self.portfolioScrollView.zoomScale);
     
 }
 
@@ -170,13 +198,18 @@
 
         [self.portfolioImageView setImageWithURL:[NSURL URLWithString:resumeLink] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
             NSLog(@"image description %@", [image description]);
-//            CGRect screenRect = [[UIScreen mainScreen] bounds];
-//            CGFloat screenWidth = screenRect.size.width;
-//            float proportion = image.size.width/screenWidth;
-//            float newHeight = image.size.height/proportion;
-//            weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, newHeight);
+            CGRect screenRect = [[UIScreen mainScreen] bounds];
+            CGFloat screenWidth = screenRect.size.width;
+            float proportion = image.size.width/screenWidth;
+            float newHeight = image.size.height/proportion;
+            
+            weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, newHeight);
             weakSelf.portfolioScrollView.contentSize = image.size;
 //            weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
+            NSLog(@"Just refresh");
+            NSLog(@"my frame is %f %f", weakSelf.portfolioScrollView.frame.size.height, weakSelf.portfolioScrollView.frame.size.width);
+            NSLog(@"my size is %f %f", weakSelf.portfolioScrollView.contentSize.height, weakSelf.portfolioScrollView.contentSize.width);
+            NSLog(@"my zoomscale is %f", weakSelf.portfolioScrollView.zoomScale);
         } usingProgressView:nil];
     }
     else if ([[response objectForKey:@"response"] objectForKey:@"hunts"]) {
@@ -281,10 +314,7 @@
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    if (scrollView == self.portfolioScrollView) {
-        return self.portfolioImageView;
-    }
-    return nil;
+    return self.portfolioImageView;
 }
 
 #pragma mark - Bluetooth-specific Methods

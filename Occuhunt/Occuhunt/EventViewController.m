@@ -308,7 +308,7 @@
         for (NSDictionary *eachRoom in self.listOfRooms) {
             [roomListAlert addButtonWithTitle:[eachRoom objectForKey:@"name"]];
         }
-        roomListAlert.tag == 100;
+        roomListAlert.tag = 100;
         [roomListAlert show];
     }
 }
