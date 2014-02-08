@@ -78,10 +78,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    thisServer = [[ServerIO alloc] init];
-    thisServer.delegate = self;
     
-    [thisServer getCompany:self.companyID];
     
     self.dropResumeButton = [[BButton alloc] initWithFrame:CGRectMake(60, 402, 160, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
     self.dropResumeButton.color = UIColorFromRGB(0x348891);
@@ -90,6 +87,12 @@
     [self.view addSubview:self.dropResumeButton];
     
     [self.favoriteButton setImage:nil forState:UIControlStateNormal];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    thisServer = [[ServerIO alloc] init];
+    thisServer.delegate = self;
+    [thisServer getCompany:self.companyID];
 }
 
 - (void)didReceiveMemoryWarning

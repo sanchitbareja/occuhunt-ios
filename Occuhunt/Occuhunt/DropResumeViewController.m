@@ -97,7 +97,13 @@
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
     if (operation.tag == SHARERESUMEMULTIPLE) {
-        UIAlertView *dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Your resumes have been dropped." delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
+        UIAlertView *dropSuccessAlert;
+        if (checkedCompanies.count == 1) {
+            dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Your resume has been dropped." delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
+        }
+        else {
+            dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Your resumes have been dropped." delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
+        }
         [dropSuccessAlert show];
     }
 }

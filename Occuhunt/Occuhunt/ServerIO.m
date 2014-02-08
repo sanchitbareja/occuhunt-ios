@@ -28,7 +28,12 @@
     
     NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:string relativeToURL:manager.baseURL] absoluteString] parameters:nil error:nil];
 //    [request setTimeoutInterval:[NSTimeInterval time]];
-    request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    if (httpCallTag == GETCOMPANY) {
+        request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    }
+    else {
+        request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    }
     
 
     AFHTTPRequestOperation *operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
