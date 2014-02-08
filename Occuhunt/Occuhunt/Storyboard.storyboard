@@ -237,7 +237,7 @@
                                 </state>
                                 <state key="highlighted" image="HeartFilled"/>
                                 <connections>
-                                    <action selector="dropResume:" destination="XqI-sV-ruo" eventType="touchUpInside" id="jcH-2g-zLZ"/>
+                                    <action selector="favoriteCompany:" destination="XqI-sV-ruo" eventType="touchUpInside" id="svh-JC-wvr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7V-Gn-2M7">
@@ -261,7 +261,6 @@
                                 <rect key="frame" x="10" y="135" width="260" height="254"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="textColor" red="0.0" green="0.37254901960784315" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

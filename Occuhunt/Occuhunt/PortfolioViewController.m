@@ -180,36 +180,32 @@
 #pragma mark - ServerIO Methods
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
-    if ([[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"]) {;
-        self.loginView.hidden = YES;
-        self.resumeView.hidden = NO;
-        NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];
-        int userIDInt = [[[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"id"] intValue];
-        NSString *userID = [NSString stringWithFormat:@"%i", userIDInt];
-        [SSKeychain setPassword:userID forService:@"OH" account:@"user_id"];
-        self.portfolioImageView.contentMode = UIViewContentModeTopLeft;
-        NSLog(@"resume link %@", resumeLink);
-//        __block CGSize tempsize;
-        __weak PortfolioViewController *weakSelf = self;
+    if (operation.tag == GETUSER) {
+        if ([[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"]) {;
+            self.loginView.hidden = YES;
+            self.resumeView.hidden = NO;
+            NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];
+            int userIDInt = [[[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"id"] intValue];
+            NSString *userID = [NSString stringWithFormat:@"%i", userIDInt];
+            [SSKeychain setPassword:userID forService:@"OH" account:@"user_id"];
+            self.portfolioImageView.contentMode = UIViewContentModeTopLeft;
+            NSLog(@"resume link %@", resumeLink);
+            __weak PortfolioViewController *weakSelf = self;
 
-        [self.portfolioImageView setImageWithURL:[NSURL URLWithString:resumeLink] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
-            NSLog(@"image description %@", [image description]);
-            CGRect screenRect = [[UIScreen mainScreen] bounds];
-            CGFloat screenWidth = screenRect.size.width;
-            float proportion = image.size.width/screenWidth;
-            float newHeight = image.size.height/proportion;
-            
-            weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, image.size.height);
-//            weakSelf.portfolioScrollView.contentSize = image.size;
-            weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
-            weakSelf.portfolioScrollView.minimumZoomScale = 320/image.size.width;
-            
-            
-//            weakSelf.portfolioImageView.contentMode = UIViewContentModeScaleAspectFit;
-//            weakSelf.portfolioScrollView.contentOffset = CGPointMake(0, -500);
-        } usingProgressView:nil];
+            [self.portfolioImageView setImageWithURL:[NSURL URLWithString:resumeLink] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+                NSLog(@"image description %@", [image description]);
+                CGRect screenRect = [[UIScreen mainScreen] bounds];
+                CGFloat screenWidth = screenRect.size.width;
+                float proportion = image.size.width/screenWidth;
+                float newHeight = image.size.height/proportion;
+                
+                weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, image.size.height);
+                weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
+                weakSelf.portfolioScrollView.minimumZoomScale = 320/image.size.width;
+            } usingProgressView:nil];
+        }
     }
-    else if ([[response objectForKey:@"response"] objectForKey:@"hunts"]) {
+    else if (operation.tag == GETHUNTS) {
         // Hunting!
         NSDictionary *fair = [[[[response objectForKey:@"response"] objectForKey:@"hunts"] objectAtIndex:0] objectForKey:@"fair"];
         NSString *fairName = [fair objectForKey:@"name"];

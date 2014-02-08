@@ -60,8 +60,10 @@
 #pragma mark - Server IO Delegate
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
-    self.listOfEvents = [response objectForKey:@"objects"];
-    [self.tableView reloadData];
+    if (operation.tag == GETFAIRS) {
+        self.listOfEvents = [response objectForKey:@"objects"];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {

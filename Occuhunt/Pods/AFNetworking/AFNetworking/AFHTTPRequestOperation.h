@@ -33,6 +33,8 @@
 /// @name Getting HTTP URL Connection Information
 ///------------------------------------------------
 
+@property (nonatomic, assign) int tag;
+
 /**
  The last HTTP response received by the operation's connection.
  */

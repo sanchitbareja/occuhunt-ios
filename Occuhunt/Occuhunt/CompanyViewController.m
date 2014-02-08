@@ -33,6 +33,18 @@
     }];
 }
 
+- (IBAction)favoriteCompany:(id)sender {
+    if([[SSKeychain passwordForService:@"OH" account:@"self"] length] == 0) {
+        UIAlertView *notLoggedIn = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You are not logged in." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [notLoggedIn show];
+    }
+    else {
+        NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
+        NSLog(@"your user id is %@", userID);
+        [thisServer favoriteWithUserID:userID andCompanyID:self.companyID];
+    }
+}
+
 - (IBAction)dropResume:(id)sender {
     if([[SSKeychain passwordForService:@"OH" account:@"self"] length] == 0) {
         UIAlertView *notLoggedIn = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You are not logged in." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -73,7 +85,7 @@
 #pragma mark - Server IO Methods
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
-    if ([response objectForKey:@"meta"]) {
+    if (operation.tag == GETCOMPANY) {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineHeightMultiple = 20.0f;
         paragraphStyle.minimumLineHeight = 20.0f;
@@ -100,7 +112,7 @@
 
         NSLog(@"Finished setting up!");
     }
-    else {
+    else if (operation.tag == SHARERESUME){
         if ([operation.response statusCode] == 200 || [operation.response statusCode] == 201) {
             NSLog(@"Success!");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Resume dropped!" message:[NSString stringWithFormat:@"Expect to hear back from %@ soon!", self.companyNameLabel.text] delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
