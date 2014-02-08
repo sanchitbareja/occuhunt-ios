@@ -169,6 +169,7 @@
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:drvc];
     drvc.listOfCompanies = self.listOfCompaniesAtUpcomingEvent;
     drvc.title = self.fairName;
+    drvc.fairID = self.fairID;
     [self presentViewController:navc animated:YES completion:nil];
 }
 
@@ -208,6 +209,7 @@
     else if (operation.tag == GETHUNTS) {
         // Hunting!
         NSDictionary *fair = [[[[response objectForKey:@"response"] objectForKey:@"hunts"] objectAtIndex:0] objectForKey:@"fair"];
+        self.fairID = [[fair objectForKey:@"id"] intValue];
         NSString *fairName = [fair objectForKey:@"name"];
         NSLog(@"fairname is %@", fairName);
         if (fairName.length > 0) {

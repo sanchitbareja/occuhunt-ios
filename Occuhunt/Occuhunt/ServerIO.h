@@ -21,9 +21,10 @@
 - (void)getMaps;
 - (void)getUser:(NSString *)userID;
 - (void)getHunts:(NSString *)userID;
-- (void)checkInWithUserID:(NSString *)userID andEventID:(NSString *)eventID;
-- (void)shareResumeWithRecruitersWithUserID:(NSString *)userID andCompanyID:(NSString *)companyID andStatus:(NSString *)status;
+- (void)shareResumeWithRecruitersWithUserID:(NSString *)userID andFairID:(int)fairID andCompanyID:(NSString *)companyID andStatus:(NSString *)status;
+- (void)shareResumeWithMultipleRecruitersWithUserID:(NSString *)userID andFairID:(int)fairID andCompanyIDs:(NSArray *)companyIDs andStatuses:(NSArray *)statuses;
 - (void)favoriteWithUserID:(NSString *)userID andCompanyID:(NSString *)companyID;
+- (void)unfavoriteWithUserID:(NSString *)userID andCompanyID:(NSString *)companyID;
 
 @property (nonatomic, assign) id <ServerIODelegate> delegate;
 

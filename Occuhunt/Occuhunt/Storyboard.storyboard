@@ -232,7 +232,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqR-dv-EoQ">
                                 <rect key="frame" x="230" y="2" width="42" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Heart">
+                                <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="HeartFilled"/>
@@ -280,6 +280,7 @@
                         <outlet property="companyDetailTextView" destination="jEm-Dm-CEU" id="4EM-sm-Kg4"/>
                         <outlet property="companyLogo" destination="wCs-1c-qEx" id="uAu-KC-jb7"/>
                         <outlet property="companyNameLabel" destination="ZI7-tx-wMn" id="UoO-vx-BPQ"/>
+                        <outlet property="favoriteButton" destination="RqR-dv-EoQ" id="bu5-ce-Kxk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hpn-F8-m9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -412,7 +413,6 @@
         <image name="740-gear" width="28" height="28"/>
         <image name="Close" width="100" height="100"/>
         <image name="CloseGreen" width="100" height="100"/>
-        <image name="Heart" width="1500" height="1500"/>
         <image name="HeartFilled" width="1500" height="1500"/>
         <image name="ucbsf" width="125" height="125"/>
     </resources>

@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServerIO.h"
 
-@interface DropResumeViewController : UITableViewController {
+@interface DropResumeViewController : UITableViewController <ServerIODelegate>{
     NSMutableArray *checkedCompanies;
+    ServerIO *thisServer;
     
 }
 
+@property (nonatomic, assign) int fairID;
 @property (nonatomic, strong) NSArray *listOfCompanies;
 @property (nonatomic, strong) NSMutableArray *alphabetsArray;
 @property (nonatomic, weak) UIViewController *delegate;

@@ -20,6 +20,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *favoriteButton;
 
 @property (nonatomic, strong) NSString *companyID;
+@property (nonatomic, strong) NSString *fairID;
 @property (nonatomic, strong) IBOutlet UILabel *companyNameLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *companyBannerImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *companyLogo;

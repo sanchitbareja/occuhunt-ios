@@ -41,7 +41,21 @@
     else {
         NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
         NSLog(@"your user id is %@", userID);
+        self.favoriteButton.enabled = NO;
         [thisServer favoriteWithUserID:userID andCompanyID:self.companyID];
+    }
+}
+
+- (IBAction)unFavoriteCompany:(id)sender {
+    if([[SSKeychain passwordForService:@"OH" account:@"self"] length] == 0) {
+        UIAlertView *notLoggedIn = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You are not logged in." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [notLoggedIn show];
+    }
+    else {
+        NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
+        NSLog(@"your user id is %@", userID);
+        self.favoriteButton.enabled = NO;
+        [thisServer unfavoriteWithUserID:userID andCompanyID:self.companyID];
     }
 }
 
@@ -54,7 +68,7 @@
         NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
         NSLog(@"your user id is %@", userID);
         
-        [thisServer shareResumeWithRecruitersWithUserID:userID andCompanyID:self.companyID andStatus:@"\"applied\""];
+        [thisServer shareResumeWithRecruitersWithUserID:userID andFairID:[self.fairID intValue] andCompanyID:self.companyID andStatus:@"1"];
      }
     
 }
@@ -74,6 +88,8 @@
     [self.dropResumeButton setTitle:@"Drop Resume" forState:UIControlStateNormal];
     [self.dropResumeButton addTarget:self action:@selector(dropResume:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.dropResumeButton];
+    
+    [self.favoriteButton setImage:nil forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,6 +101,7 @@
 #pragma mark - Server IO Methods
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
+    NSLog(@"Success!");
     if (operation.tag == GETCOMPANY) {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineHeightMultiple = 20.0f;
@@ -94,8 +111,9 @@
         NSDictionary *theCompany = [[[response objectForKey:@"response"] objectForKey:@"companies"] objectAtIndex:0];
         
         NSString *string = [theCompany objectForKey:@"company_description"];
-        UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:16.0];
-        UIColor *color = UIColorFromRGB(0x005f69);
+        UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:14.0];
+//        UIColor *color = UIColorFromRGB(0x005f69);
+        UIColor *color = [UIColor blackColor];
         NSDictionary *attribute = @{
                                     NSParagraphStyleAttributeName : paragraphStyle,
                                     NSFontAttributeName : font,
@@ -109,7 +127,30 @@
             weakSelf.companyBannerImageView.image = [image applyBlurWithRadius:20 tintColor:[UIColor clearColor] saturationDeltaFactor:1.0 maskImage:nil];
         }];
         [self.companyLogo setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [theCompany objectForKey:@"logo"]]] placeholderImage:nil completed:nil];
-
+        
+        NSArray *listOfPeopleWhoFavoritedThisCompany = [theCompany objectForKey:@"favorites"];
+        NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
+        if (userID.length > 0) {
+            
+            [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateNormal];
+            self.favoriteButton.enabled = YES;
+            [self.favoriteButton removeTarget:nil
+                                       action:NULL
+                             forControlEvents:UIControlEventAllEvents];
+            [self.favoriteButton addTarget:self action:@selector(favoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
+            
+            for (NSNumber *eachPerson in listOfPeopleWhoFavoritedThisCompany) {
+                if ([eachPerson intValue] == [userID intValue]) {
+                    NSLog(@"Initial set up is filled");
+                    [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
+                    self.favoriteButton.enabled = YES;
+                    [self.favoriteButton removeTarget:nil
+                                       action:NULL
+                             forControlEvents:UIControlEventAllEvents];
+                    [self.favoriteButton addTarget:self action:@selector(unFavoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
+                }
+            }
+        }
         NSLog(@"Finished setting up!");
     }
     else if (operation.tag == SHARERESUME){
@@ -120,9 +161,47 @@
 
         }
     }
+    else if (operation.tag == FAVORITECOMPANY) {
+        NSLog(@"Succeed and favorite");
+        [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
+        self.favoriteButton.enabled = YES;
+        [self.favoriteButton removeTarget:nil
+                                   action:NULL
+                         forControlEvents:UIControlEventAllEvents];
+        [self.favoriteButton addTarget:self action:@selector(unFavoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else if (operation.tag == UNFAVORITECOMPANY) {
+        NSLog(@"Succeed and unfavorite");
+        [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateNormal];
+        self.favoriteButton.enabled = YES;
+        [self.favoriteButton removeTarget:nil
+                                   action:NULL
+                         forControlEvents:UIControlEventAllEvents];
+        [self.favoriteButton addTarget:self action:@selector(favoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 - (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
-    
+    NSLog(@"Failure!");
+    if (operation.tag == FAVORITECOMPANY) {
+        [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateNormal];
+        self.favoriteButton.enabled = YES;
+        [self.favoriteButton removeTarget:nil
+                                   action:NULL
+                         forControlEvents:UIControlEventAllEvents];
+        [self.favoriteButton addTarget:self action:@selector(favoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else if (operation.tag == UNFAVORITECOMPANY) {
+        [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
+        self.favoriteButton.enabled = YES;
+        [self.favoriteButton removeTarget:nil
+                                   action:NULL
+                         forControlEvents:UIControlEventAllEvents];
+        [self.favoriteButton addTarget:self action:@selector(unFavoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else if (operation.tag == SHARERESUME) {
+        UIAlertView *dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"We couldn't drop your resumes at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [dropSuccessAlert show];
+    }
 }
 @end

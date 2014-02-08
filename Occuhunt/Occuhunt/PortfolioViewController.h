@@ -24,6 +24,7 @@
 @property (nonatomic, strong) IBOutlet BButton *shareResume;
 @property (nonatomic, strong) UILabel *checkInStatus;
 @property (nonatomic, strong) NSString *fairName;
+@property (nonatomic, assign) int fairID;
 
 @property (nonatomic, strong) IBOutlet UIView *loginView;
 @property (nonatomic, strong) IBOutlet UIView *resumeView;

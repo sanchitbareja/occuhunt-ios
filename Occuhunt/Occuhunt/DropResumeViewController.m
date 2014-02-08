@@ -7,6 +7,7 @@
 //
 
 #import "DropResumeViewController.h"
+#import <SSKeychain/SSKeychain.h>
 
 @interface DropResumeViewController ()
 
@@ -34,7 +35,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
 //    self.title = @"Pick Companies";
-    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Drop" style:UIBarButtonItemStylePlain target:self action:@selector(checkIn:)];
+    UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Drop" style:UIBarButtonItemStylePlain target:self action:@selector(dropResume:)];
     self.navigationItem.rightBarButtonItem = rightbbi;
     
     UIBarButtonItem *leftbbi = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(close:)];
@@ -49,6 +50,9 @@
 
     self.alphabetsArray = [[NSMutableArray alloc] init];
     [self createAlphabetArray];
+    
+    thisServer = [[ServerIO alloc] init];
+    thisServer.delegate = self;
 }
 
 - (void)close:(id)sender {
@@ -57,9 +61,27 @@
     }
 }
 
-- (IBAction)checkIn:(id)sender {
+- (IBAction)dropResume:(id)sender {
     // Use checkedCompanies array to send up
+    if (checkedCompanies.count == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You have no companies selected." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    NSMutableArray *companyIDArray = [[NSMutableArray alloc] init];
+    NSMutableArray *statusArray = [[NSMutableArray alloc] init];
+    
+    for (NSIndexPath *eachIndexPath in checkedCompanies) {
+        NSDictionary *eachCompany = [self.listOfCompanies objectAtIndex:eachIndexPath.row];
+        NSLog(@"%@", eachCompany);
+        [companyIDArray addObject:[eachCompany objectForKey:@"coy_id"]];
+        [statusArray addObject:[NSNumber numberWithInteger:1]];
+    }
 
+    NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
+    [thisServer shareResumeWithMultipleRecruitersWithUserID:userID andFairID:self.fairID andCompanyIDs:companyIDArray andStatuses:statusArray];
+    
     if (self.delegate) {
         [self.delegate dismissViewControllerAnimated:YES completion:nil];
     }
@@ -69,6 +91,22 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Server IO Delegate Methods
+
+- (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
+    if (operation.tag == SHARERESUMEMULTIPLE) {
+        UIAlertView *dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Your resumes have been dropped." delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
+        [dropSuccessAlert show];
+    }
+}
+
+- (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
+    if (operation.tag == SHARERESUMEMULTIPLE) {
+        UIAlertView *dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"We couldn't drop your resumes at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [dropSuccessAlert show];
+    }
 }
 
 #pragma mark - Create Alphabet Array

@@ -60,6 +60,16 @@
     NSMutableString *constructString = [NSMutableString stringWithString:@"{"];
     for (NSString *key in args) {
         NSString *object = [args objectForKey:key];
+//        if ([key isEqualToString:@"unfavorite"]) {
+//            if ([object isEqualToString:@"TRUE"]) {
+//            [constructString appendFormat:@"\"%@\":%i,", key, [object boolValue]];
+//            continue;
+//            }
+//            else if ([object isEqualToString:@"FALSE"]) {
+//                [constructString appendFormat:@"\"%@\":%i,", key, [object boolValue]];
+//                continue;
+//            }
+//        }
         [constructString appendFormat:@"\"%@\":%@,", key, object];
     }
     constructString = [NSMutableString stringWithString:[constructString substringToIndex:constructString.length-1]];
@@ -71,6 +81,63 @@
     [request setHTTPMethod:@"POST"];
     [request setValue: @"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:[constructString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    op.tag = httpCallTag;
+    op.responseSerializer = [AFJSONResponseSerializer serializer];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON responseObject: %@ ",responseObject);
+        if (self.delegate) {
+            [self.delegate returnData:operation response:responseObject];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", [error localizedDescription]);
+        if (self.delegate) {
+            [self.delegate returnFailure:operation error:error];
+        }
+        
+    }];
+    [op start];
+    return;
+}
+
+- (void)makeJSONPatch:(NSString *)string andArgs:(NSArray *)args andTag:(int)httpCallTag{
+    if (!self.delegate) {
+        NSLog(@"No delegate. Please check.");
+    }
+    if ([args count] == 0) {
+        NSLog(@"Empty dictionary");
+        return;
+    }
+    NSLog(@"Making call to %@", string);
+    NSLog(@"args are %@",  args);
+    NSMutableString *constructString = [NSMutableString stringWithString:@""];
+    for (NSDictionary *dictionary in args) {
+        [constructString appendFormat:@"{"];
+        for (NSString *key in [dictionary allKeys]) {
+            NSString *object = [dictionary objectForKey:key];
+            if ([object isKindOfClass:[NSNumber class]]) {
+                if ([object intValue] > 0) {
+                    [constructString appendFormat:@"\"%@\":%i,", key, [object intValue]];
+                    continue;
+                }
+            }
+            [constructString appendFormat:@"\"%@\":%@,", key, object];
+        }
+        constructString = [NSMutableString stringWithString:[constructString substringToIndex:constructString.length-1]];
+        [constructString appendFormat:@"},"];
+    }
+    constructString = [NSMutableString stringWithString:[constructString substringToIndex:constructString.length-1]];
+//    [constructString appendString:@"}"];
+    NSString *newString = [NSString stringWithFormat:@"{\"objects\":[%@]}", constructString];
+    NSLog(@"new string = %@", newString);
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:string]
+                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad  timeoutInterval:10];
+    
+    [request setHTTPMethod:@"PATCH"];
+    [request setValue: @"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:[newString dataUsingEncoding:NSUTF8StringEncoding]];
     
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.tag = httpCallTag;
@@ -152,19 +219,40 @@
     [self makeJSONCall:url andTag:GETHUNTS];
 }
 
-- (void)checkInWithUserID:(NSString *)userID andEventID:(NSString *)eventID {
-    NSString *url = @"http://occuhunt.com/api/v1/hunts/";
-    [self makeJSONPost:url andArgs:@{@"user_id": userID, @"event_id": eventID} andTag:CHECKIN];
+- (void)shareResumeWithRecruitersWithUserID:(NSString *)userID andFairID:(int)fairID andCompanyID:(NSString *)companyID andStatus:(NSString *)status {
+    NSString *url = @"http://occuhunt.com/api/v1/applications/";
+    [self makeJSONPost:url andArgs:@{@"user_id": userID, @"fair_id": [NSNumber numberWithInt:fairID], @"company_id": companyID, @"status": status} andTag:SHARERESUME];
 }
 
-- (void)shareResumeWithRecruitersWithUserID:(NSString *)userID andCompanyID:(NSString *)companyID andStatus:(NSString *)status {
+- (void)shareResumeWithMultipleRecruitersWithUserID:(NSString *)userID andFairID:(int)fairID andCompanyIDs:(NSArray *)companyIDs andStatuses:(NSArray *)statuses {
     NSString *url = @"http://occuhunt.com/api/v1/applications/";
-    [self makeJSONPost:url andArgs:@{@"user_id": userID, @"company_id": companyID, @"status": status} andTag:SHARERESUME];
+    if (companyIDs.count != statuses.count) {
+        NSLog(@"Both company IDs and statuses are not equal length.");
+        return;
+    }
+    NSMutableArray *listOfObjects = [[NSMutableArray alloc] init];
+    for (int i = 0; i < companyIDs.count; i++) {
+        [listOfObjects addObject:@{@"user_id": userID, @"fair_id":[NSNumber numberWithInt:fairID], @"company_id":[companyIDs objectAtIndex:i], @"status":[statuses objectAtIndex:i]}];
+    }
+    
+    [self makeJSONPatch:url andArgs:listOfObjects andTag:SHARERESUMEMULTIPLE];
+                                      
+//    {"objects":[{"user_id":1,"company_id":302,"status":1},{"user_id":1,"company_id":301,"status":1},
+//                {"user_id":1,"company_id":300,"status":1},
+//                {"user_id":1,"company_id":299,"status":1}]}
 }
 
 - (void)favoriteWithUserID:(NSString *)userID andCompanyID:(NSString *)companyID {
+    NSLog(@"Calling favorite");
     NSString *url = [NSString stringWithFormat:@"http://occuhunt.com/api/v1/favorites/"];
-    [self makeJSONPost:url andArgs:@{@"user_id": userID, @"company_id": companyID} andTag:FAVORITECOMPANY];
+    [self makeJSONPost:url andArgs:@{@"user_id": userID, @"company_id": companyID, @"unfavorite": @"false"} andTag:FAVORITECOMPANY];
 }
+
+- (void)unfavoriteWithUserID:(NSString *)userID andCompanyID:(NSString *)companyID {
+    NSLog(@"Calling unfavorite");
+    NSString *url = [NSString stringWithFormat:@"http://occuhunt.com/api/v1/favorites/"];
+    [self makeJSONPost:url andArgs:@{@"user_id": userID, @"company_id": companyID, @"unfavorite": @"true"} andTag:UNFAVORITECOMPANY];
+}
+
 
 @end
