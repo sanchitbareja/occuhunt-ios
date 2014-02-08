@@ -14,6 +14,7 @@
 #import <SSKeychain/SSKeychain.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DropResumeViewController.h"
+#import <SDWebImage-ProgressView/UIImageView+ProgressView.h>
 
 @interface PortfolioViewController ()
 
@@ -120,6 +121,8 @@
                      animations:animationLabel2 completion:completionLabel2];
     
     [thisServer getHunts:[SSKeychain passwordForService:@"OH" account:@"user_id"]];
+    
+    self.shareResume.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -162,8 +165,9 @@
         [SSKeychain setPassword:userID forService:@"OH" account:@"user_id"];
         self.portfolioImageView.contentMode = UIViewContentModeTopLeft;
         NSLog(@"resume link %@", resumeLink);
-        __block CGSize tempsize;
+//        __block CGSize tempsize;
         __weak PortfolioViewController *weakSelf = self;
+
         [self.portfolioImageView setImageWithURL:[NSURL URLWithString:resumeLink] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
             NSLog(@"image description %@", [image description]);
 //            CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -173,7 +177,7 @@
 //            weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, newHeight);
             weakSelf.portfolioScrollView.contentSize = image.size;
 //            weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
-        }];
+        } usingProgressView:nil];
     }
     else if ([[response objectForKey:@"response"] objectForKey:@"hunts"]) {
         // Hunting!
@@ -182,6 +186,7 @@
         NSLog(@"fairname is %@", fairName);
         if (fairName.length > 0) {
             self.checkInStatus.text = [NSString stringWithFormat:@"You are checked in at %@", fairName];
+            self.shareResume.enabled = YES;
             // Download fair details
 #warning to change before submission
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://occuhunt.com/static/faircoords/8.json"]]];

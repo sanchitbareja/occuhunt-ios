@@ -166,7 +166,7 @@
         self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, 50*numberOfNotBlankColumns+30*numberOfBlankColumns, 50*numberOfNotBlankRows+30*numberOfBlankRows);
         self.mapScrollView.zoomScale = 1.0;
         self.mapScrollView.contentOffset = CGPointMake(0, 0);
-        self.mapScrollView.frame = self.view.frame;
+        self.mapScrollView.frame = self.mapView.frame;
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -415,7 +415,7 @@
         companyName.textAlignment = NSTextAlignmentCenter;
         companyName.backgroundColor = [UIColor clearColor];
         companyName.font = [UIFont fontWithName:@"Open Sans" size:8];
-        companyName.textColor = [UIColor whiteColor];
+        companyName.textColor = [UIColor blackColor];
         companyName.lineBreakMode = NSLineBreakByWordWrapping;
         companyName.numberOfLines = 0;
     }
@@ -438,7 +438,8 @@
         [cell.contentView addSubview:companyName];
     }
     else {
-        cell.backgroundColor = [UIColor colorWithRed:122/255.0 green:167/255.0 blue:174/255.0 alpha:1.0];
+        cell.backgroundColor = UIColorFromRGB(0xeef7f7);
+        cell.layer.borderColor = [UIColorFromRGB(0xadadad) CGColor];
         [cell.contentView addSubview:companyName];
     }
     if ([[[companies objectAtIndex:(indexPath.row)] objectForKey:@"blank_column"] intValue] == 1){

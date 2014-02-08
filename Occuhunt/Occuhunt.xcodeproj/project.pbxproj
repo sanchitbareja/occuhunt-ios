@@ -64,6 +64,16 @@
 		8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F531817D59B0500D783FD /* accenture-advert.jpg */; };
 		8F9F531A17D59B0500D783FD /* accenture-advert.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F9F531817D59B0500D783FD /* accenture-advert.jpg */; };
 		8FABE22D18A2B73300A36A6A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FABE22C18A2B73300A36A6A /* Security.framework */; };
+		8FBEA1DA18A5D1270069A8DB /* ProximaNova-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D018A5D1270069A8DB /* ProximaNova-Black.otf */; };
+		8FBEA1DB18A5D1270069A8DB /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D118A5D1270069A8DB /* ProximaNova-Bold.otf */; };
+		8FBEA1DC18A5D1270069A8DB /* ProximaNova-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D218A5D1270069A8DB /* ProximaNova-BoldIt.otf */; };
+		8FBEA1DD18A5D1270069A8DB /* ProximaNova-Extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D318A5D1270069A8DB /* ProximaNova-Extrabold.otf */; };
+		8FBEA1DE18A5D1270069A8DB /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D418A5D1270069A8DB /* ProximaNova-Light.otf */; };
+		8FBEA1DF18A5D1270069A8DB /* ProximaNova-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D518A5D1270069A8DB /* ProximaNova-LightItalic.otf */; };
+		8FBEA1E018A5D1270069A8DB /* ProximaNova-RegItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D618A5D1270069A8DB /* ProximaNova-RegItalic.otf */; };
+		8FBEA1E118A5D1270069A8DB /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D718A5D1270069A8DB /* ProximaNova-Regular.otf */; };
+		8FBEA1E218A5D1270069A8DB /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D818A5D1270069A8DB /* ProximaNova-Semibold.otf */; };
+		8FBEA1E318A5D1270069A8DB /* ProximaNova-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FBEA1D918A5D1270069A8DB /* ProximaNova-SemiboldItalic.otf */; };
 		8FC1B5A7188DC82C00E09E67 /* CEEFairMap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */; };
 		8FC1B5AA188DD03A00E09E67 /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC1B5A9188DD03A00E09E67 /* DrawView.m */; };
 		8FC1B5AD188DD47E00E09E67 /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */; };
@@ -149,6 +159,16 @@
 		8F9F531117D5859E00D783FD /* EventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewController.m; sourceTree = "<group>"; };
 		8F9F531817D59B0500D783FD /* accenture-advert.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "accenture-advert.jpg"; path = "Images/accenture-advert.jpg"; sourceTree = "<group>"; };
 		8FABE22C18A2B73300A36A6A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8FBEA1D018A5D1270069A8DB /* ProximaNova-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Black.otf"; sourceTree = "<group>"; };
+		8FBEA1D118A5D1270069A8DB /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
+		8FBEA1D218A5D1270069A8DB /* ProximaNova-BoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-BoldIt.otf"; sourceTree = "<group>"; };
+		8FBEA1D318A5D1270069A8DB /* ProximaNova-Extrabold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Extrabold.otf"; sourceTree = "<group>"; };
+		8FBEA1D418A5D1270069A8DB /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.otf"; sourceTree = "<group>"; };
+		8FBEA1D518A5D1270069A8DB /* ProximaNova-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-LightItalic.otf"; sourceTree = "<group>"; };
+		8FBEA1D618A5D1270069A8DB /* ProximaNova-RegItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-RegItalic.otf"; sourceTree = "<group>"; };
+		8FBEA1D718A5D1270069A8DB /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		8FBEA1D818A5D1270069A8DB /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
+		8FBEA1D918A5D1270069A8DB /* ProximaNova-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = CEEFairMap.jpg; path = Images/CEEFairMap.jpg; sourceTree = "<group>"; };
 		8FC1B5A8188DD03A00E09E67 /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
 		8FC1B5A9188DD03A00E09E67 /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
@@ -242,7 +262,7 @@
 			name = Events;
 			sourceTree = "<group>";
 		};
-		8F84350A17D59D6C00E52121 /* OpenSans */ = {
+		8F84350A17D59D6C00E52121 /* Open Sans */ = {
 			isa = PBXGroup;
 			children = (
 				8FC1B5A6188DC82C00E09E67 /* CEEFairMap.jpg */,
@@ -257,7 +277,7 @@
 				8F8434F417D59D6700E52121 /* OpenSans-Semibold.ttf */,
 				8F8434F517D59D6700E52121 /* OpenSans-SemiboldItalic.ttf */,
 			);
-			name = OpenSans;
+			name = "Open Sans";
 			sourceTree = "<group>";
 		};
 		8F9F530217D5816A00D783FD /* JASidePanel */ = {
@@ -275,6 +295,23 @@
 				8F9F52FD17D5816700D783FD /* UIViewController+JASidePanel.m */,
 			);
 			name = JASidePanel;
+			sourceTree = "<group>";
+		};
+		8FBEA1E418A5D12C0069A8DB /* Proxima Nova */ = {
+			isa = PBXGroup;
+			children = (
+				8FBEA1D018A5D1270069A8DB /* ProximaNova-Black.otf */,
+				8FBEA1D118A5D1270069A8DB /* ProximaNova-Bold.otf */,
+				8FBEA1D218A5D1270069A8DB /* ProximaNova-BoldIt.otf */,
+				8FBEA1D318A5D1270069A8DB /* ProximaNova-Extrabold.otf */,
+				8FBEA1D418A5D1270069A8DB /* ProximaNova-Light.otf */,
+				8FBEA1D518A5D1270069A8DB /* ProximaNova-LightItalic.otf */,
+				8FBEA1D618A5D1270069A8DB /* ProximaNova-RegItalic.otf */,
+				8FBEA1D718A5D1270069A8DB /* ProximaNova-Regular.otf */,
+				8FBEA1D818A5D1270069A8DB /* ProximaNova-Semibold.otf */,
+				8FBEA1D918A5D1270069A8DB /* ProximaNova-SemiboldItalic.otf */,
+			);
+			name = "Proxima Nova";
 			sourceTree = "<group>";
 		};
 		8FF9575217D580D000046DDF = {
@@ -347,7 +384,8 @@
 				8FC1B5AC188DD47E00E09E67 /* PulsingHaloLayer.m */,
 				8FC1B5A8188DD03A00E09E67 /* DrawView.h */,
 				8FC1B5A9188DD03A00E09E67 /* DrawView.m */,
-				8F84350A17D59D6C00E52121 /* OpenSans */,
+				8FBEA1E418A5D12C0069A8DB /* Proxima Nova */,
+				8F84350A17D59D6C00E52121 /* Open Sans */,
 				8F9F531817D59B0500D783FD /* accenture-advert.jpg */,
 				8FF9577217D580D000046DDF /* Occuhunt.xcdatamodeld */,
 				8FF9576817D580D000046DDF /* Occuhunt-Info.plist */,
@@ -457,24 +495,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F664C5018A3120400684A0F /* Favicon4.png in Resources */,
+				8FBEA1E118A5D1270069A8DB /* ProximaNova-Regular.otf in Resources */,
 				8F547BF9189F31BB0046D518 /* EventListCell.xib in Resources */,
 				8F8434FE17D59D6700E52121 /* OpenSans-Italic.ttf in Resources */,
 				8F8434F817D59D6700E52121 /* OpenSans-BoldItalic.ttf in Resources */,
 				8F9F531917D59B0500D783FD /* accenture-advert.jpg in Resources */,
+				8FBEA1DA18A5D1270069A8DB /* ProximaNova-Black.otf in Resources */,
 				8F547C02189F3BD10046D518 /* 1.jpg in Resources */,
+				8FBEA1DF18A5D1270069A8DB /* ProximaNova-LightItalic.otf in Resources */,
 				8F84350617D59D6700E52121 /* OpenSans-Semibold.ttf in Resources */,
+				8FBEA1E018A5D1270069A8DB /* ProximaNova-RegItalic.otf in Resources */,
+				8FBEA1E318A5D1270069A8DB /* ProximaNova-SemiboldItalic.otf in Resources */,
+				8FBEA1DC18A5D1270069A8DB /* ProximaNova-BoldIt.otf in Resources */,
 				8F664C6118A33C4100684A0F /* Door@2x.png in Resources */,
 				8F8434FA17D59D6700E52121 /* OpenSans-ExtraBold.ttf in Resources */,
 				8F664C6018A33C4100684A0F /* Door.png in Resources */,
 				8FC1B5A7188DC82C00E09E67 /* CEEFairMap.jpg in Resources */,
 				8FF9576B17D580D000046DDF /* InfoPlist.strings in Resources */,
 				8F84350217D59D6700E52121 /* OpenSans-LightItalic.ttf in Resources */,
+				8FBEA1DE18A5D1270069A8DB /* ProximaNova-Light.otf in Resources */,
 				8FF9577617D580D000046DDF /* Images.xcassets in Resources */,
 				8F8434F617D59D6700E52121 /* OpenSans-Bold.ttf in Resources */,
 				8F9F530417D581B300D783FD /* Storyboard.storyboard in Resources */,
 				8F84350817D59D6700E52121 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				8F84350017D59D6700E52121 /* OpenSans-Light.ttf in Resources */,
+				8FBEA1DB18A5D1270069A8DB /* ProximaNova-Bold.otf in Resources */,
 				8F84350417D59D6700E52121 /* OpenSans-Regular.ttf in Resources */,
+				8FBEA1DD18A5D1270069A8DB /* ProximaNova-Extrabold.otf in Resources */,
+				8FBEA1E218A5D1270069A8DB /* ProximaNova-Semibold.otf in Resources */,
 				8F8434FC17D59D6700E52121 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

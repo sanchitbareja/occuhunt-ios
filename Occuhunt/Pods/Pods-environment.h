@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_BButton 2
 #define COCOAPODS_VERSION_PATCH_BButton 3
 
+// DropdownMenu
+#define COCOAPODS_POD_AVAILABLE_DropdownMenu
+#define COCOAPODS_VERSION_MAJOR_DropdownMenu 1
+#define COCOAPODS_VERSION_MINOR_DropdownMenu 0
+#define COCOAPODS_VERSION_PATCH_DropdownMenu 0
+
 // IOSLinkedInAPI
 #define COCOAPODS_POD_AVAILABLE_IOSLinkedInAPI
 #define COCOAPODS_VERSION_MAJOR_IOSLinkedInAPI 2
@@ -95,6 +101,12 @@
 #define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 5
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
+
+// SDWebImage-ProgressView
+#define COCOAPODS_POD_AVAILABLE_SDWebImage_ProgressView
+#define COCOAPODS_VERSION_MAJOR_SDWebImage_ProgressView 0
+#define COCOAPODS_VERSION_MINOR_SDWebImage_ProgressView 3
+#define COCOAPODS_VERSION_PATCH_SDWebImage_ProgressView 0
 
 // SSKeychain
 #define COCOAPODS_POD_AVAILABLE_SSKeychain

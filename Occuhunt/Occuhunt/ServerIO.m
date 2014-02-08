@@ -23,17 +23,25 @@
     }
     NSLog(@"Making call to %@", string);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:string parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    
+    
+    NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:string relativeToURL:manager.baseURL] absoluteString] parameters:nil error:nil];
+//    [request setTimeoutInterval:[NSTimeInterval time]];
+    request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+
+    AFHTTPRequestOperation *operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         if (self.delegate) {
             [self.delegate returnData:operation response:responseObject];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        if (self.delegate) {
-            [self.delegate returnFailure:operation error:error];
-        }
-    }];
+        }    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", operation.responseString);
+            if (self.delegate) {
+                [self.delegate returnFailure:operation error:error];
+            }
+        }];
+    [manager.operationQueue addOperation:operation];
+    return;
 
 }
 
@@ -57,7 +65,7 @@
     NSLog(@"construct string = %@", constructString);
 //    NSString *constructString = [NSString stringWithFormat:@"{\"user_id\":5,\"event_id\":3}"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:string]
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:10];
+                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad  timeoutInterval:10];
     
     [request setHTTPMethod:@"POST"];
     [request setValue: @"application/json" forHTTPHeaderField:@"Content-Type"];
