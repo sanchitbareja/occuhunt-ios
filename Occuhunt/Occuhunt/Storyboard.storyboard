@@ -230,41 +230,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqR-dv-EoQ">
-                                <rect key="frame" x="238" y="2" width="42" height="42"/>
+                                <rect key="frame" x="230" y="2" width="42" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="703-download">
+                                <state key="normal" image="Heart">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" image="HeartFilled"/>
                                 <connections>
                                     <action selector="dropResume:" destination="XqI-sV-ruo" eventType="touchUpInside" id="jcH-2g-zLZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7V-Gn-2M7">
-                                <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                <rect key="frame" x="10" y="8" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="close">
+                                <state key="normal" image="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" image="CloseGreen"/>
                                 <connections>
                                     <action selector="closeView:" destination="XqI-sV-ruo" eventType="touchUpInside" id="qOb-Eq-Ox7"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI7-tx-wMn">
-                                <rect key="frame" x="50" y="14" width="180" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI7-tx-wMn">
+                                <rect key="frame" x="50" y="3" width="180" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEm-Dm-CEU">
-                                <rect key="frame" x="10" y="135" width="260" height="265"/>
+                                <rect key="frame" x="10" y="135" width="260" height="254"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.0" green="0.37254901960784315" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DdM-aj-Rcb">
-                                <rect key="frame" x="28" y="43" width="224" height="84"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DdM-aj-Rcb">
+                                <rect key="frame" x="0.0" y="46" width="280" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCs-1c-qEx">
+                                <rect key="frame" x="45" y="54" width="190" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -273,6 +279,7 @@
                     <connections>
                         <outlet property="companyBannerImageView" destination="DdM-aj-Rcb" id="GYu-HD-viK"/>
                         <outlet property="companyDetailTextView" destination="jEm-Dm-CEU" id="4EM-sm-Kg4"/>
+                        <outlet property="companyLogo" destination="wCs-1c-qEx" id="uAu-KC-jb7"/>
                         <outlet property="companyNameLabel" destination="ZI7-tx-wMn" id="UoO-vx-BPQ"/>
                     </connections>
                 </viewController>
@@ -403,9 +410,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="703-download" width="21" height="28"/>
         <image name="740-gear" width="28" height="28"/>
-        <image name="close" width="50" height="50"/>
+        <image name="Close" width="100" height="100"/>
+        <image name="CloseGreen" width="100" height="100"/>
+        <image name="Heart" width="1500" height="1500"/>
+        <image name="HeartFilled" width="1500" height="1500"/>
         <image name="ucbsf" width="125" height="125"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

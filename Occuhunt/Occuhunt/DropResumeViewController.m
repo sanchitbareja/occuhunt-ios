@@ -130,23 +130,23 @@
     }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    for (int i = 0; i< [self.listOfCompanies count]; i++) {
-        NSString *letterString = [[[self.listOfCompanies objectAtIndex:i] objectForKey:@"coy_name"] substringToIndex:1];
-        NSLog(@"letter string %@", letterString);
-        NSLog(@"letter title %@", title);
-        if ([letterString isEqualToString:title]) {
-            NSLog(@"indexpath row %i", [[NSIndexPath indexPathForRow:i inSection:0] row]);
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-            break;
-        }
-    }
-    return 0;
-}
+//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+//    for (int i = 0; i< [self.listOfCompanies count]; i++) {
+//        NSString *letterString = [[[self.listOfCompanies objectAtIndex:i] objectForKey:@"coy_name"] substringToIndex:1];
+//        NSLog(@"letter string %@", letterString);
+//        NSLog(@"letter title %@", title);
+//        if ([letterString isEqualToString:title]) {
+//            NSLog(@"indexpath row %i", [[NSIndexPath indexPathForRow:i inSection:0] row]);
+//            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//            break;
+//        }
+//    }
+//    return 0;
+//}
 
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return self.alphabetsArray;
-}
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+//    return self.alphabetsArray;
+//}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

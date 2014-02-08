@@ -10,6 +10,7 @@
 #import <MZFormSheetController/MZFormSheetController.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SSKeychain/SSKeychain.h>
+#import "UIImage+ImageEffects.h"
 
 @interface CompanyViewController ()
 
@@ -55,6 +56,12 @@
     thisServer.delegate = self;
     
     [thisServer getCompany:self.companyID];
+    
+    self.dropResumeButton = [[BButton alloc] initWithFrame:CGRectMake(60, 402, 160, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
+    self.dropResumeButton.color = UIColorFromRGB(0x348891);
+    [self.dropResumeButton setTitle:@"Drop Resume" forState:UIControlStateNormal];
+    [self.dropResumeButton addTarget:self action:@selector(dropResume:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.dropResumeButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,7 +92,12 @@
         companyDetailTextView.attributedText = [[NSAttributedString alloc] initWithString:string attributes:attribute];
         
         self.companyNameLabel.text = [theCompany objectForKey:@"name"];
-        [self.companyBannerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [theCompany objectForKey:@"banner_image"]]]];
+        __weak CompanyViewController *weakSelf = self;
+        [self.companyBannerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [theCompany objectForKey:@"banner_image"]]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+            weakSelf.companyBannerImageView.image = [image applyBlurWithRadius:20 tintColor:[UIColor clearColor] saturationDeltaFactor:1.0 maskImage:nil];
+        }];
+        [self.companyLogo setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [theCompany objectForKey:@"logo"]]] placeholderImage:nil completed:nil];
+
         NSLog(@"Finished setting up!");
     }
     else {

@@ -199,9 +199,10 @@
             float proportion = image.size.width/screenWidth;
             float newHeight = image.size.height/proportion;
             
-            weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, newHeight);
-            weakSelf.portfolioScrollView.contentSize = image.size;
+            weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, image.size.height);
+//            weakSelf.portfolioScrollView.contentSize = image.size;
             weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
+            weakSelf.portfolioScrollView.minimumZoomScale = 320/image.size.width;
             
             
 //            weakSelf.portfolioImageView.contentMode = UIViewContentModeScaleAspectFit;

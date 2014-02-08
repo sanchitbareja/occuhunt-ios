@@ -501,21 +501,23 @@
         NSString *companyID = [NSString stringWithFormat:@"%@", [[companies objectAtIndex:indexPath.row] objectForKey:@"coy_id"]];
         vc.companyID = companyID;
     }
-    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 410) viewController:vc];
-    [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
-    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:10.0];
+    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 460) viewController:vc];
+//    [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
+//    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:10.0];
     [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
     mzv.transitionStyle = MZFormSheetTransitionStyleFade;
     mzv.shouldDismissOnBackgroundViewTap = YES;
     [mzv presentAnimated:YES completionHandler:^(UIViewController *presentedFSViewController) {
         
     }];
+    
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0;
 
 }
+
 # pragma mark - UISearchBar Methods
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
