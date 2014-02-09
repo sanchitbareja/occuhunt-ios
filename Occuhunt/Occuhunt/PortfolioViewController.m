@@ -243,10 +243,19 @@
 
        }
     }
+    else if (operation.tag == SHARERESUMEMULTIPLE) {
+        UIAlertView *dropSuccessAlert;
+        dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"You have dropped your resume." delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
+        [dropSuccessAlert show];
+    }
+
 }
 
 - (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
-    
+    if (operation.tag == SHARERESUMEMULTIPLE) {
+        UIAlertView *dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"We couldn't drop your resumes at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [dropSuccessAlert show];
+    }
 }
 
 #pragma mark - LinkedIn Methods
