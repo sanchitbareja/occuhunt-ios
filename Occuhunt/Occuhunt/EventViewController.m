@@ -107,6 +107,10 @@
     self.companyTableView.dataSource = self;
     [self.companyTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
     [self.listView addSubview:self.companyTableView];
+    
+    [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
+    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:10.0];
+    [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)mapNewRoom {
@@ -484,14 +488,18 @@
         vc.fairID = self.fairID;
     }
     MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 460) viewController:vc];
-//    [[MZFormSheetBackgroundWindow appearance] setBackgroundBlurEffect:YES];
-//    [[MZFormSheetBackgroundWindow appearance] setBlurRadius:10.0];
-    [[MZFormSheetBackgroundWindow appearance] setBackgroundColor:[UIColor clearColor]];
     mzv.transitionStyle = MZFormSheetTransitionStyleFade;
     mzv.shouldDismissOnBackgroundViewTap = YES;
-    [mzv presentAnimated:YES completionHandler:^(UIViewController *presentedFSViewController) {
-        
+    mzv.shouldCenterVertically = YES;
+    mzv.shadowRadius = 2.0;
+    mzv.shadowOpacity = 0.3;
+
+    [self mz_presentFormSheetController:mzv animated:YES completionHandler:^(MZFormSheetController *formSheetController) {
+        //do sth
     }];
+//    [mzv presentAnimated:YES completionHandler:^(UIViewController *presentedFSViewController) {
+    
+//    }];
     
 }
 

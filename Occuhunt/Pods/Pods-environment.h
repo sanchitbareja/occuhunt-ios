@@ -60,12 +60,6 @@
 #define COCOAPODS_VERSION_MINOR_BButton 2
 #define COCOAPODS_VERSION_PATCH_BButton 3
 
-// DropdownMenu
-#define COCOAPODS_POD_AVAILABLE_DropdownMenu
-#define COCOAPODS_VERSION_MAJOR_DropdownMenu 1
-#define COCOAPODS_VERSION_MINOR_DropdownMenu 0
-#define COCOAPODS_VERSION_PATCH_DropdownMenu 0
-
 // IOSLinkedInAPI
 #define COCOAPODS_POD_AVAILABLE_IOSLinkedInAPI
 #define COCOAPODS_VERSION_MAJOR_IOSLinkedInAPI 2
@@ -113,4 +107,16 @@
 #define COCOAPODS_VERSION_MAJOR_SSKeychain 1
 #define COCOAPODS_VERSION_MINOR_SSKeychain 2
 #define COCOAPODS_VERSION_PATCH_SSKeychain 1
+
+// UIAlertView+Blocks
+#define COCOAPODS_POD_AVAILABLE_UIAlertView_Blocks
+#define COCOAPODS_VERSION_MAJOR_UIAlertView_Blocks 0
+#define COCOAPODS_VERSION_MINOR_UIAlertView_Blocks 8
+#define COCOAPODS_VERSION_PATCH_UIAlertView_Blocks 0
+
+// VENVersionTracker
+#define COCOAPODS_POD_AVAILABLE_VENVersionTracker
+#define COCOAPODS_VERSION_MAJOR_VENVersionTracker 0
+#define COCOAPODS_VERSION_MINOR_VENVersionTracker 1
+#define COCOAPODS_VERSION_PATCH_VENVersionTracker 0
 

@@ -21,6 +21,8 @@
     
 }
 
+@property (nonatomic, strong) NSString *appStoreLink;
+
 @property (nonatomic, strong) IBOutlet BButton *shareResume;
 @property (nonatomic, strong) UILabel *checkInStatus;
 @property (nonatomic, strong) NSString *fairName;

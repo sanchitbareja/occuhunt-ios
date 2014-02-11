@@ -32,7 +32,7 @@
         request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     }
     else {
-        request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+        request.cachePolicy = NSURLRequestReloadRevalidatingCacheData;
     }
     
 

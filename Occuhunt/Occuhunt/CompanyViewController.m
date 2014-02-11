@@ -63,6 +63,14 @@
     }
 }
 
+
+- (IBAction)viewJobs:(id)sender {
+    if (self.jobsWebsiteLink.length <= 0) {
+        return;
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.jobsWebsiteLink]];
+}
+
 - (IBAction)dropResume:(id)sender {
     if([[SSKeychain passwordForService:@"OH" account:@"self"] length] == 0) {
         UIAlertView *notLoggedIn = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You are not logged in." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -82,17 +90,16 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
-    
-    self.dropResumeButton = [[BButton alloc] initWithFrame:CGRectMake(60, 402, 160, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
-    self.dropResumeButton.color = UIColorFromRGB(0x348891);
-    [self.dropResumeButton setTitle:@"Drop Resume" forState:UIControlStateNormal];
-    [self.dropResumeButton addTarget:self action:@selector(dropResume:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.dropResumeButton];
+//    self.dropResumeButton = [[BButton alloc] initWithFrame:CGRectMake(60, 402, 160, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
+//    self.dropResumeButton.color = UIColorFromRGB(0x348891);
+//    [self.dropResumeButton setTitle:@"Drop Resume" forState:UIControlStateNormal];
+//    [self.dropResumeButton addTarget:self action:@selector(dropResume:) forControlEvents:UIControlEventTouchUpInside];
+    self.dropResumeButton.enabled = NO;
+    self.viewJobsWebsiteButton.enabled = NO;
+//    [self.view addSubview:self.dropResumeButton];
     
     [self.favoriteButton setImage:nil forState:UIControlStateNormal];
     [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateSelected | UIControlStateHighlighted];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -130,6 +137,10 @@
                                     };
         companyDetailTextView.attributedText = [[NSAttributedString alloc] initWithString:string attributes:attribute];
         
+        self.viewJobsWebsiteButton.enabled = YES;
+        self.jobsWebsiteLink = [theCompany objectForKey:@"careers_website"];
+        
+        self.dropResumeButton.enabled = YES;
         self.companyNameLabel.text = [theCompany objectForKey:@"name"];
         __weak CompanyViewController *weakSelf = self;
         [self.companyBannerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [theCompany objectForKey:@"banner_image"]]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){

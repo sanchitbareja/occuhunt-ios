@@ -15,6 +15,9 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DropResumeViewController.h"
 #import <SDWebImage-ProgressView/UIImageView+ProgressView.h>
+#import <VENVersionTracker/VENVersionTracker.h>
+#import <VENVersionTracker/VENVersion.h>
+#import <UIAlertView+Blocks/UIAlertView+Blocks.h>
 
 @interface PortfolioViewController ()
 
@@ -49,8 +52,33 @@
 //    _shareResume.layer.cornerRadius = 8;
 //    _shareResume.layer.masksToBounds = YES;
     
-    self.shareResume = [[BButton alloc] initWithFrame:CGRectMake(40, 10, 240, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
-    self.shareResume.color = UIColorFromRGB(0x348891);
+    [VENVersionTracker beginTrackingVersionForChannel:@"production"
+                                       serviceBaseUrl:@"http://www.occuhunt.com/static/version/appversion.json"
+                                         timeInterval:1800
+                                          withHandler:^(VENVersionTrackerState state, VENVersion *version) {
+                                              
+                                              dispatch_sync(dispatch_get_main_queue(), ^{
+                                    
+                                                  self.appStoreLink = version.installUrl;
+                                                  switch (state) {
+                                                      case VENVersionTrackerStateDeprecated:
+                                                          [version install];
+                                                          break;
+                                                          
+                                                      case VENVersionTrackerStateOutdated:
+                                                          // Offer the user the option to update
+                                                          [self callAlertView];
+                                                          break;
+                                                      default:
+                                                          break;
+                                                  }
+                                              });
+                                          }];
+
+    
+    self.shareResume = [[BButton alloc] initWithFrame:CGRectMake(40, 10, 240, 48) type:BButtonTypeDefault style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
+//    self.shareResume.color = UIColorFromRGB(0x348891);
+    self.shareResume.layer.borderColor = [UIColor redColor].CGColor;
     [self.shareResume setTitle:@"Drop Resume" forState:UIControlStateNormal];
     [self.shareResume addTarget:self action:@selector(dropResume:) forControlEvents:UIControlEventTouchUpInside];
     [self.resumeView addSubview:self.shareResume];
@@ -152,6 +180,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)callAlertView {
+    [UIAlertView showWithTitle:@"Update Available"
+                       message:@"There is a new version of Occuhunt. Update now?"
+             cancelButtonTitle:@"Not Now"
+             otherButtonTitles:@[@"Update"]
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                          if (buttonIndex == [alertView cancelButtonIndex]) {
+                              NSLog(@"Cancelled");
+                          } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Update"]) {
+                              [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.appStoreLink]];
+                          }
+                      }];
 }
 
 - (IBAction)openSettings:(id)sender {

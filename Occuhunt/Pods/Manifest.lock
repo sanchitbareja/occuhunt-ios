@@ -19,7 +19,6 @@ PODS:
     - AFNetworking/NSURLConnection
   - AsyncImageView (1.5.1)
   - BButton (3.2.3)
-  - DropdownMenu (1.0.0)
   - IOSLinkedInAPI (2.0.0):
     - AFNetworking (>= 2.0.0)
   - Mixpanel (2.3.1)
@@ -32,24 +31,26 @@ PODS:
     - SDWebImage (~> 3.0)
   - SDWebImage/Core (3.5.2)
   - SSKeychain (1.2.1)
+  - UIAlertView+Blocks (0.8)
+  - VENVersionTracker (0.1.0)
 
 DEPENDENCIES:
   - AFNetworking
   - AsyncImageView
   - BButton
-  - DropdownMenu
   - IOSLinkedInAPI
   - Mixpanel
   - MZFormSheetController
   - SDWebImage
   - SDWebImage-ProgressView
   - SSKeychain
+  - UIAlertView+Blocks
+  - VENVersionTracker (~> 0.1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
   AsyncImageView: 686febb2b2a923353ede67c529d257498059852d
   BButton: b405745cd7ccc9444c696b8690fb79541623766a
-  DropdownMenu: 3c454205c2db1fd39dc1ebf099114c4fdb73f136
   IOSLinkedInAPI: 1c1b1bc3fcf21607225d2b9cd704bffab0abfbe1
   Mixpanel: 8d189c58bcaac429de9cb4f18a54621df99b7e38
   MZAppearance: 8b02683f0019f725557ae9839ed6cab153fff669
@@ -57,5 +58,7 @@ SPEC CHECKSUMS:
   SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
   SDWebImage-ProgressView: 0984b5b885886358dff24964912d3313e104ad4f
   SSKeychain: d18926838c2e7cd342e2a49e9f869858e49f035a
+  UIAlertView+Blocks: 39a1aee8ea75c4f9f877ff0b3734d84bf2009d1f
+  VENVersionTracker: 678c673a653280c1cf5a260d0f6fecd8d523c715
 
 COCOAPODS: 0.29.0
