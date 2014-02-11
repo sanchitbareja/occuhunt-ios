@@ -41,7 +41,9 @@
     else {
         NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
         NSLog(@"your user id is %@", userID);
-        self.favoriteButton.enabled = NO;
+        [self.favoriteButton setSelected:YES];
+        [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateSelected | UIControlStateNormal];
+//        self.favoriteButton.userInteractionEnabled = NO;
         [thisServer favoriteWithUserID:userID andCompanyID:self.companyID];
     }
 }
@@ -54,7 +56,9 @@
     else {
         NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
         NSLog(@"your user id is %@", userID);
-        self.favoriteButton.enabled = NO;
+        //        self.favoriteButton.userInteractionEnabled = NO;
+        [self.favoriteButton setSelected:NO];
+        [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateSelected | UIControlStateNormal];
         [thisServer unfavoriteWithUserID:userID andCompanyID:self.companyID];
     }
 }
@@ -87,6 +91,8 @@
     [self.view addSubview:self.dropResumeButton];
     
     [self.favoriteButton setImage:nil forState:UIControlStateNormal];
+    [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateSelected | UIControlStateHighlighted];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -136,7 +142,7 @@
         if (userID.length > 0) {
             
             [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateNormal];
-            self.favoriteButton.enabled = YES;
+            self.favoriteButton.userInteractionEnabled = YES;
             [self.favoriteButton removeTarget:nil
                                        action:NULL
                              forControlEvents:UIControlEventAllEvents];
@@ -146,7 +152,7 @@
                 if ([eachPerson intValue] == [userID intValue]) {
                     NSLog(@"Initial set up is filled");
                     [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
-                    self.favoriteButton.enabled = YES;
+                    self.favoriteButton.userInteractionEnabled = YES;
                     [self.favoriteButton removeTarget:nil
                                        action:NULL
                              forControlEvents:UIControlEventAllEvents];
@@ -166,8 +172,9 @@
     }
     else if (operation.tag == FAVORITECOMPANY) {
         NSLog(@"Succeed and favorite");
-        [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
-        self.favoriteButton.enabled = YES;
+//        [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
+        self.favoriteButton.highlighted = NO;
+        self.favoriteButton.userInteractionEnabled = YES;
         [self.favoriteButton removeTarget:nil
                                    action:NULL
                          forControlEvents:UIControlEventAllEvents];
@@ -176,7 +183,8 @@
     else if (operation.tag == UNFAVORITECOMPANY) {
         NSLog(@"Succeed and unfavorite");
         [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateNormal];
-        self.favoriteButton.enabled = YES;
+        self.favoriteButton.highlighted = NO;
+        self.favoriteButton.userInteractionEnabled = YES;
         [self.favoriteButton removeTarget:nil
                                    action:NULL
                          forControlEvents:UIControlEventAllEvents];
@@ -186,23 +194,23 @@
 
 - (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
     NSLog(@"Failure!");
-    if (operation.tag == FAVORITECOMPANY) {
-        [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateNormal];
-        self.favoriteButton.enabled = YES;
-        [self.favoriteButton removeTarget:nil
-                                   action:NULL
-                         forControlEvents:UIControlEventAllEvents];
-        [self.favoriteButton addTarget:self action:@selector(favoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    else if (operation.tag == UNFAVORITECOMPANY) {
-        [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
-        self.favoriteButton.enabled = YES;
-        [self.favoriteButton removeTarget:nil
-                                   action:NULL
-                         forControlEvents:UIControlEventAllEvents];
-        [self.favoriteButton addTarget:self action:@selector(unFavoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    else if (operation.tag == SHARERESUME) {
+//    if (operation.tag == FAVORITECOMPANY) {
+//        [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateNormal];
+//        self.favoriteButton.userInteractionEnabled = YES;
+//        [self.favoriteButton removeTarget:nil
+//                                   action:NULL
+//                         forControlEvents:UIControlEventAllEvents];
+//        [self.favoriteButton addTarget:self action:@selector(favoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    else if (operation.tag == UNFAVORITECOMPANY) {
+//        [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
+//        self.favoriteButton.userInteractionEnabled = YES;
+//        [self.favoriteButton removeTarget:nil
+//                                   action:NULL
+//                         forControlEvents:UIControlEventAllEvents];
+//        [self.favoriteButton addTarget:self action:@selector(unFavoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+    if (operation.tag == SHARERESUME) {
         UIAlertView *dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"We couldn't drop your resumes at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [dropSuccessAlert show];
     }
