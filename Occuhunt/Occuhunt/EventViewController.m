@@ -83,9 +83,7 @@
     
     self.filteredCompanyList = [NSMutableArray arrayWithCapacity:50];
     [self.searchDisplayController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
-    thisServer = [[ServerIO alloc] init];
-    thisServer.delegate = self;
-
+    
 	// Map View
     
     self.mapScrollView = [[UIScrollView alloc] initWithFrame:myView];
@@ -148,8 +146,17 @@
     
     
     // Reload all tables
-    [self.listCollectionView reloadData];
+    [self.collectionView reloadData];
     [self.companyTableView reloadData];
+    
+    [self performSelector:@selector(logAllFrames) withObject:nil afterDelay:3.0];
+}
+
+- (void)logAllFrames {
+    NSLog(@"Collection View Frame %@", NSStringFromCGRect(self.collectionView.frame));
+    NSLog(@"Scroll View Frame %@", NSStringFromCGRect(self.mapScrollView.frame));
+    NSLog(@"Scroll View Content Size %@", NSStringFromCGSize(self.mapScrollView.contentSize));
+//    self.mapScrollView.contentSize = CGSizeMake(1000, 1000);
 }
 
 - (void)parseData:(NSData *)returnedData{
@@ -174,7 +181,7 @@
         int numberOfNotBlankRows = numberOfRows-numberOfBlankRows;
         int numberOfNotBlankColumns = numberOfColumns-numberOfBlankColumns;
         self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, 50*numberOfNotBlankColumns+30*numberOfBlankColumns, 50*numberOfNotBlankRows+30*numberOfBlankRows);
-        self.mapScrollView.zoomScale = 1.5;
+//        self.mapScrollView.zoomScale = 1.5;
         self.mapScrollView.contentOffset = CGPointMake(0, 0);
     }
     else {
@@ -262,15 +269,6 @@
     [self.mapImageView addSubview:drawableView];
 }
 
-#pragma mark - Server IO Methods
-
-- (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
-}
-
-- (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
-
-}
-
 #pragma mark - UIAlertViewDelegate Methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -283,6 +281,7 @@
     if (buttonIndex > self.listOfRooms.count) {
         return;
     }
+    self.mapScrollView.zoomScale = 1.0;
     int roomID = [[[self.listOfRooms objectAtIndex:buttonIndex-1] objectForKey:@"id"] intValue];
     self.mapID = [NSString stringWithFormat:@"%@_%i", self.fairID, roomID];
     NSLog(@"self.map id is %@", self.mapID);
@@ -379,6 +378,7 @@
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
 //    NSLog(@"Zoomed");
     NSLog(@"current zoom is %f", scrollView.zoomScale);
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {

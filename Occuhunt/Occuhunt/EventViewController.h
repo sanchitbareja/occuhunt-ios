@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "ServerIO.h"
 
-@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, ServerIODelegate, UIAlertViewDelegate> {
+@interface EventViewController : UIViewController <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UIAlertViewDelegate> {
     // Event Map Details
     int numberOfRows;
     int numberOfColumns;
@@ -43,7 +43,6 @@
 @property IBOutlet UISearchBar *mainSearchBar;
 @property IBOutlet UIButton *drawLineButton;
 
-@property UICollectionView *listCollectionView;
 @property UITableView *companyTableView;
 @property (strong,nonatomic) NSMutableArray *filteredCompanyList;
 
