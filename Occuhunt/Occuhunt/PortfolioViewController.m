@@ -312,6 +312,10 @@
             [SSKeychain setPassword:userID forService:@"OH" account:@"user_id"];
             self.portfolioImageView.contentMode = UIViewContentModeTopLeft;
             NSLog(@"resume link %@", resumeLink);
+            
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel track:@"Downloaded Resume"];
+            
             __weak PortfolioViewController *weakSelf = self;
 
             [self.portfolioImageView setImageWithURL:[NSURL URLWithString:resumeLink] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){

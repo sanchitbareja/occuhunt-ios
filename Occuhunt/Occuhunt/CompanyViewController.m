@@ -44,6 +44,11 @@
         [self.favoriteButton setSelected:YES];
         [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateSelected | UIControlStateNormal];
 //        self.favoriteButton.userInteractionEnabled = NO;
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"Favorite Company" properties:@{
+                                                       @"company":self.companyNameLabel.text
+                                                       }];
         [thisServer favoriteWithUserID:userID andCompanyID:self.companyID];
     }
 }
@@ -59,6 +64,11 @@
         //        self.favoriteButton.userInteractionEnabled = NO;
         [self.favoriteButton setSelected:NO];
         [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateSelected | UIControlStateNormal];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"Unfavorite Company" properties:@{
+                                                       @"company":self.companyNameLabel.text
+                                                       }];
         [thisServer unfavoriteWithUserID:userID andCompanyID:self.companyID];
     }
 }
@@ -68,6 +78,11 @@
     if (self.jobsWebsiteLink.length <= 0) {
         return;
     }
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"View Jobs" properties:@{
+                                                   @"company":self.companyNameLabel.text
+                                                   }];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.jobsWebsiteLink]];
 }
 
@@ -80,6 +95,11 @@
         NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
         NSLog(@"your user id is %@", userID);
         [[NSUserDefaults standardUserDefaults] setObject:self.theCurrentFair forKey:@"favoriteFair"];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"Dropped Resume" properties:@{
+                                                         @"company":self.companyNameLabel.text
+                                                         }];
         [thisServer shareResumeWithRecruitersWithUserID:userID andFairID:[self.fairID intValue] andCompanyID:self.companyID andStatus:@"1"];
      }
     
@@ -106,6 +126,7 @@
     thisServer = [[ServerIO alloc] init];
     thisServer.delegate = self;
     [thisServer getCompany:self.companyID];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,6 +163,13 @@
         
         self.dropResumeButton.enabled = YES;
         self.companyNameLabel.text = [theCompany objectForKey:@"name"];
+        
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"Selected Company" properties:@{
+                                                         @"company":self.companyNameLabel.text
+                                                             }];
+        
         __weak CompanyViewController *weakSelf = self;
         [self.companyBannerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [theCompany objectForKey:@"banner_image"]]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
             weakSelf.companyBannerImageView.image = [image applyBlurWithRadius:20 tintColor:[UIColor clearColor] saturationDeltaFactor:1.0 maskImage:nil];

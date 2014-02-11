@@ -49,6 +49,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [thisServer getFairs];
+    
 }
 
 - (void)didReceiveMemoryWarning

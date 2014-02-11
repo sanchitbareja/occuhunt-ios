@@ -80,6 +80,11 @@
         NSLog(@"%@", eachCompany);
         [companyIDArray addObject:[eachCompany objectForKey:@"coy_id"]];
         [statusArray addObject:[NSNumber numberWithInteger:1]];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"Dropped Resume" properties:@{
+                                                       @"company":[eachCompany objectForKey:@"coy_name"]
+                                                       }];
     }
 
     NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];

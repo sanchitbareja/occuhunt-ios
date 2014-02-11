@@ -41,7 +41,7 @@
    
     mapButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"852-map"] style:UIBarButtonItemStylePlain target:self action:@selector(showMap:)];
     listButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"729-top-list"] style:UIBarButtonItemStylePlain target:self action:@selector(showList:)];
-    checkInButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"722-location-pin"] style:UIBarButtonItemStylePlain target:self action:@selector(checkIn:)];
+//    checkInButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"722-location-pin"] style:UIBarButtonItemStylePlain target:self action:@selector(checkIn:)];
     
     if (self.listOfRooms.count <= 1) {
         roomsButton.enabled = NO;
@@ -55,6 +55,11 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 //    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Selected Fair" properties:@{
+                                                  @"fair": [self.theCurrentFair objectForKey:@"name"]
+                                                      }];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -73,6 +78,9 @@
     
     [self mapNewRoom];
     
+    CGRect myView = self.view.frame;
+    myView.size.height -= 64;
+    
     self.filteredCompanyList = [NSMutableArray arrayWithCapacity:50];
     [self.searchDisplayController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
     thisServer = [[ServerIO alloc] init];
@@ -80,13 +88,13 @@
 
 	// Map View
     
-    self.mapScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
+    self.mapScrollView = [[UIScrollView alloc] initWithFrame:myView];
     
     self.mapScrollView.delegate = self;
     self.mapScrollView.backgroundColor = [UIColor clearColor];
     
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
-    _collectionView=[[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+    _collectionView=[[UICollectionView alloc] initWithFrame:myView collectionViewLayout:layout];
     [_collectionView setDataSource:self];
     [_collectionView setDelegate:self];
     
@@ -102,8 +110,6 @@
     
     // List View
     filteredCompanies = [[NSMutableArray alloc] init];
-    CGRect myView = self.view.frame;
-    myView.size.height -= 64;
     self.companyTableView = [[UITableView alloc] initWithFrame:myView];
     self.companyTableView.delegate = self;
     self.companyTableView.dataSource = self;
@@ -116,6 +122,11 @@
 }
 
 - (void)mapNewRoom {
+    // Empty all arrays
+//    [filteredCompanies removeAllObjects];
+//    companies = [[NSArray alloc] init];
+//    [self.filteredCompanyList removeAllObjects];
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://occuhunt.com/static/faircoords/%@.json", self.mapID]]];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
@@ -135,10 +146,6 @@
     self.listView.hidden = YES;
     self.mainSearchBar.hidden = YES;
     
-    // Empty all arrays
-    [filteredCompanies removeAllObjects];
-    companies = [[NSArray alloc] init];
-    [self.filteredCompanyList removeAllObjects];
     
     // Reload all tables
     [self.listCollectionView reloadData];
@@ -156,6 +163,7 @@
     
     if (json) {
         // Setup of Map
+        NSLog(@"Setting up map");
         numberOfRows = [[json objectForKey:@"rows"] intValue];
         numberOfColumns = [[json objectForKey:@"cols"] intValue];
         companies = [json objectForKey:@"coys"];
@@ -434,14 +442,8 @@
         tiledLayer.levelsOfDetail = 10;
         tiledLayer.levelsOfDetailBias = 10;
     }
-//    int theNumber = (indexPath.row)*(indexPath.section);
-//    NSLog(@"the row is %i", indexPath.row);
-//    NSLog(@"the section is %i", indexPath.section);
-//    NSLog(@"the number is %i", theNumber);
-//    NSLog(@"companies count is %i", companies.count);
     if (indexPath.row < companies.count) {
         companyName.text = [[companies objectAtIndex:(indexPath.row)] objectForKey:@"coy_name"];
-        
     }
     else {
         companyName.text = @"";
@@ -450,6 +452,7 @@
     if ([companyName.text isEqualToString:@""]) {
         companyName.text = @"";
         cell.backgroundColor = [UIColor clearColor];
+        cell.layer.borderColor = [[UIColor clearColor] CGColor];
         [cell.contentView addSubview:companyName];
     }
     else {
@@ -460,6 +463,7 @@
     }
     if ([[[companies objectAtIndex:(indexPath.row)] objectForKey:@"blank_column"] intValue] == 1){
         cell.backgroundColor = [UIColor clearColor];
+        cell.layer.borderColor = [[UIColor clearColor] CGColor];
     }
     return cell;
 }
@@ -496,7 +500,7 @@
         vc.fairID = self.fairID;
         vc.theCurrentFair = self.theCurrentFair;
     }
-    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 454) viewController:vc];
+    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 442) viewController:vc];
     mzv.transitionStyle = MZFormSheetTransitionStyleFade;
     mzv.shouldDismissOnBackgroundViewTap = YES;
     mzv.shouldCenterVertically = YES;
