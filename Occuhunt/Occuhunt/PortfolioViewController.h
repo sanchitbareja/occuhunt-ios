@@ -22,6 +22,7 @@
 }
 
 @property (nonatomic, strong) NSString *appStoreLink;
+@property (nonatomic, strong) NSString *resumeLink;
 
 @property (nonatomic, strong) IBOutlet BButton *shareResume;
 @property (nonatomic, strong) UILabel *checkInStatus;
@@ -31,7 +32,8 @@
 @property (nonatomic, strong) IBOutlet UIView *loginView;
 @property (nonatomic, strong) IBOutlet UIView *resumeView;
 @property (nonatomic, strong) IBOutlet UIView *resumeImageView;
-@property (nonatomic, strong) IBOutlet UIButton *logInButton;
+@property (nonatomic, strong) IBOutlet UILabel *logInLabel;
+@property (nonatomic, strong) IBOutlet BButton *logInButton;
 @property (nonatomic, strong) IBOutlet UIScrollView *portfolioScrollView;
 @property (nonatomic, strong) IBOutlet UIImageView *portfolioImageView;
 

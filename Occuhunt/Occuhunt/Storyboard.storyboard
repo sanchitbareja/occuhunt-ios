@@ -114,8 +114,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="0j3-sw-7cZ" kind="relationship" relationship="viewControllers" id="7AB-An-JgO"/>
                         <segue destination="58i-VM-j03" kind="relationship" relationship="viewControllers" id="TPP-bI-zUY"/>
+                        <segue destination="0j3-sw-7cZ" kind="relationship" relationship="viewControllers" id="7AB-An-JgO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8iR-Ym-V4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -159,8 +159,8 @@
                                             <action selector="connectWithLinkedIn:" destination="F7l-DL-L7g" eventType="touchUpInside" id="GiS-oJ-hoQ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Log in to view and share your profile." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6u-3T-Tq3">
-                                        <rect key="frame" x="13" y="140" width="293" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Log in to view and share your profile." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="293" translatesAutoresizingMaskIntoConstraints="NO" id="b6u-3T-Tq3">
+                                        <rect key="frame" x="13" y="133" width="293" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="highlightedColor"/>
@@ -180,6 +180,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="logInButton" destination="fPD-73-xEo" id="AZu-20-eG1"/>
+                        <outlet property="logInLabel" destination="b6u-3T-Tq3" id="c2I-3a-fUH"/>
                         <outlet property="loginView" destination="sSE-sD-6fa" id="FQd-5J-twl"/>
                         <outlet property="resumeImageView" destination="fqs-hg-J9R" id="aLz-OY-tE7"/>
                         <outlet property="resumeView" destination="kEM-tp-8II" id="Pq5-4t-bWy"/>

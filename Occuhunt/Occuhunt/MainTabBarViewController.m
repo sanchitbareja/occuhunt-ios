@@ -29,10 +29,10 @@
     
     UITabBarItem *item0 = [self.tabBar.items objectAtIndex:0];
     UITabBarItem *item1 = [self.tabBar.items objectAtIndex:1];
-    [item0 setTitle:@"Portfolio"];
-    [item0 setImage:[UIImage imageNamed:@"769-male"]];
-    [item1 setTitle:@"Events"];
-    [item1 setImage:[UIImage imageNamed:@"851-calendar"]];
+    [item1 setTitle:@"Portfolio"];
+    [item1 setImage:[UIImage imageNamed:@"769-male"]];
+    [item0 setTitle:@"Events"];
+    [item0 setImage:[UIImage imageNamed:@"851-calendar"]];
 }
 
 - (void)didReceiveMemoryWarning

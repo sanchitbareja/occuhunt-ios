@@ -102,7 +102,9 @@
     
     // List View
     filteredCompanies = [[NSMutableArray alloc] init];
-    self.companyTableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    CGRect myView = self.view.frame;
+    myView.size.height -= 64;
+    self.companyTableView = [[UITableView alloc] initWithFrame:myView];
     self.companyTableView.delegate = self;
     self.companyTableView.dataSource = self;
     [self.companyTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
@@ -174,11 +176,17 @@
     
     [self.collectionView reloadData];
     [filteredCompanies removeAllObjects];
+    NSMutableArray *listOfNames = [[NSMutableArray alloc] init];
     for (NSDictionary *eachCoy in companies) {
-        if ([[eachCoy objectForKey:@"coy_name"] length] > 0) {
+        if ([[eachCoy objectForKey:@"coy_name"] length] > 0 && ![listOfNames containsObject:[eachCoy objectForKey:@"coy_name"]]) {
             [filteredCompanies addObject:eachCoy];
+            [listOfNames addObject:[eachCoy objectForKey:@"coy_name"]];
         }
     }
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"coy_name" ascending:YES];
+    filteredCompanies = [[filteredCompanies sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]] mutableCopy];
+
     [self.companyTableView reloadData];
 }
 

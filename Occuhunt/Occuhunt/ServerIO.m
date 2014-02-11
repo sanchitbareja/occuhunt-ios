@@ -28,11 +28,11 @@
     
     NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:string relativeToURL:manager.baseURL] absoluteString] parameters:nil error:nil];
 //    [request setTimeoutInterval:[NSTimeInterval time]];
-    if (httpCallTag == GETCOMPANY) {
-        request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    if (httpCallTag == GETFAIRS || httpCallTag == GETMAPS) {
+        request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     }
     else {
-        request.cachePolicy = NSURLRequestReloadRevalidatingCacheData;
+        request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     }
     
 

@@ -76,8 +76,8 @@
                                           }];
 
     
-    self.shareResume = [[BButton alloc] initWithFrame:CGRectMake(40, 10, 240, 48) type:BButtonTypeDefault style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
-//    self.shareResume.color = UIColorFromRGB(0x348891);
+    self.shareResume = [[BButton alloc] initWithFrame:CGRectMake(40, 10, 240, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
+    self.shareResume.color = UIColorFromRGB(0x348891);
     self.shareResume.layer.borderColor = [UIColor redColor].CGColor;
     [self.shareResume setTitle:@"Drop Resume" forState:UIControlStateNormal];
     [self.shareResume addTarget:self action:@selector(dropResume:) forControlEvents:UIControlEventTouchUpInside];
@@ -90,15 +90,18 @@
     self.checkInStatus.textColor = [UIColor whiteColor];
 //    [self.resumeView addSubview:self.checkInStatus];
     
-    _logInButton.layer.borderWidth = 1;
-    _logInButton.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
-    _logInButton.layer.cornerRadius = 8;
-    _logInButton.layer.masksToBounds = YES;
+    self.logInButton = [[BButton alloc] initWithFrame:CGRectMake(40, 203, 240, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
+    self.logInButton.color = UIColorFromRGB(0x348891);
+    self.logInButton.layer.borderColor = [UIColor redColor].CGColor;
+    [self.logInButton setTitle:@"Log in with LinkedIn" forState:UIControlStateNormal];
+    [self.logInButton addTarget:self action:@selector(connectWithLinkedIn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView addSubview:self.logInButton];
+
     
     // iBeacon Tech
-    self.locationManagerReceiver = [[CLLocationManager alloc] init];
-    self.locationManagerReceiver.delegate = self;
-    [self initRegion:nil];
+//    self.locationManagerReceiver = [[CLLocationManager alloc] init];
+//    self.locationManagerReceiver.delegate = self;
+//    [self initRegion:nil];
     
     LIALinkedInHttpClient *_client;
     _client = [self client];
@@ -173,6 +176,9 @@
     
     [thisServer getHunts:[SSKeychain passwordForService:@"OH" account:@"user_id"]];
     
+    if (self.resumeLink.length <= 0) {
+        [self setUpProfile];
+    }
     self.shareResume.enabled = NO;
 }
 
@@ -225,9 +231,26 @@
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
     if (operation.tag == GETUSER) {
         if ([[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"]) {;
+            
+            NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];
+            
+            // No resume uploaded
+            if ([resumeLink isEqual: [NSNull null]]) {
+                self.logInLabel.text = @"You do not have a resume. Visit occuhunt.com to set up your profile.";
+                NSLog(@"NO PROFILE");
+                
+                self.loginView.hidden = NO;
+                self.resumeView.hidden = YES;
+                return;
+            }
+            else {
+                self.resumeLink = resumeLink;
+            }
+            
             self.loginView.hidden = YES;
             self.resumeView.hidden = NO;
-            NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];
+            
+            
             int userIDInt = [[[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"id"] intValue];
             NSString *userID = [NSString stringWithFormat:@"%i", userIDInt];
             [SSKeychain setPassword:userID forService:@"OH" account:@"user_id"];
@@ -240,8 +263,6 @@
                 CGRect screenRect = [[UIScreen mainScreen] bounds];
                 CGFloat screenWidth = screenRect.size.width;
                 float proportion = image.size.width/screenWidth;
-                float newHeight = image.size.height/proportion;
-                
                 weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, image.size.height);
                 weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
                 weakSelf.portfolioScrollView.minimumZoomScale = 320/image.size.width;
@@ -259,8 +280,7 @@
             self.fairName = fairName;
             self.shareResume.enabled = YES;
             // Download fair details
-#warning to change before submission
-            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://occuhunt.com/static/faircoords/8.json"]]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://occuhunt.com/static/faircoords/%i.json", self.fairID]]];
             [NSURLConnection sendAsynchronousRequest:request
                                                queue:[NSOperationQueue mainQueue]
                                    completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
