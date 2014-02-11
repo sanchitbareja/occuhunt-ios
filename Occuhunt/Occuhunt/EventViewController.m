@@ -494,8 +494,9 @@
         NSString *companyID = [NSString stringWithFormat:@"%@", [[companies objectAtIndex:indexPath.row] objectForKey:@"coy_id"]];
         vc.companyID = companyID;
         vc.fairID = self.fairID;
+        vc.theCurrentFair = self.theCurrentFair;
     }
-    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 460) viewController:vc];
+    MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 454) viewController:vc];
     mzv.transitionStyle = MZFormSheetTransitionStyleFade;
     mzv.shouldDismissOnBackgroundViewTap = YES;
     mzv.shouldCenterVertically = YES;

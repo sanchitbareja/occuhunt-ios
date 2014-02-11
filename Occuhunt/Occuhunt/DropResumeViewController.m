@@ -35,11 +35,14 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
 //    self.title = @"Pick Companies";
+    if ((int)self.shouldShowClose == 1) {
+        UIBarButtonItem *leftbbi = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(close:)];
+        self.navigationItem.leftBarButtonItem = leftbbi;
+    }
+    
     UIBarButtonItem *rightbbi = [[UIBarButtonItem alloc] initWithTitle:@"Drop" style:UIBarButtonItemStylePlain target:self action:@selector(dropResume:)];
     self.navigationItem.rightBarButtonItem = rightbbi;
     
-    UIBarButtonItem *leftbbi = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(close:)];
-    self.navigationItem.leftBarButtonItem = leftbbi;
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     self.tableView.allowsMultipleSelection = NO;

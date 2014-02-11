@@ -117,6 +117,7 @@
     EventViewController *vc = (EventViewController *) [storyboard instantiateViewControllerWithIdentifier:@"EventViewController"];
     
     NSDictionary *currentEvent = [self.listOfEvents objectAtIndex:indexPath.row];
+    vc.theCurrentFair = currentEvent;
     int eventID = [[currentEvent objectForKey:@"id"] intValue];
     int roomID = [[[[currentEvent objectForKey:@"rooms"] objectAtIndex:0] objectForKey:@"id"] intValue];
     vc.fairID = [NSString stringWithFormat:@"%i", eventID];

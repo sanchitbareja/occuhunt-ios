@@ -18,6 +18,7 @@
 #import <VENVersionTracker/VENVersionTracker.h>
 #import <VENVersionTracker/VENVersion.h>
 #import <UIAlertView+Blocks/UIAlertView+Blocks.h>
+#import "FilteredEventListViewController.h"
 
 @interface PortfolioViewController ()
 
@@ -137,6 +138,7 @@
     thisServer = [[ServerIO alloc] init];
     thisServer.delegate = self;
     
+    [thisServer getFairs];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -176,10 +178,10 @@
     
     [thisServer getHunts:[SSKeychain passwordForService:@"OH" account:@"user_id"]];
     
-    if (self.resumeLink.length <= 0) {
-        [self setUpProfile];
-    }
-    self.shareResume.enabled = NO;
+//    if (self.resumeLink.length > 0) {
+//        [self setUpProfile];
+//    }
+    self.shareResume.enabled = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -211,13 +213,67 @@
 }
 
 - (IBAction)dropResume:(id)sender {
+    if (self.filteredListOfEvents.count == 0) {
+        UIAlertView *noUpcomingFairs = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"No upcoming fairs." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [noUpcomingFairs show];
+        return;
+    }
     
-    DropResumeViewController *drvc = [[DropResumeViewController alloc] init];
-    drvc.delegate = self;
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:drvc];
-    drvc.listOfCompanies = self.listOfCompaniesAtUpcomingEvent;
-    drvc.title = self.fairName;
-    drvc.fairID = self.fairID;
+    // Check for favorite fair
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"favoriteFair"]) {
+        NSDictionary *theFair = [[NSUserDefaults standardUserDefaults] objectForKey:@"favoriteFair"];
+        
+        // Check if its still upcoming
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+        if (![theFair objectForKey:@"time_end"]) {
+            return;
+        }
+        NSDate *endDate = [dateFormatter dateFromString:[theFair objectForKey:@"time_end"]];
+        if ([[NSDate date] compare:endDate] == NSOrderedDescending) {
+            NSLog(@"now is later than enddate. fair is over. overwrite and continue.");
+            [[NSUserDefaults standardUserDefaults] setObject:@{} forKey:@"favoriteFair"];
+        } else if ([[NSDate date] compare:endDate] == NSOrderedAscending) {
+            NSLog(@"now is earlier than enddate");
+            DropResumeViewController *drvc = [[DropResumeViewController alloc] init];
+            drvc.title = [theFair objectForKey:@"name"];
+            drvc.fairID = [[theFair objectForKey:@"id"] intValue];
+            drvc.delegate = self;
+            [[NSUserDefaults standardUserDefaults] setObject:theFair forKey:@"favoriteFair"];
+            
+            NSString *theID = [NSString stringWithFormat:@"%i", [[theFair objectForKey:@"id"] intValue]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://occuhunt.com/static/faircoords/%@.json", theID]]];
+            [NSURLConnection sendAsynchronousRequest:request
+                                               queue:[NSOperationQueue mainQueue]
+                                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                       if (error || data == (id)[NSNull null] || [data length] == 0) {
+                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the list of companies. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                           [alert show];
+                                       }
+                                       else {
+                                           NSError* error;
+                                           NSDictionary* json = [NSJSONSerialization
+                                                                 JSONObjectWithData:data //1
+                                                                 options:kNilOptions
+                                                                 error:&error];
+                                           
+                                           NSLog(@"json: %@", json); //3
+                                           
+                                           drvc.listOfCompanies = [json objectForKey:@"coys"];
+                                           drvc.shouldShowClose = 1;
+                                           UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:drvc];
+                                           [self presentViewController:navc animated:YES completion:nil];
+                                        }
+                                   }];
+            return;
+        }
+    }
+    
+    
+    FilteredEventListViewController *felvc = [[FilteredEventListViewController alloc] init];
+    felvc.listOfFilteredEvents = self.filteredListOfEvents;
+    felvc.delegate = self;
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:felvc];
     [self presentViewController:navc animated:YES completion:nil];
 }
 
@@ -262,7 +318,6 @@
                 NSLog(@"image description %@", [image description]);
                 CGRect screenRect = [[UIScreen mainScreen] bounds];
                 CGFloat screenWidth = screenRect.size.width;
-                float proportion = image.size.width/screenWidth;
                 weakSelf.portfolioScrollView.contentSize = CGSizeMake(screenWidth, image.size.height);
                 weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
                 weakSelf.portfolioScrollView.minimumZoomScale = 320/image.size.width;
@@ -270,6 +325,8 @@
         }
     }
     else if (operation.tag == GETHUNTS) {
+        // disable now
+        return;
         // Hunting!
         NSDictionary *fair = [[[[response objectForKey:@"response"] objectForKey:@"hunts"] objectAtIndex:0] objectForKey:@"fair"];
         self.fairID = [[fair objectForKey:@"id"] intValue];
@@ -309,6 +366,34 @@
         UIAlertView *dropSuccessAlert;
         dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"You have dropped your resume." delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles: nil];
         [dropSuccessAlert show];
+    }
+    else if (operation.tag == GETFAIRS) {
+        self.listOfEvents = [response objectForKey:@"objects"];
+        if (self.listOfEvents.count == 0) {
+            return;
+        }
+        NSMutableArray *filteredEvents = [[NSMutableArray alloc] init];
+        for (NSDictionary *eachFair in self.listOfEvents) {
+            [eachFair objectForKey:@"end_date"];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+            NSDate *endDate = [dateFormatter dateFromString:[eachFair objectForKey:@"time_end"]];
+            if ([[NSDate date] compare:endDate] == NSOrderedDescending) {
+                NSLog(@"now is later than enddate");
+                
+            } else if ([[NSDate date] compare:endDate] == NSOrderedAscending) {
+                NSLog(@"now is earlier than enddate");
+                // Show events
+                [filteredEvents addObject:eachFair];
+            } else {
+                NSLog(@"dates are the same");
+                [filteredEvents addObject:eachFair];
+            }
+        }
+        if (filteredEvents.count > 0) {
+            self.shareResume.enabled = YES;
+            self.filteredListOfEvents = filteredEvents;
+        }
     }
 
 }

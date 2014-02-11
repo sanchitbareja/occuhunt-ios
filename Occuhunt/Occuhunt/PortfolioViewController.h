@@ -49,6 +49,10 @@
 
 @property (nonatomic, strong) NSArray *listOfCompaniesAtUpcomingEvent;
 
+@property (nonatomic, strong) NSArray *listOfEvents;
+@property (nonatomic, strong) NSArray *filteredListOfEvents;
+
+
 - (IBAction)initRegion:(id)sender;
 - (IBAction)transmitBeacon:(UIButton *)sender;
 - (IBAction)openSettings:(id)sender;

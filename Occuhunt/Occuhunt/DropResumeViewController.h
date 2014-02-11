@@ -20,4 +20,6 @@
 @property (nonatomic, strong) NSMutableArray *alphabetsArray;
 @property (nonatomic, weak) UIViewController *delegate;
 
+@property (nonatomic, assign) int shouldShowClose;
+
 @end

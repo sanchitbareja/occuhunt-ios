@@ -79,7 +79,7 @@
     else {
         NSString *userID = [SSKeychain passwordForService:@"OH" account:@"user_id"];
         NSLog(@"your user id is %@", userID);
-        
+        [[NSUserDefaults standardUserDefaults] setObject:self.theCurrentFair forKey:@"favoriteFair"];
         [thisServer shareResumeWithRecruitersWithUserID:userID andFairID:[self.fairID intValue] andCompanyID:self.companyID andStatus:@"1"];
      }
     

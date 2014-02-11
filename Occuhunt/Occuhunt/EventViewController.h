@@ -30,6 +30,7 @@
 @property (nonatomic, strong) NSString *fairID;
 @property (nonatomic, strong) NSString *mapID;
 @property (nonatomic, strong) NSArray *listOfRooms;
+@property (nonatomic, strong) NSDictionary *theCurrentFair;
 
 @property IBOutlet UIView *mapView;
 @property IBOutlet UIView *listView;
@@ -47,7 +48,6 @@
 @property (strong,nonatomic) NSMutableArray *filteredCompanyList;
 
 - (IBAction)segmentedValueChanged:(id)sender;
-- (IBAction)checkIn:(id)sender;
 - (IBAction)showRooms:(id)sender;
 
 @end

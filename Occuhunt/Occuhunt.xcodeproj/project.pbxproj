@@ -51,6 +51,7 @@
 		8F87319417D826F100579703 /* ServerIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F87319317D826F100579703 /* ServerIO.m */; };
 		8F87319617D8345400579703 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F87319517D8345400579703 /* SystemConfiguration.framework */; };
 		8F87319817D8345D00579703 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F87319717D8345D00579703 /* MobileCoreServices.framework */; };
+		8F8D95A918A9F18C004CF18F /* FilteredEventListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8D95A818A9F18C004CF18F /* FilteredEventListViewController.m */; };
 		8F9F52FE17D5816700D783FD /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F52FB17D5816700D783FD /* JASidePanelController.m */; };
 		8F9F52FF17D5816700D783FD /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F52FB17D5816700D783FD /* JASidePanelController.m */; };
 		8F9F530017D5816700D783FD /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F52FD17D5816700D783FD /* UIViewController+JASidePanel.m */; };
@@ -150,6 +151,8 @@
 		8F87319317D826F100579703 /* ServerIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerIO.m; sourceTree = "<group>"; };
 		8F87319517D8345400579703 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8F87319717D8345D00579703 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		8F8D95A718A9F18C004CF18F /* FilteredEventListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilteredEventListViewController.h; sourceTree = "<group>"; };
+		8F8D95A818A9F18C004CF18F /* FilteredEventListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilteredEventListViewController.m; sourceTree = "<group>"; };
 		8F9F52FA17D5816700D783FD /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
 		8F9F52FB17D5816700D783FD /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
 		8F9F52FC17D5816700D783FD /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
@@ -243,6 +246,8 @@
 				8F547BFF189F34610046D518 /* PortfolioViewController.m */,
 				8F664C4818A3043A00684A0F /* MyImageView.h */,
 				8F664C4918A3043A00684A0F /* MyImageView.m */,
+				8F8D95A718A9F18C004CF18F /* FilteredEventListViewController.h */,
+				8F8D95A818A9F18C004CF18F /* FilteredEventListViewController.m */,
 				8F664C6218A409EC00684A0F /* DropResumeViewController.h */,
 				8F664C6318A409EC00684A0F /* DropResumeViewController.m */,
 			);
@@ -600,6 +605,7 @@
 				8F9F530017D5816700D783FD /* UIViewController+JASidePanel.m in Sources */,
 				8F84351117D5A26000E52121 /* CategoryCell.m in Sources */,
 				8FC1B5AA188DD03A00E09E67 /* DrawView.m in Sources */,
+				8F8D95A918A9F18C004CF18F /* FilteredEventListViewController.m in Sources */,
 				8F547C10189F535B0046D518 /* SettingsViewController.m in Sources */,
 				8FBEA1EA18A615E10069A8DB /* UIImage+ImageEffects.m in Sources */,
 				8F9F530817D581FF00D783FD /* SidePanelViewController.m in Sources */,
