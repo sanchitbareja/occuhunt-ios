@@ -31,6 +31,8 @@ PODS:
     - SDWebImage (~> 3.0)
   - SDWebImage/Core (3.5.2)
   - SSKeychain (1.2.1)
+  - UIActivityIndicator-for-SDWebImage (1.0.3):
+    - SDWebImage (~> 3.2)
   - UIAlertView+Blocks (0.8)
   - VENVersionTracker (0.1.0)
 
@@ -44,6 +46,7 @@ DEPENDENCIES:
   - SDWebImage
   - SDWebImage-ProgressView
   - SSKeychain
+  - UIActivityIndicator-for-SDWebImage
   - UIAlertView+Blocks
   - VENVersionTracker (~> 0.1.0)
 
@@ -58,6 +61,7 @@ SPEC CHECKSUMS:
   SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
   SDWebImage-ProgressView: 0984b5b885886358dff24964912d3313e104ad4f
   SSKeychain: d18926838c2e7cd342e2a49e9f869858e49f035a
+  UIActivityIndicator-for-SDWebImage: e712b97826395022ce7b4a4b56eb7194090c19d5
   UIAlertView+Blocks: 39a1aee8ea75c4f9f877ff0b3734d84bf2009d1f
   VENVersionTracker: 678c673a653280c1cf5a260d0f6fecd8d523c715
 

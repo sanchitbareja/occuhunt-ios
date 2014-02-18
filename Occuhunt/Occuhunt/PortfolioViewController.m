@@ -325,7 +325,8 @@
             [mixpanel track:@"Downloaded Resume"];
             
             __weak PortfolioViewController *weakSelf = self;
-
+            NSLog(@"my image view size is %@", NSStringFromCGSize(self.portfolioImageView.frame.size));
+            self.portfolioImageView.frame = CGRectMake(0, 0, 320, 381);
             [self.portfolioImageView setImageWithURL:[NSURL URLWithString:resumeLink] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
                 NSLog(@"image description %@", [image description]);
                 CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -334,6 +335,7 @@
                 weakSelf.portfolioScrollView.zoomScale = 320/image.size.width;
                 weakSelf.portfolioScrollView.minimumZoomScale = 320/image.size.width;
             } usingProgressView:nil];
+
         }
     }
     else if (operation.tag == GETHUNTS) {
