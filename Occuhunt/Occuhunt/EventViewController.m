@@ -43,9 +43,6 @@
     listButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"729-top-list"] style:UIBarButtonItemStylePlain target:self action:@selector(showList:)];
 //    checkInButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"722-location-pin"] style:UIBarButtonItemStylePlain target:self action:@selector(checkIn:)];
     
-    if (self.listOfRooms.count <= 1) {
-        roomsButton.enabled = NO;
-    }
 //    [self.navigationItem setRightBarButtonItems:@[checkInButton, locateButton]];
 
     //    UIView *titleView = [self createNavigationTitleViewWithTitle:@"Startup Fair" andSubtitle:@"Recreational Sports Facility"];
@@ -77,6 +74,10 @@
     }
     
     [self mapNewRoom];
+    
+    if (self.listOfRooms.count < 2) {
+        roomsButton.enabled = NO;
+    }
     
     CGRect myView = self.view.frame;
     myView.size.height -= 94;
@@ -321,7 +322,7 @@
 }
 
 - (IBAction)showRooms:(id)sender {
-    if (self.listOfRooms.count > 0) {
+    if (self.listOfRooms.count > 1) {
         UIAlertView *roomListAlert = [[UIAlertView alloc] initWithTitle:@"Venues" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         for (NSDictionary *eachRoom in self.listOfRooms) {
             [roomListAlert addButtonWithTitle:[eachRoom objectForKey:@"name"]];

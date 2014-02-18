@@ -426,6 +426,7 @@
                         <outlet property="mapListSegmentedControl" destination="Qx3-hr-vn7" id="REi-rt-CaR"/>
                         <outlet property="mapView" destination="l2G-NI-gVY" id="Jmh-ma-bwS"/>
                         <outlet property="roomLabel" destination="3dV-ms-DBA" id="G9P-YB-S9Y"/>
+                        <outlet property="roomsButton" destination="6Md-Jb-fxI" id="0GW-w1-bfk"/>
                         <outlet property="searchDisplayController" destination="bnu-T9-plN" id="Tsv-bM-uRt"/>
                         <outlet property="view" destination="Avj-S9-Z01" id="84B-2c-suh"/>
                     </connections>
