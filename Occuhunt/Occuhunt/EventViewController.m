@@ -76,7 +76,7 @@
     [self mapNewRoom];
     
     if (self.listOfRooms.count < 2) {
-        roomsButton.enabled = NO;
+        self.navigationItem.rightBarButtonItem = nil;
     }
     
     CGRect myView = self.view.frame;
