@@ -28,7 +28,7 @@
     
     NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:string relativeToURL:manager.baseURL] absoluteString] parameters:nil error:nil];
 //    [request setTimeoutInterval:[NSTimeInterval time]];
-    if (httpCallTag == GETFAIRS || httpCallTag == GETMAPS) {
+    if (httpCallTag == GETMAPS) {
         request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     }
     else {

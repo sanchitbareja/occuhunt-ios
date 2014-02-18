@@ -31,6 +31,7 @@
 @property (nonatomic, strong) NSString *mapID;
 @property (nonatomic, strong) NSArray *listOfRooms;
 @property (nonatomic, strong) NSDictionary *theCurrentFair;
+@property (nonatomic, strong) IBOutlet UILabel *roomLabel;
 
 @property IBOutlet UIView *mapView;
 @property IBOutlet UIView *listView;

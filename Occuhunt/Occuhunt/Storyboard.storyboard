@@ -381,6 +381,16 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l2G-NI-gVY">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dV-ms-DBA">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LoH-dM-PqX">
@@ -415,6 +425,7 @@
                         <outlet property="mainSearchBar" destination="3nt-bI-5Y5" id="ldy-sH-enB"/>
                         <outlet property="mapListSegmentedControl" destination="Qx3-hr-vn7" id="REi-rt-CaR"/>
                         <outlet property="mapView" destination="l2G-NI-gVY" id="Jmh-ma-bwS"/>
+                        <outlet property="roomLabel" destination="3dV-ms-DBA" id="G9P-YB-S9Y"/>
                         <outlet property="searchDisplayController" destination="bnu-T9-plN" id="Tsv-bM-uRt"/>
                         <outlet property="view" destination="Avj-S9-Z01" id="84B-2c-suh"/>
                     </connections>

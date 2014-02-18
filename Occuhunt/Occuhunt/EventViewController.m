@@ -79,7 +79,8 @@
     [self mapNewRoom];
     
     CGRect myView = self.view.frame;
-    myView.size.height -= 64;
+    myView.size.height -= 94;
+    myView.origin.y += 30;
     
     self.filteredCompanyList = [NSMutableArray arrayWithCapacity:50];
     [self.searchDisplayController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
@@ -92,18 +93,21 @@
     self.mapScrollView.backgroundColor = [UIColor clearColor];
     
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
-    _collectionView=[[UICollectionView alloc] initWithFrame:myView collectionViewLayout:layout];
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    _collectionView=[[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+    _collectionView.scrollEnabled = NO;
     [_collectionView setDataSource:self];
     [_collectionView setDelegate:self];
     
     [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     [_collectionView setBackgroundColor:[UIColor clearColor]];
     _collectionView.userInteractionEnabled = YES;
-    self.mapScrollView.contentSize = CGSizeMake(600, 800);
+    self.mapScrollView.contentSize = CGSizeMake(600, 1200);
     self.mapScrollView.minimumZoomScale = 0.6;
     self.mapScrollView.maximumZoomScale = 5.0;
     self.mapScrollView.tag = 123;
     [self.mapView addSubview:self.mapScrollView];
+    [self.mapView sendSubviewToBack:self.mapScrollView];
     [self.mapScrollView addSubview:_collectionView];
     
     // List View
@@ -177,12 +181,14 @@
         
         numberOfBlankRows = [[json objectForKey:@"blank_rows"] intValue];
         numberOfBlankColumns = [[json objectForKey:@"blank_columns"] intValue];
+        self.roomLabel.text = [json objectForKey:@"room_name"];
         
         int numberOfNotBlankRows = numberOfRows-numberOfBlankRows;
         int numberOfNotBlankColumns = numberOfColumns-numberOfBlankColumns;
         self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, 50*numberOfNotBlankColumns+30*numberOfBlankColumns, 50*numberOfNotBlankRows+30*numberOfBlankRows);
 //        self.mapScrollView.zoomScale = 1.5;
-        self.mapScrollView.contentOffset = CGPointMake(0, 0);
+//        self.mapScrollView.contentOffset = CGPointMake(0, 0);
+        self.mapScrollView.contentSize = self.collectionView.frame.size;
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were unable to retrieve the map. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -461,7 +467,7 @@
         cell.layer.borderWidth = 0.5f;
         [cell.contentView addSubview:companyName];
     }
-    if ([[[companies objectAtIndex:(indexPath.row)] objectForKey:@"blank_column"] intValue] == 1){
+    if ([[[companies objectAtIndex:(indexPath.row)] objectForKey:@"blank_column"] intValue] == 1 || [[[companies objectAtIndex:(indexPath.row)] objectForKey:@"blank"] intValue] == 1){
         cell.backgroundColor = [UIColor clearColor];
         cell.layer.borderColor = [[UIColor clearColor] CGColor];
     }
