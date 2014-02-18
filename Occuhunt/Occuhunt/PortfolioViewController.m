@@ -286,6 +286,14 @@
 
 - (void)returnData:(AFHTTPRequestOperation *)operation response:(NSDictionary *)response {
     if (operation.tag == GETUSER) {
+        // Catch for no users
+        if ([[[response objectForKey:@"response"] objectForKey:@"users"] count] == 0) {
+            self.logInLabel.text = @"You do not have an Occuhunt profile. Visit occuhunt.com to set one up.";
+            NSLog(@"NO OCCUHUNT PROFILE");
+            self.loginView.hidden = NO;
+            self.resumeView.hidden = YES;
+            return;
+        }
         if ([[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"]) {;
             
             NSString *resumeLink = [[[[response objectForKey:@"response"] objectForKey:@"users"] objectAtIndex:0] objectForKey:@"resume"];
