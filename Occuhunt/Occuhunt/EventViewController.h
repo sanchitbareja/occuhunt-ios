@@ -23,6 +23,7 @@
     UIBarButtonItem *locateButton;
     UIBarButtonItem *checkInButton;
     IBOutlet UIBarButtonItem *roomsButton;
+    BOOL showResumeDrop;
     NSMutableArray *filteredCompanies; // no blank guys
     
     ServerIO *thisServer;

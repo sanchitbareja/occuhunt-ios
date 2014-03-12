@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSString *companyID;
 @property (nonatomic, strong) NSString *fairID;
 @property (nonatomic, strong) NSString *jobsWebsiteLink;
+@property (nonatomic, assign) BOOL showResumeDrop;
 @property (nonatomic, strong) NSDictionary *theCurrentFair;
 
 @property (nonatomic, strong) IBOutlet UILabel *companyNameLabel;

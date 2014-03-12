@@ -388,7 +388,9 @@
         }
         NSMutableArray *filteredEvents = [[NSMutableArray alloc] init];
         for (NSDictionary *eachFair in self.listOfEvents) {
-            [eachFair objectForKey:@"end_date"];
+            if ([eachFair objectForKey:@"resume_drop"] == 0) {
+                continue;
+            }
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
             NSDate *endDate = [dateFormatter dateFromString:[eachFair objectForKey:@"time_end"]];

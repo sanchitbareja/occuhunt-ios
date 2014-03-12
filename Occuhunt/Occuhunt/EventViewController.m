@@ -182,6 +182,7 @@
         
         numberOfBlankRows = [[json objectForKey:@"blank_rows"] intValue];
         numberOfBlankColumns = [[json objectForKey:@"blank_columns"] intValue];
+        showResumeDrop = [[json objectForKey:@"resume_drop"] intValue];
         self.roomLabel.text = [json objectForKey:@"room_name"];
         
         int numberOfNotBlankRows = numberOfRows-numberOfBlankRows;
@@ -495,10 +496,6 @@
             return;
         }
     }
-    NSLog(@"I tapped");
-    
-    // Highlight
-    
     
     CompanyViewController *vc = (CompanyViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"CompanyViewController"];
     if ([[companies objectAtIndex:indexPath.row] objectForKey:@"coy_id"]) {
@@ -506,6 +503,7 @@
         vc.companyID = companyID;
         vc.fairID = self.fairID;
         vc.theCurrentFair = self.theCurrentFair;
+        vc.showResumeDrop = showResumeDrop;
     }
     MZFormSheetController *mzv = [[MZFormSheetController alloc] initWithSize:CGSizeMake(280, 442) viewController:vc];
     mzv.transitionStyle = MZFormSheetTransitionStyleFade;
@@ -515,11 +513,7 @@
     mzv.shadowOpacity = 0.3;
 
     [self mz_presentFormSheetController:mzv animated:YES completionHandler:^(MZFormSheetController *formSheetController) {
-        //do sth
     }];
-//    [mzv presentAnimated:YES completionHandler:^(UIViewController *presentedFSViewController) {
-    
-//    }];
     
 }
 

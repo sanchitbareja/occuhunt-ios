@@ -108,25 +108,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
-//    self.dropResumeButton = [[BButton alloc] initWithFrame:CGRectMake(60, 402, 160, 48) type:BButtonTypeSuccess style:BButtonStyleBootstrapV3 icon:FAIconDownload fontSize:12];
-//    self.dropResumeButton.color = UIColorFromRGB(0x348891);
-//    [self.dropResumeButton setTitle:@"Drop Resume" forState:UIControlStateNormal];
-//    [self.dropResumeButton addTarget:self action:@selector(dropResume:) forControlEvents:UIControlEventTouchUpInside];
     self.dropResumeButton.enabled = NO;
     self.viewJobsWebsiteButton.enabled = NO;
-//    [self.view addSubview:self.dropResumeButton];
-    
+    self.viewJobsWebsiteButton.translatesAutoresizingMaskIntoConstraints = YES;
     [self.favoriteButton setImage:nil forState:UIControlStateNormal];
     [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    
+    if (!self.showResumeDrop) {
+        CGRect currentRect = self.viewJobsWebsiteButton.frame;
+        currentRect.origin.x = 105;
+        self.viewJobsWebsiteButton.frame = currentRect;
+        [self.dropResumeButton removeFromSuperview];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     thisServer = [[ServerIO alloc] init];
     thisServer.delegate = self;
     [thisServer getCompany:self.companyID];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,7 +160,6 @@
         
         self.viewJobsWebsiteButton.enabled = YES;
         self.jobsWebsiteLink = [theCompany objectForKey:@"careers_website"];
-        
         self.dropResumeButton.enabled = YES;
         self.companyNameLabel.text = [theCompany objectForKey:@"name"];
         
@@ -211,7 +210,6 @@
     }
     else if (operation.tag == FAVORITECOMPANY) {
         NSLog(@"Succeed and favorite");
-//        [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
         self.favoriteButton.highlighted = NO;
         self.favoriteButton.userInteractionEnabled = YES;
         [self.favoriteButton removeTarget:nil
@@ -233,22 +231,6 @@
 
 - (void)returnFailure:(AFHTTPRequestOperation *)operation error:(NSError *)error {
     NSLog(@"Failure!");
-//    if (operation.tag == FAVORITECOMPANY) {
-//        [self.favoriteButton setImage:[UIImage imageNamed:@"Heart"] forState:UIControlStateNormal];
-//        self.favoriteButton.userInteractionEnabled = YES;
-//        [self.favoriteButton removeTarget:nil
-//                                   action:NULL
-//                         forControlEvents:UIControlEventAllEvents];
-//        [self.favoriteButton addTarget:self action:@selector(favoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    else if (operation.tag == UNFAVORITECOMPANY) {
-//        [self.favoriteButton setImage:[UIImage imageNamed:@"HeartFilled"] forState:UIControlStateNormal];
-//        self.favoriteButton.userInteractionEnabled = YES;
-//        [self.favoriteButton removeTarget:nil
-//                                   action:NULL
-//                         forControlEvents:UIControlEventAllEvents];
-//        [self.favoriteButton addTarget:self action:@selector(unFavoriteCompany:) forControlEvents:UIControlEventTouchUpInside];
-//    }
     if (operation.tag == SHARERESUME) {
         UIAlertView *dropSuccessAlert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"We couldn't drop your resumes at this time. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [dropSuccessAlert show];
